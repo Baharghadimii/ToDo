@@ -33,7 +33,16 @@ function App() {
       axios.get(`https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?tags=${item}&limit=12&includes=Images:1&api_key=${etsyApi}`)
         .then(res => console.log(res))
     } else if (state.group === 'business') {
-      console.log('business');
+      axios.get('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search', {
+        headers: {
+          Authorization: `Bearer ${yelpApi}`,
+
+        },
+        params: {
+          location: 'vancouver',
+          term: item,
+        }
+      }).then(res => console.log(res));
     } else if (state.group === 'movie') {
       console.log('movie');
     } else {
