@@ -4,6 +4,7 @@ import { googleApi, yelpApi, etsyApi, omdbApi } from '../api-keys';
 
 export default function applicationData() {
 
+
   //yelp api for restaurants and cafes
   axios.get('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search', {
     headers: {

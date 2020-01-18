@@ -1,25 +1,28 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import useApplicationData from '../hooks/useApplicationData'
+import SearchBar from '@bit/lekanmedia.shared-ui.search-bar';
+
+const style = {
+  margin: '40px',
+  display: 'block',
+  justifyContent: 'center',
+  alignItem: 'center',
+  width: 400,
+  height: 40,
+  textAlign: 'center'
+};
 
 function App() {
-  useApplicationData();
+  const search = value => {
+    console.log(value)
+  }
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div style={style}>
+          <SearchBar onSearch={search} />
+        </div>
       </header>
     </div>
   );
