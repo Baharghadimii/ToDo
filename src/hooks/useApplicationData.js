@@ -20,8 +20,7 @@ export default function applicationData() {
   axios.get(`https://www.googleapis.com/books/v1/volumes?q=game+of+thrones&key=${googleApi}`)
     .then(res => console.log(res))
   //shopify api for products
-  axios.get(`https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?tags=pants&limit=12&includes=Images:1&api_key=${etsyApi}`)
-    .then(res => console.log(res))
+
   //omdb api for movies and series
   axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&s=game+of+thrones`)
     .then(res => console.log(res))
