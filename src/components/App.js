@@ -44,9 +44,11 @@ function App() {
         }
       }).then(res => console.log(res));
     } else if (state.group === 'movie') {
-      console.log('movie');
+      axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&s=${item}`)
+        .then(res => console.log(res))
     } else {
-      console.log('book');
+      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`)
+        .then(res => console.log(res))
     }
   }
   return (
