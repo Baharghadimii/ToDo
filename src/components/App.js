@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import useApplicationData from '../hooks/useApplicationData'
 
 function App() {
+  useApplicationData();
   return (
     <div className="App">
       <header className="App-header">
