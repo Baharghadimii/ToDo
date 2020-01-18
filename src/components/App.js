@@ -28,7 +28,13 @@ function App() {
   }
   const search = () => {
     if (state.group === 'product') {
-
+      console.log('product')
+    } else if (state.group === 'business') {
+      console.log('business')
+    } else if (state.group === 'movie') {
+      console.log('movie')
+    } else {
+      console.log('book')
     }
   }
   return (
