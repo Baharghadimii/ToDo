@@ -2,8 +2,9 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import SearchBar from '@bit/lekanmedia.shared-ui.search-bar';
+import DropDown from './DropDown';
 
-const style = {
+const searchBarStyle = {
   margin: '40px',
   display: 'block',
   justifyContent: 'center',
@@ -13,14 +14,28 @@ const style = {
   textAlign: 'center'
 };
 
+
 function App() {
-  const search = value => {
-    console.log(value)
+
+  const [state, setState] = React.useState({
+    group: ''
+  })
+
+  const select = data => {
+    setState({
+      group: data.group
+    })
+  }
+  const search = () => {
+    if (state.group === 'product') {
+
+    }
   }
   return (
     <div className="App">
       <header className="App-header">
-        <div style={style}>
+        <div style={searchBarStyle}>
+          <DropDown onSelect={select} />
           <SearchBar onSearch={search} />
         </div>
       </header>
