@@ -1,6 +1,6 @@
 import { useReducer, useEffect } from 'react';
 import axios from "axios";
-import { googleApi, yelpApi, shopifyApi, rottenTomatoApi } from '../api-keys';
+import { googleApi, yelpApi, etsyApi, omdbApi } from '../api-keys';
 
 export default function applicationData() {
 
@@ -19,9 +19,11 @@ export default function applicationData() {
   axios.get(`https://www.googleapis.com/books/v1/volumes?q=game+of+thrones&key=${googleApi}`)
     .then(res => console.log(res))
   //shopify api for products
-  axios.get(`http://www.omdbapi.com/?apikey=${rottenTomatoApi}&s=game+of+thrones`)
+  axios.get(`https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?tags=pants&limit=12&includes=Images:1&api_key=${etsyApi}`)
     .then(res => console.log(res))
-  //rotten tomato api for movies and series
+  //omdb api for movies and series
+  axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&s=game+of+thrones`)
+    .then(res => console.log(res))
 
 
 }
