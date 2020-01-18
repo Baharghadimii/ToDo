@@ -1,6 +1,6 @@
 import { useReducer, useEffect } from 'react';
 import axios from "axios";
-import { googleApi, yelpApi } from '../api-keys';
+import { googleApi, yelpApi, shopifyApi, rottenTomatoApi } from '../api-keys';
 
 export default function applicationData() {
 
@@ -18,7 +18,10 @@ export default function applicationData() {
   //google api for books
   axios.get(`https://www.googleapis.com/books/v1/volumes?q=game+of+thrones&key=${googleApi}`)
     .then(res => console.log(res))
-  //amazon api for products
+  //shopify api for products
+  axios.get(`http://www.omdbapi.com/?apikey=${rottenTomatoApi}&s=game+of+thrones`)
+    .then(res => console.log(res))
   //rotten tomato api for movies and series
+
 
 }
