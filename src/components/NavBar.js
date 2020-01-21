@@ -8,7 +8,6 @@ import Modal from './ItemPicker';
 import axios from "axios";
 import { googleApi, yelpApi, etsyApi, omdbApi } from '../api-keys';
 
-
 export default function NavBar(props) {
   const [state, setState] = React.useState({
     rowOne: [],
@@ -21,6 +20,7 @@ export default function NavBar(props) {
 
   const search = (item) => {
     setModal(true);
+    props.changeDisplay();
     Promise.all([
       Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?tags=${item}&limit=12&includes=Images:1&api_key=${etsyApi}`)),
       Promise.resolve(axios.get('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search', {
@@ -35,37 +35,49 @@ export default function NavBar(props) {
       Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&s=${item}`)),
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
     ]).then(all => {
-      const productslist = all[0].data.results;
-      const businessesList = all[1].data.businesses;
-      const moviesList = all[2].data.Search;
-      const booksList = all[3].data.items;
+      const rowOneObjs = []
+      const rowTwoObjs = []
+      const rowThreeObjs = []
+      const rowFourObjs = []
+      if (all[2].data.Response !== 'False') {
+        const moviesList = all[2].data.Search;
+        rowOneObjs.push({ id: 1, category: 'movie', title: moviesList[0].Title, img: moviesList[0].Poster, content: `Year: ${moviesList[0].Year}`, link: '', obj: moviesList[0] });
+        rowTwoObjs.push({ id: 5, category: 'movie', title: moviesList[1].Title, img: moviesList[1].Poster, content: `Year: ${moviesList[1].Year}`, link: '', obj: moviesList[1] });
+        rowThreeObjs.push({ id: 9, category: 'movie', title: moviesList[2].Title, img: moviesList[2].Poster, content: `Year: ${moviesList[2].Year}`, link: '', obj: moviesList[1] });
+        rowFourObjs.push({ id: 13, category: 'movie', title: moviesList[3].Title, img: moviesList[3].Poster, content: `Year: ${moviesList[3].Year}`, link: '', obj: moviesList[3] });
+      }
+      if (all[3].data.totalItems) {
+        const booksList = all[3].data.items;
+        rowOneObjs.push({ id: 2, category: 'book', title: booksList[0].volumeInfo.title.slice(0, 20), img: booksList[0].volumeInfo.imageLinks || "", content: `Publisher: ${booksList[0].volumeInfo.publisher}`, link: booksList[0].volumeInfo.infoLink, obj: booksList[0] })
+        rowTwoObjs.push({ id: 6, category: 'book', title: booksList[1].volumeInfo.title.slice(0, 20), img: booksList[1].volumeInfo.imageLinks || "", content: `Publisher: ${booksList[1].volumeInfo.publisher}`, link: booksList[1].volumeInfo.infoLink, obj: booksList[1] })
+        rowThreeObjs.push({ id: 10, category: 'book', title: booksList[2].volumeInfo.title.slice(0, 20), img: booksList[2].volumeInfo.imageLinks || "", content: `Publisher: ${booksList[2].volumeInfo.publisher}`, link: booksList[2].volumeInfo.infoLink, obj: booksList[2] })
+        rowFourObjs.push({ id: 14, category: 'book', title: booksList[3].volumeInfo.title.slice(0, 20), img: booksList[3].volumeInfo.imageLinks || "", content: `Publisher: ${booksList[3].volumeInfo.publisher}`, link: booksList[3].volumeInfo.infoLink, obj: booksList[3] })
+      }
+      if (all[0].data.results.length > 0) {
+        const productslist = all[0].data.results;
+        rowOneObjs.push({ id: 3, category: 'product', title: `${productslist[0].title.slice(0, 20)}...`, img: productslist[0].Images[0].url_170x135, content: `Price: ${productslist[0].price}`, link: productslist[0].url, obj: productslist[0] });
+        rowTwoObjs.push({ id: 7, category: 'product', title: `${productslist[1].title.slice(0, 20)}...`, img: productslist[1].Images[0].url_170x135, content: `Price: ${productslist[1].price}`, link: productslist[1].url, obj: productslist[1] });
+        rowThreeObjs.push({ id: 11, category: 'product', title: `${productslist[2].title.slice(0, 20)}...`, img: productslist[2].Images[0].url_170x135, content: `Price: ${productslist[2].price}`, link: productslist[2].url, obj: productslist[2] });
+        rowFourObjs.push({ id: 15, category: 'product', title: `${productslist[3].title.slice(0, 20)}...`, img: productslist[3].Images[0].url_170x135, content: `Price: ${productslist[3].price}`, link: productslist[2].url, obj: productslist[3] });
+      }
+      if (all[1].data.businesses.length > 0) {
+        const businessesList = all[1].data.businesses;
+        rowOneObjs.push({ id: 4, category: 'business', title: businessesList[0].name, img: businessesList[0].image_url, content: `Address: ${businessesList[0].location.address1}`, link: businessesList[0].url, obj: businessesList[0] })
+        rowTwoObjs.push({ id: 8, category: 'business', title: businessesList[1].name, img: businessesList[1].image_url, content: `Address: ${businessesList[1].location.address1}`, link: businessesList[1].url, obj: businessesList[1] });
+        rowThreeObjs.push({ id: 12, category: 'business', title: businessesList[2].name, img: businessesList[2].image_url, content: `Address: ${businessesList[2].location.address1}`, link: businessesList[2].url, obj: businessesList[2] });
+        rowFourObjs.push({ id: 16, category: 'business', title: businessesList[3].name, img: businessesList[3].image_url, content: `Address: ${businessesList[3].location.address1}`, link: businessesList[3].url, obj: businessesList[3] })
+      }
       setState({
         ...state,
-        rowOne: [
-          { id: 1, title: moviesList[0].Title, img: moviesList[0].Poster, obj: moviesList[0] },
-          { id: 2, title: booksList[0].volumeInfo.title, img: booksList[0].volumeInfo.imageLinks.thumbnail, obj: booksList[0] },
-          { id: 3, title: `${productslist[0].title.slice(0, 20)}...`, img: productslist[0].Images[0].url_170x135, obj: productslist[0] },
-          { id: 4, title: businessesList[0].name, img: businessesList[0].image_url, obj: businessesList[0] }],
-        rowTwo: [
-          { id: 5, title: moviesList[1].Title, img: moviesList[1].Poster, obj: moviesList[1] },
-          { id: 6, title: booksList[1].volumeInfo.title, img: booksList[1].volumeInfo.imageLinks.thumbnail, obj: booksList[1] },
-          { id: 7, title: `${productslist[1].title.slice(0, 20)}...`, img: productslist[1].Images[0].url_170x135, obj: productslist[1] },
-          { id: 8, title: businessesList[1].name, img: businessesList[1].image_url, obj: businessesList[1] }],
-        rowThree: [
-          { id: 9, title: moviesList[2].Title, img: moviesList[2].Poster },
-          { id: 10, title: booksList[2].volumeInfo.title, img: booksList[2].volumeInfo.imageLinks.thumbnail, obj: booksList[2] },
-          { id: 11, title: `${productslist[2].title.slice(0, 20)}...`, img: productslist[2].Images[0].url_170x135, obj: productslist[2] },
-          { id: 12, title: businessesList[2].name, img: businessesList[2].image_url, obj: businessesList[2] }],
-        rowFour: [
-          { id: 13, title: moviesList[3].Title, img: moviesList[3].Poster, obj: moviesList[3] },
-          { id: 14, title: booksList[3].volumeInfo.title, img: booksList[3].volumeInfo.imageLinks.thumbnail, obj: booksList[3] },
-          { id: 15, title: `${productslist[3].title.slice(0, 20)}...`, img: productslist[3].Images[0].url_170x135, obj: productslist[3] },
-          { id: 16, title: businessesList[3].name, img: businessesList[3].image_url, obj: businessesList[3] }]
+        rowOne: rowOneObjs,
+        rowTwo: rowTwoObjs,
+        rowThree: rowThreeObjs,
+        rowFour: rowFourObjs
       })
     });
   }
+  const items = [];
   const add = (itemIds) => {
-    const items = [];
     itemIds.forEach(id => {
       state.rowOne.forEach(item => {
         if (id === item.id) {
@@ -87,7 +99,10 @@ export default function NavBar(props) {
           items.push(item);
         }
       })
-    })
+    });
+    setModal(false);
+    console.log(items)
+    props.showList(items);
   }
 
   return (
@@ -100,7 +115,7 @@ export default function NavBar(props) {
           value={item}
           onChange={(event) => setItem(event.target.value)}>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info" style={{ width: '5rem' }} onClick={() => search(item)}>Search</Button>
+          <Button variant="outline-info" style={{ width: '5rem', color: 'white', borderColor: 'white' }} onClick={() => search(item)}>Search</Button>
         </Form>
       </Navbar>
       {modal && <Modal list={state} onAdd={add} />}
