@@ -46,8 +46,6 @@ function App() {
         temp[3].push(element);
       }
     })
-
-
     setState({ ...state, list: temp, showList: true });
   }
   const login = () => {
