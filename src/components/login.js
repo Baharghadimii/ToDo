@@ -30,10 +30,10 @@ export default function Login(props) {
   return (
     <div>
       {state.error && (
-        < Alert style={{ width: '60%', margin: '0 auto', marginTop: '3%' }} variant='danger'>
+        < Alert style={{ width: '30%', margin: '0 auto', marginTop: '3%' }} variant='danger'>
           Email or password is incorrect!
           </Alert>)}
-      <Form style={{ width: '40%', margin: '0 auto', marginTop: '5%', textAlign: 'left' }}>
+      <Form style={{ width: '30%', margin: '0 auto', marginTop: '5%', textAlign: 'left' }}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control onChange={e => setState({ ...state, email: e.target.value })} type="email" placeholder="Enter email" />
@@ -46,9 +46,12 @@ export default function Login(props) {
           <Form.Control onChange={e => setState({ ...state, password: e.target.value })} type="password" placeholder="Password" />
         </Form.Group>
       </Form>
-      <Button variant="primary" type="submit" onClick={submit} >
-        Submit
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <Button style={{ width: '20%', margin: '0 auto' }} variant="primary" type="submit" onClick={submit} >
+          Submit
       </Button>
+        <a style={{ marginTop: '1%', cursor: 'pointer' }} href='#'>Don't Have an account?!</a>
+      </div>
     </div >
 
   )
