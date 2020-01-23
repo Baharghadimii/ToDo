@@ -10,7 +10,14 @@ VALUES(
 )
 RETURNING *;`);
 };
-
+const getUser = (user, db) => {
+  return db.query(`
+  SELECT * FROM
+  users WHERE users.email = '${user.email}'
+  AND users.password = '${user.password}';
+  `);
+};
 module.exports = {
-  addUser
+  addUser,
+  getUser
 };
