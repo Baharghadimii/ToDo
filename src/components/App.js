@@ -3,10 +3,11 @@ import './App.css';
 import NavBar from './NavBar';
 import Category from './Category';
 import axios from 'axios';
+import Login from './login';
 
 function App() {
   const [state, setState] = React.useState({
-    showList: true,
+    showList: localStorage.getItem('token') ? true : false,
     list: []
   });
   const changeDisplay = () => {
@@ -49,8 +50,16 @@ function App() {
 
     setState({ ...state, list: temp, showList: true });
   }
+  const login = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      console.log(token)
+      setState({ ...state, showList: true });
+    }
+  }
 
   useEffect(() => {
+
     Promise.all([
       Promise.resolve(axios.get('http://localhost:3001/api/1/movies', {
         Headers: new Headers({ 'content-type': 'application/json' })
@@ -86,12 +95,13 @@ function App() {
       })
     })
   }, [])
-  // console.log(state)
+  console.log(state)
   return (
     <div className="App">
       <header className="App-header">
         <NavBar changeDisplay={changeDisplay} showList={showList} reset={reset} />
       </header>
+      {!state.showList && <Login login={login} />}
       {state.showList && <Category delete={deleteItem} list={state.list} showList={showList} />}
     </div>
   );

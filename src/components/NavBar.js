@@ -17,6 +17,9 @@ export default function NavBar(props) {
   })
   const [item, setItem] = React.useState('');
   const [modal, setModal] = React.useState(false);
+  const [searchBar, setSearchBar] = React.useState(
+    localStorage.getItem('token') ? true : false
+  );
 
   const search = (item) => {
     setModal(true);
@@ -74,7 +77,7 @@ export default function NavBar(props) {
         rowThree: rowThreeObjs,
         rowFour: rowFourObjs
       })
-    });
+    }, [searchBar]);
   }
   const add = (item) => {
     console.log(item);
@@ -95,12 +98,12 @@ export default function NavBar(props) {
         <Navbar.Brand href="#home">ToDo</Navbar.Brand>
         <Nav className="mr-auto">
         </Nav>
-        <Form inline
+        {searchBar && <Form inline
           value={item}
           onChange={(event) => setItem(event.target.value)}>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-info" style={{ width: '5rem', color: 'white', borderColor: 'white' }} onClick={() => search(item)}>Search</Button>
-        </Form>
+        </Form>}
       </Navbar>
       {modal && <Modal list={state} onAdd={add} onClose={close} />}
     </div>
