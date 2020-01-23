@@ -36,7 +36,6 @@ export default function Login(props) {
         .then(res => {
           const token = { session: res.data.id }
           localStorage.setItem('token', JSON.stringify(token));
-          props.login();
         });
     } else {
       console.log('no')
