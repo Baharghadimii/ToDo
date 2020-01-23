@@ -17,7 +17,16 @@ const getUser = (user, db) => {
   AND users.password = '${user.password}';
   `);
 };
+const getItemsById = function (id, db, category) {
+  return db.query(
+    `SELECT * FROM 
+    ${category} JOIN items 
+    ON item_id = items.id
+    WHERE user_id=$1`, [`${id}`]
+  );
+};
 module.exports = {
   addUser,
-  getUser
+  getUser,
+  getItemsById
 };
