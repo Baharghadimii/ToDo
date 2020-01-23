@@ -34,7 +34,8 @@ export default function ItemPicker(props) {
         <div>
           {props.noData && (
             < Alert style={{ width: '100%', margin: '0 auto' }} variant='danger'>
-              No Item Found!
+              No Item was Found!
+              <Alert.Link href="/home">  Back to Lists.</Alert.Link>
             </Alert>
           )}
           {!props.noData && (
