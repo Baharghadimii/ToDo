@@ -28,8 +28,11 @@ export default function Login(props) {
         }
       });
   }
-  const test = () => {
+  const showRegister = () => {
     setState({ ...state, showLogin: false })
+  }
+  const showLogin = () => {
+    setState({ ...state, showLogin: true })
   }
   return (
     <div>
@@ -53,9 +56,9 @@ export default function Login(props) {
           </Form>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <Button style={{ width: '20%', margin: '0 auto' }} variant="primary" type="submit" onClick={submit} >
-              Submit
+              Login
       </Button>
-            <a style={{ marginTop: '1%', cursor: 'pointer' }} href='#' onClick={test}>Don't Have an account?!</a>
+            <a style={{ marginTop: '1%', cursor: 'pointer' }} href='#' onClick={showRegister}>Don't Have an account?!</a>
           </div>
         </div>
       }
@@ -81,9 +84,9 @@ export default function Login(props) {
           </Form>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <Button style={{ width: '20%', margin: '0 auto' }} variant="primary" type="submit" onClick={submit} >
-              Submit
-      </Button>
-            <a style={{ marginTop: '1%', cursor: 'pointer' }} href='#' onClick={test}>Already have an account?!</a>
+              Create Acoount
+            </Button>
+            <a style={{ marginTop: '1%', cursor: 'pointer' }} href='#' onClick={showLogin}>Already have an account?!</a>
           </div>
         </div>)}
     </div >
