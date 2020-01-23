@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
@@ -17,6 +17,7 @@ export default function NavBar(props) {
   })
   const [item, setItem] = React.useState('');
   const [modal, setModal] = React.useState(false);
+  const [searchBar, setSearchBar] = React.useState();
 
   const search = (item) => {
     setModal(true);
@@ -89,18 +90,22 @@ export default function NavBar(props) {
     setModal(false)
     props.reset();
   }
+  useEffect(() => {
+    setSearchBar(localStorage.getItem('token') ? true : false)
+
+  })
   return (
     <div className='Nav' >
       <Navbar style={{ backgroundColor: '#2E4053' }} variant="dark">
         <Navbar.Brand href="#home">ToDo</Navbar.Brand>
         <Nav className="mr-auto">
         </Nav>
-        <Form inline
+        {searchBar && <Form inline
           value={item}
           onChange={(event) => setItem(event.target.value)}>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-info" style={{ width: '5rem', color: 'white', borderColor: 'white' }} onClick={() => search(item)}>Search</Button>
-        </Form>
+        </Form>}
       </Navbar>
       {modal && <Modal list={state} onAdd={add} onClose={close} />}
     </div>
