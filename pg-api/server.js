@@ -6,7 +6,7 @@ const PORT = 3001;
 let pg = require('pg');
 let app = express();
 
-const { addUser, getUser, getItemsById, addItem, addItemForUser, } = require('./database');
+const { addUser, getUser, getItemsById, addItem, addItemForUser, deleteItem } = require('./database');
 
 let pool = new pg.Pool({
   port: 5432,
@@ -73,5 +73,9 @@ app.post('/api/:userId/add', function (request, response) {
           .catch(err => console.log(err));
       });
   });
+});
+app.delete('/api/:userId/delete/:itemId', function (request, response) {
+  deleteItem(request.params.itemId, pool)
+    .then(res => response.send(res.rows));
 });
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));
