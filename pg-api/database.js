@@ -25,8 +25,42 @@ const getItemsById = function (id, db, category) {
     WHERE user_id=$1`, [`${id}`]
   );
 };
+const addItemForUser = function (userId, db) {
+  return db.query(`
+  INSERT INTO items(
+    user_id,
+    created_at
+  ) VALUES (
+    ${userId},
+    current_timestamp
+  )
+  RETURNING *;`);
+};
+const addItem = function (itemId, item, db) {
+  return db.query(
+    `INSERT INTO ${item[0]}
+          (item_id,
+            title,
+            image,
+            link,
+            category,
+            description
+            )
+            VALUES (
+              ${itemId},
+              '${item[1]}',
+              '${item[2]}',
+              '${item[3]}',
+              '${item[0]}',
+              '${item[4]}'
+            )
+            RETURNING *;`
+  );
+};
 module.exports = {
   addUser,
   getUser,
-  getItemsById
+  getItemsById,
+  addItem,
+  addItemForUser,
 };
