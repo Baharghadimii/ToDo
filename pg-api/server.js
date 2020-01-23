@@ -44,4 +44,8 @@ app.get('/api/:userId/movies', function (request, response) {
   getItemsById(request.params.userId, pool, `movies`)
     .then(data => response.send(data.rows));
 });
+app.get('/api/:userId/books', function (request, response) {
+  getItemsById(request.params.userId, pool, `books`)
+    .then(data => response.send(data.rows));
+});
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));
