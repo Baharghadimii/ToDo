@@ -14,7 +14,8 @@ export default function NavBar(props) {
     rowTwo: [],
     rowThree: [],
     rowFour: []
-  })
+  });
+  const [noData, setNoData] = React.useState(false);
   const [item, setItem] = React.useState('');
   const [modal, setModal] = React.useState(false);
   const [searchBar, setSearchBar] = React.useState();
@@ -36,6 +37,13 @@ export default function NavBar(props) {
       Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&s=${item}`)),
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
     ]).then(all => {
+      // console.log(all);
+      if (!all[0].data.results.length && all[2].data.Response === 'False') {
+        if (!all[3].data.totalItems && !all[1].data.businesses.length) {
+          setNoData(true)
+        }
+      }
+
       const rowOneObjs = []
       const rowTwoObjs = []
       const rowThreeObjs = []
@@ -54,14 +62,14 @@ export default function NavBar(props) {
         rowThreeObjs.push({ id: 10, category: 'books', title: booksList[2].volumeInfo.title.slice(0, 20), image: booksList[2].volumeInfo.imageLinks || "", content: `Publisher: ${booksList[2].volumeInfo.publisher}`, link: booksList[2].volumeInfo.infoLink })
         rowFourObjs.push({ id: 14, category: 'books', title: booksList[3].volumeInfo.title.slice(0, 20), image: booksList[3].volumeInfo.imageLinks || "", content: `Publisher: ${booksList[3].volumeInfo.publisher}`, link: booksList[3].volumeInfo.infoLink })
       }
-      if (all[0].data.results.length > 0) {
+      if (all[0].data.results.length) {
         const productslist = all[0].data.results;
         rowOneObjs.push({ id: 3, category: 'products', title: `${productslist[0].title.slice(0, 20)}...`, image: productslist[0].Images[0].url_170x135, content: `Price: ${productslist[0].price}`, link: productslist[0].url });
         rowTwoObjs.push({ id: 7, category: 'products', title: `${productslist[1].title.slice(0, 20)}...`, image: productslist[1].Images[0].url_170x135, content: `Price: ${productslist[1].price}`, link: productslist[1].url, });
         rowThreeObjs.push({ id: 11, category: 'products', title: `${productslist[2].title.slice(0, 20)}...`, image: productslist[2].Images[0].url_170x135, content: `Price: ${productslist[2].price}`, link: productslist[2].url });
         rowFourObjs.push({ id: 15, category: 'products', title: `${productslist[3].title.slice(0, 20)}...`, image: productslist[3].Images[0].url_170x135, content: `Price: ${productslist[3].price}`, link: productslist[2].url });
       }
-      if (all[1].data.businesses.length > 0) {
+      if (all[1].data.businesses.length) {
         const businessesList = all[1].data.businesses;
         rowOneObjs.push({ id: 4, category: 'restaurants', title: businessesList[0].name, image: businessesList[0].image_url, content: `Address: ${businessesList[0].location.address1}`, link: businessesList[0].url })
         rowTwoObjs.push({ id: 8, category: 'restaurants', title: businessesList[1].name, image: businessesList[1].image_url, content: `Address: ${businessesList[1].location.address1}`, link: businessesList[1].url });
@@ -113,7 +121,7 @@ export default function NavBar(props) {
           <Button variant="outline-info" style={{ width: '5rem', color: 'white', borderColor: 'white' }} onClick={() => search(item)}>Search</Button>
         </Form>}
       </Navbar>
-      {modal && <Modal list={state} onAdd={add} onClose={close} />}
+      {modal && <Modal list={state} onAdd={add} onClose={close} noData={noData} />}
     </div>
   )
 }

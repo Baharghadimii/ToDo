@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import CheckboxList from './CheckboxList';
-import ProgressBar from 'react-bootstrap/ProgressBar'
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import Alert from 'react-bootstrap/Alert'
 export default function ItemPicker(props) {
   const temp = [];
   const [progress, setProgress] = useState(0);
@@ -31,16 +32,25 @@ export default function ItemPicker(props) {
       {!list && <ProgressBar animated now={progress} />}
       {list && (
         <div>
-          <Modal.Header closeButton>
-            <Modal.Title>Check items you desire to add.</Modal.Title>
-          </Modal.Header>
-          <Modal.Body style={{ display: 'flex', flexDirection: 'row' }}>
-            <CheckboxList list={props.list} onChange={itemPick} />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={props.onClose}>Close</Button>
-            <Button variant="primary" onClick={save}>Add Items</Button>
-          </Modal.Footer>
+          {props.noData && (
+            < Alert style={{ width: '100%', margin: '0 auto' }} variant='danger'>
+              No Item Found!
+            </Alert>
+          )}
+          {!props.noData && (
+            <div>
+              <Modal.Header closeButton>
+                <Modal.Title>Check items you desire to add.</Modal.Title>
+              </Modal.Header>
+              <Modal.Body style={{ display: 'flex', flexDirection: 'row' }}>
+                <CheckboxList list={props.list} onChange={itemPick} />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={props.onClose}>Close</Button>
+                <Button variant="primary" onClick={save}>Add Items</Button>
+              </Modal.Footer>
+            </div>
+          )}
         </div>
       )}
 
