@@ -3,15 +3,17 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert'
+import { stat } from 'fs';
 export default function Login(props) {
   const [state, setState] = useState({
     email: '',
     password: '',
+    passwordConfirmation: '',
     error: false,
     showLogin: true,
   });
 
-  const submit = () => {
+  const login = () => {
     axios.get(`http://localhost:3001/api/user/`, {
       params: {
         email: state.email,
@@ -27,6 +29,18 @@ export default function Login(props) {
           setState({ ...state, error: true })
         }
       });
+  }
+  const register = () => {
+    if (state.password === state.passwordConfirmation) {
+      axios.post(`http://localhost:3001/api/register/`, { user: { email: state.email, password: state.password } })
+        .then(res => {
+          const token = { session: res.data.id }
+          localStorage.setItem('token', JSON.stringify(token));
+          props.login();
+        });
+    } else {
+      console.log('no')
+    }
   }
   const showRegister = () => {
     setState({ ...state, showLogin: false })
@@ -55,7 +69,7 @@ export default function Login(props) {
             </Form.Group>
           </Form>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <Button style={{ width: '20%', margin: '0 auto' }} variant="primary" type="submit" onClick={submit} >
+            <Button style={{ width: '20%', margin: '0 auto' }} variant="primary" type="submit" onClick={login} >
               Login
       </Button>
             <a style={{ marginTop: '1%', cursor: 'pointer' }} href='#' onClick={showRegister}>Don't Have an account?!</a>
@@ -79,11 +93,11 @@ export default function Login(props) {
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Confirm Password</Form.Label>
-              <Form.Control onChange={e => setState({ ...state, password: e.target.value })} type="password" placeholder="Password" />
+              <Form.Control onChange={e => setState({ ...state, passwordConfirmation: e.target.value })} type="password" placeholder="Password" />
             </Form.Group>
           </Form>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <Button style={{ width: '20%', margin: '0 auto' }} variant="primary" type="submit" onClick={submit} >
+            <Button style={{ width: '20%', margin: '0 auto' }} variant="primary" type="submit" onClick={register} >
               Create Acoount
             </Button>
             <a style={{ marginTop: '1%', cursor: 'pointer' }} href='#' onClick={showLogin}>Already have an account?!</a>
