@@ -46,12 +46,10 @@ function App() {
         temp[3].push(element);
       }
     })
-
-
     setState({ ...state, list: temp, showList: true });
   }
   const login = () => {
-    const token = localStorage.getItem('token');
+    const token = JSON.parse(localStorage.getItem('token'));
     if (token) {
       console.log(token)
       setState({ ...state, showList: true });
@@ -95,13 +93,13 @@ function App() {
       })
     })
   }, [])
-  console.log(state)
+  // console.log(state)
   return (
     <div className="App">
       <header className="App-header">
         <NavBar changeDisplay={changeDisplay} showList={showList} reset={reset} />
       </header>
-      {!state.showList && <Login login={login} />}
+      {!state.showList && !localStorage.getItem('token') && <Login login={login} />}
       {state.showList && <Category delete={deleteItem} list={state.list} showList={showList} />}
     </div>
   );
