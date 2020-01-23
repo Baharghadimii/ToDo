@@ -23,5 +23,18 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//routes
+app.post('/api/register', function (request, response) {
+  getUser(request.body.user, pool)
+    .then(res => {
+      console.log(res.rows.length);
+      if (!res.rows.length) {
+        addUser(request.body.user, pool)
+          .then(data => response.send(data.rows));
+      } else {
+        response.send(null);
+      }
+    });
+});
 
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));
