@@ -6,6 +6,8 @@ const PORT = 3001;
 let pg = require('pg');
 let app = express();
 
+const { addUser } = require('./database');
+
 let pool = new pg.Pool({
   port: 5432,
   password: 'tehghad',
