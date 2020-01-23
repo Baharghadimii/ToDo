@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
@@ -17,9 +17,7 @@ export default function NavBar(props) {
   })
   const [item, setItem] = React.useState('');
   const [modal, setModal] = React.useState(false);
-  const [searchBar, setSearchBar] = React.useState(
-    localStorage.getItem('token') ? true : false
-  );
+  const [searchBar, setSearchBar] = React.useState();
 
   const search = (item) => {
     setModal(true);
@@ -77,7 +75,7 @@ export default function NavBar(props) {
         rowThree: rowThreeObjs,
         rowFour: rowFourObjs
       })
-    }, [searchBar]);
+    });
   }
   const add = (item) => {
     console.log(item);
@@ -92,6 +90,10 @@ export default function NavBar(props) {
     setModal(false)
     props.reset();
   }
+  useEffect(() => {
+    setSearchBar(localStorage.getItem('token') ? true : false)
+
+  })
   return (
     <div className='Nav' >
       <Navbar style={{ backgroundColor: '#2E4053' }} variant="dark">
