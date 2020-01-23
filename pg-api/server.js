@@ -48,4 +48,8 @@ app.get('/api/:userId/books', function (request, response) {
   getItemsById(request.params.userId, pool, `books`)
     .then(data => response.send(data.rows));
 });
+app.get('/api/:userId/products', function (request, response) {
+  getItemsById(request.params.userId, pool, `products`)
+    .then(data => response.send(data.rows));
+});
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));
