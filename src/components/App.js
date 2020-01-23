@@ -51,8 +51,10 @@ function App() {
     setState({ ...state, list: temp, showList: true });
   }
   const login = () => {
-    const token = localStorage.getItem('token');
-    console.log(JSON.parse(token))
+    const token = JSON.parse(localStorage.getItem('token'));
+    // console.log(token)
+    axios.get('http://localhost:3001/api/userId', { token })
+      .then(res => console.log(res));
     if (token) {
       setState({ ...state, showList: true });
     }
@@ -95,7 +97,7 @@ function App() {
       })
     })
   }, [])
-  console.log(state)
+  // console.log(state)
   return (
     <div className="App">
       <header className="App-header">
