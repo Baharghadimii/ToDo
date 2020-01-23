@@ -52,8 +52,8 @@ function App() {
   }
   const login = () => {
     const token = localStorage.getItem('token');
+    console.log(JSON.parse(token))
     if (token) {
-      console.log(token)
       setState({ ...state, showList: true });
     }
   }

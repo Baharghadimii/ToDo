@@ -8,7 +8,7 @@ export default function Login(props) {
   });
 
   const submit = () => {
-    localStorage.setItem('token', state);
+    localStorage.setItem('token', JSON.stringify(state));
     props.login()
   }
   console.log(state)
