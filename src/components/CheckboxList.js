@@ -26,28 +26,28 @@ export default function CheckboxList(props) {
         <tr>
           {props.list.rowOne.map(item => {
             return (
-              <td><CheckboxListItem listItem={item} onChange={() => props.onChange(item.id)} /></td>
+              <td><CheckboxListItem listItem={item} onChange={() => props.onChange(item)} /></td>
             )
           })}
         </tr>
         <tr>
           {props.list.rowTwo.map(item => {
             return (
-              <td><CheckboxListItem listItem={item} onChange={() => props.onChange(item.id)} /></td>
+              <td><CheckboxListItem listItem={item} onChange={() => props.onChange(item)} /></td>
             )
           })}
         </tr>
         <tr>
           {props.list.rowThree.map(item => {
             return (
-              <td><CheckboxListItem listItem={item} onChange={() => props.onChange(item.id)} /></td>
+              <td><CheckboxListItem listItem={item} onChange={() => props.onChange(item)} /></td>
             )
           })}
         </tr>
         <tr>
           {props.list.rowFour.map(item => {
             return (
-              <td><CheckboxListItem listItem={item} onChange={() => props.onChange(item.id)} /></td>
+              <td><CheckboxListItem listItem={item} onChange={() => props.onChange(item)} /></td>
             )
           })}
         </tr>
