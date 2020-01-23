@@ -52,9 +52,6 @@ function App() {
   }
   const login = () => {
     const token = JSON.parse(localStorage.getItem('token'));
-    // console.log(token)
-    axios.get('http://localhost:3001/api/userId', { token })
-      .then(res => console.log(res));
     if (token) {
       setState({ ...state, showList: true });
     }
@@ -103,7 +100,7 @@ function App() {
       <header className="App-header">
         <NavBar changeDisplay={changeDisplay} showList={showList} reset={reset} />
       </header>
-      {!state.showList && <Login login={login} />}
+      {!state.showList && !localStorage.getItem('token') && <Login login={login} />}
       {state.showList && <Category delete={deleteItem} list={state.list} showList={showList} />}
     </div>
   );
