@@ -6,7 +6,7 @@ const PORT = 3001;
 let pg = require('pg');
 let app = express();
 
-const { addUser, getUser } = require('./database');
+const { addUser, getUser, getItemsById } = require('./database');
 
 let pool = new pg.Pool({
   port: 5432,
@@ -39,5 +39,9 @@ app.post('/api/register', function (request, response) {
 app.get('/api/user/', function (request, response) {
   getUser(request.query, pool)
     .then(res => response.send(res.rows[0]));
+});
+app.get('/api/:userId/movies', function (request, response) {
+  getItemsById(request.params.userId, pool, `movies`)
+    .then(data => response.send(data.rows));
 });
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));
