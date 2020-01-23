@@ -57,10 +57,17 @@ const addItem = function (itemId, item, db) {
             RETURNING *;`
   );
 };
+const deleteItem = function (id, db) {
+  return db.query(`
+  DELETE FROM items
+  WHERE id=$1;
+`, [`${id}`]);
+};
 module.exports = {
   addUser,
   getUser,
   getItemsById,
   addItem,
   addItemForUser,
+  deleteItem
 };
