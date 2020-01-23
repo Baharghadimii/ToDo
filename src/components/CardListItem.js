@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
+
 export default function CardList(props) {
   return (
     <div style={{ margin: '0.5rem' }}>
@@ -11,9 +12,11 @@ export default function CardList(props) {
           <Card.Text>
             {props.content}
           </Card.Text>
-          <Button variant="primary" href={props.link}>See More!</Button>
+          <Button style={{ marginRight: '5%' }} variant="primary" href={props.link}>See More!</Button>
+          <Button variant="primary"
+            onClick={props.onDelete}>Delete</Button>
         </Card.Body>
       </Card>
-    </div>
+    </div >
   )
 }

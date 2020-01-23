@@ -6,16 +6,18 @@ export default function CheckBoxListItem(props) {
   const [thumbnail, setThumbnail] = React.useState()
 
   useEffect(() => {
-    if (props.listItem.category === 'book') {
-      if (props.listItem.img.thumbnail) {
-        setThumbnail(props.listItem.img.thumbnail);
+    if (props.listItem.category === 'books') {
+      if (props.listItem.image.thumbnail) {
+        setThumbnail(props.listItem.image.thumbnail);
+        props.listItem.image = props.listItem.image.thumbnail;
       } else {
         setThumbnail('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/16777216colors.png/1920px-16777216colors.png')
+        props.listItem.image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/16777216colors.png/1920px-16777216colors.png';
       }
     } else {
-      setThumbnail(props.listItem.img);
+      setThumbnail(props.listItem.image);
     }
-  })
+  }, [])
   return (
     <Form onChange={props.onChange}>
       <div style={{ display: 'flex', flexDirection: "row" }} className="mb-3">

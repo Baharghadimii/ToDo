@@ -7,6 +7,7 @@ export default function ItemPicker(props) {
   const temp = [];
   const [progress, setProgress] = useState(0);
   const [list, showList] = useState(false);
+
   const itemPick = (item) => {
     temp.push(item)
   }
@@ -23,7 +24,7 @@ export default function ItemPicker(props) {
     setTimeout(() => {
       showList(true)
     }, 2000)
-  })
+  }, [])
   return (
     <Modal.Dialog style={{ width: '90vw', maxWidth: '90vw' }}>
 
@@ -37,7 +38,7 @@ export default function ItemPicker(props) {
             <CheckboxList list={props.list} onChange={itemPick} />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary">Close</Button>
+            <Button variant="secondary" onClick={props.onClose}>Close</Button>
             <Button variant="primary" onClick={save}>Add Items</Button>
           </Modal.Footer>
         </div>
