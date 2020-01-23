@@ -65,27 +65,36 @@ function App() {
         Headers: new Headers({ 'content-type': 'application/json' })
       }))
     ]).then(all => {
+      console.log(all)
+      if (all[0].data.length && all[1].data.length && all[2].data.length && all[3].data.length) {
+        let temp = [];
+        const movies = all[0].data;
+        temp.push(movies);
+        const books = all[1].data;
+        if (all[1].data[0].title.length > 20) {
+          books[0].title = `${books[0].title.slice(0, 20)}...`;
+        }
+        temp.push(books);
+        const products = all[2].data;
+        if (all[2].data[0].title.length > 20) {
+          products[0].title = `${products[0].title.slice(0, 20)}...`;
+        }
+        temp.push(products);
+        const restaurants = all[3].data;
+        temp.push(restaurants);
+        setState({
+          ...state,
+          list: temp,
+          showList: true
+        })
+      } else {
+        setState({
+          ...state,
+          list: [],
+          showList: true
+        })
+      }
 
-      let temp = [];
-      const movies = all[0].data;
-      temp.push(movies);
-      const books = all[1].data;
-      if (all[1].data[0].title.length > 20) {
-        books[0].title = `${books[0].title.slice(0, 20)}...`;
-      }
-      temp.push(books);
-      const products = all[2].data;
-      if (all[2].data[0].title.length > 20) {
-        products[0].title = `${products[0].title.slice(0, 20)}...`;
-      }
-      temp.push(products);
-      const restaurants = all[3].data;
-      temp.push(restaurants);
-      setState({
-        ...state,
-        list: temp,
-        showList: true
-      })
     })
   }
 
