@@ -49,29 +49,23 @@ function App() {
     setState({ ...state, list: temp, showList: true });
   }
   const login = () => {
-    const token = JSON.parse(localStorage.getItem('token'));
-    if (token) {
-      console.log(token)
-      setState({ ...state, showList: true });
-    }
-  }
-
-  useEffect(() => {
+    const userId = JSON.parse(localStorage.getItem('token')).session;
 
     Promise.all([
-      Promise.resolve(axios.get('http://localhost:3001/api/1/movies', {
+      Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/movies`, {
         Headers: new Headers({ 'content-type': 'application/json' })
       })),
-      Promise.resolve(axios.get('http://localhost:3001/api/1/books', {
+      Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/books`, {
         Headers: new Headers({ 'content-type': 'application/json' })
       })),
-      Promise.resolve(axios.get('http://localhost:3001/api/1/products', {
+      Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/products`, {
         Headers: new Headers({ 'content-type': 'application/json' })
       })),
-      Promise.resolve(axios.get('http://localhost:3001/api/1/restaurants', {
+      Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/restaurants`, {
         Headers: new Headers({ 'content-type': 'application/json' })
       }))
     ]).then(all => {
+
       let temp = [];
       const movies = all[0].data;
       temp.push(movies);
@@ -89,9 +83,51 @@ function App() {
       temp.push(restaurants);
       setState({
         ...state,
-        list: temp
+        list: temp,
+        showList: true
       })
     })
+  }
+
+  useEffect(() => {
+    if (state.token) {
+      const userId = JSON.parse(localStorage.getItem('token')).session;
+      Promise.all([
+        Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/movies`, {
+          Headers: new Headers({ 'content-type': 'application/json' })
+        })),
+        Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/books`, {
+          Headers: new Headers({ 'content-type': 'application/json' })
+        })),
+        Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/products`, {
+          Headers: new Headers({ 'content-type': 'application/json' })
+        })),
+        Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/restaurants`, {
+          Headers: new Headers({ 'content-type': 'application/json' })
+        }))
+      ]).then(all => {
+        let temp = [];
+        const movies = all[0].data;
+        temp.push(movies);
+        const books = all[1].data;
+        if (all[1].data[0].title.length > 20) {
+          books[0].title = `${books[0].title.slice(0, 20)}...`;
+        }
+        temp.push(books);
+        const products = all[2].data;
+        if (all[2].data[0].title.length > 20) {
+          products[0].title = `${products[0].title.slice(0, 20)}...`;
+        }
+        temp.push(products);
+        const restaurants = all[3].data;
+        temp.push(restaurants);
+        setState({
+          ...state,
+          list: temp
+        })
+      })
+    }
+
   }, [])
   // console.log(state)
   return (
@@ -99,7 +135,7 @@ function App() {
       <header className="App-header">
         <NavBar changeDisplay={changeDisplay} showList={showList} reset={reset} />
       </header>
-      {!state.showList && !localStorage.getItem('token') && <Login login={login} />}
+      {!localStorage.getItem('token') && <Login login={login} />}
       {state.showList && <Category delete={deleteItem} list={state.list} showList={showList} />}
     </div>
   );
