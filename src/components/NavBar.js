@@ -94,11 +94,17 @@ export default function NavBar(props) {
     setSearchBar(localStorage.getItem('token') ? true : false)
 
   })
+  const logOut = () => {
+    localStorage.clear();
+  }
   return (
     <div className='Nav' >
       <Navbar style={{ backgroundColor: '#2E4053' }} variant="dark">
         <Navbar.Brand href="#home">ToDo</Navbar.Brand>
         <Nav className="mr-auto">
+          {searchBar && <Nav.Item>
+            <Nav.Link onClick={logOut} href="/home">Logout</Nav.Link>
+          </Nav.Item>}
         </Nav>
         {searchBar && <Form inline
           value={item}

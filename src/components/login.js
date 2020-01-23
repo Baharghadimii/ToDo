@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import { stat } from 'fs';
 export default function Login(props) {
   const [state, setState] = useState({
     email: '',
@@ -9,9 +10,18 @@ export default function Login(props) {
   });
 
   const submit = () => {
-    localStorage.setItem('token', JSON.stringify(state));
-    axios.post(`http://localhost:3001/api/user/`, { state })
-      .then(res => console.log(res));
+    axios.get(`http://localhost:3001/api/user/`, {
+      params: {
+        email: state.email,
+        password: state.password
+      }
+    })
+      .then(res => {
+        if (res.data) {
+          const token = { session: res.data[0].id }
+          localStorage.setItem('token', JSON.stringify(token));
+        }
+      });
     props.login();
   }
   return (
