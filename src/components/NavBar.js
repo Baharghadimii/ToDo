@@ -22,6 +22,7 @@ export default function NavBar(props) {
 
   const search = (item) => {
     setModal(true);
+    setItem('');
     props.changeDisplay();
     Promise.all([
       Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?tags=${item}&limit=12&includes=Images:1&api_key=${etsyApi}`)),
@@ -37,7 +38,6 @@ export default function NavBar(props) {
       Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&s=${item}`)),
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
     ]).then(all => {
-      // console.log(all);
       if (!all[0].data.results.length && all[2].data.Response === 'False') {
         if (!all[3].data.totalItems && !all[1].data.businesses.length) {
           setNoData(true)
@@ -86,14 +86,15 @@ export default function NavBar(props) {
     });
   }
   const add = (item) => {
-    console.log(item);
+    console.log(item)
     const userId = JSON.parse(localStorage.getItem('token')).session;
     axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
       .then(res => {
 
       });
-    setModal(false);
-    props.showList(item);
+    props.reset();
+    // setModal(false);
+    // props.showList(item);
   }
   const close = () => {
     setModal(false)
@@ -116,9 +117,8 @@ export default function NavBar(props) {
           </Nav.Item>}
         </Nav>
         {searchBar && <Form inline
-          value={item}
           onChange={(event) => setItem(event.target.value)}>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+          <FormControl value={item} type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-info" style={{ width: '5rem', color: 'white', borderColor: 'white' }} onClick={() => search(item)}>Search</Button>
         </Form>}
       </Navbar>

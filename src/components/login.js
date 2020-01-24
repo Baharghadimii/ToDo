@@ -24,7 +24,7 @@ export default function Login(props) {
         if (res.data) {
           const token = { session: res.data.id }
           localStorage.setItem('token', JSON.stringify(token));
-          props.login();
+          props.reset();
         } else {
           setState({ ...state, error: true })
         }
