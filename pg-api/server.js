@@ -5,6 +5,8 @@ let morgan = require('morgan');
 const PORT = 3001;
 let pg = require('pg');
 let app = express();
+let bcrypt = require('bcrypt');
+const saltRound = 10;
 
 const { addUser, getUser, getItemsById, addItem, addItemForUser, deleteItem } = require('./database');
 
