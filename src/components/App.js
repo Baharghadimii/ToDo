@@ -4,17 +4,21 @@ import NavBar from './NavBar';
 import Category from './Category';
 import axios from 'axios';
 import Login from './login';
+import { stat } from 'fs';
 
 function App() {
   const [state, setState] = React.useState({
     showList: localStorage.getItem('token') ? true : false,
-    list: []
+    list: [],
+    token: JSON.parse(localStorage.getItem('token')) || null
   });
   const changeDisplay = () => {
     setState({ ...state, showList: false })
   }
   const deleteItem = (id) => {
-    axios.delete(`http://localhost:3001/api/1/delete/${id}`)
+    const userId = JSON.parse(localStorage.getItem('token')).session;
+
+    axios.delete(`http://localhost:3001/api/${userId}/delete/${id}`)
       .then(res => console.log(res));
     const updatedList = [];
     state.list.forEach(category => {
@@ -94,6 +98,7 @@ function App() {
   }
 
   useEffect(() => {
+    console.log(state.token);
     if (state.token) {
       const userId = JSON.parse(localStorage.getItem('token')).session;
       Promise.all([
@@ -110,17 +115,22 @@ function App() {
           Headers: new Headers({ 'content-type': 'application/json' })
         }))
       ]).then(all => {
+        console.log(all);
         let temp = [];
         const movies = all[0].data;
         temp.push(movies);
         const books = all[1].data;
-        if (all[1].data[0].title.length > 20) {
-          books[0].title = `${books[0].title.slice(0, 20)}...`;
+        if (all[1].data[0]) {
+          if (all[1].data[0].title.length > 20) {
+            books[0].title = `${books[0].title.slice(0, 20)}...`;
+          }
         }
         temp.push(books);
         const products = all[2].data;
-        if (all[2].data[0].title.length > 20) {
-          products[0].title = `${products[0].title.slice(0, 20)}...`;
+        if (all[2].data[0]) {
+          if (all[2].data[0].title.length > 20) {
+            products[0].title = `${products[0].title.slice(0, 20)}...`;
+          }
         }
         temp.push(products);
         const restaurants = all[3].data;
