@@ -4,7 +4,6 @@ import NavBar from './NavBar';
 import Category from './Category';
 import axios from 'axios';
 import Login from './login';
-import { stat } from 'fs';
 
 function App() {
   const [state, setState] = React.useState({

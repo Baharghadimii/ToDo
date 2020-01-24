@@ -1,20 +1,19 @@
-const addUser = (user, db) => {
+const addUser = ([email, password], db) => {
   return db.query(`
 INSERT INTO users(
   email,
   password
 )
 VALUES(
-  '${user.email}',
-  '${user.password}'
+  '${email}',
+  '${password}'
 )
 RETURNING *;`);
 };
-const getUser = (user, db) => {
+const getUser = (email, db) => {
   return db.query(`
   SELECT * FROM
-  users WHERE users.email = '${user.email}'
-  AND users.password = '${user.password}';
+  users WHERE users.email = '${email}';
   `);
 };
 const getItemsById = function (id, db, category) {
