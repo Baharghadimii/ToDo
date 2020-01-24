@@ -5,6 +5,8 @@ let morgan = require('morgan');
 const PORT = 3001;
 let pg = require('pg');
 let app = express();
+let bcrypt = require('bcrypt');
+const saltRound = 10;
 
 const { addUser, getUser, getItemsById, addItem, addItemForUser, deleteItem } = require('./database');
 
@@ -25,20 +27,29 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //routes
 app.post('/api/register', function (request, response) {
-  getUser(request.body.user, pool)
+  const email = request.body.user.email;
+  getUser(email, pool)
     .then(res => {
-      console.log(res.rows.length);
       if (!res.rows.length) {
-        addUser(request.body.user, pool)
-          .then(data => response.send(data.rows));
+        const hash = bcrypt.hashSync(request.body.user.password, saltRound);
+        const email = request.body.user.email;
+        addUser([email, hash], pool)
+          .then(data => response.send(data.rows[0]));
       } else {
         response.send(null);
       }
     });
 });
 app.get('/api/user/', function (request, response) {
-  getUser(request.query, pool)
-    .then(res => response.send(res.rows[0]));
+  const email = request.query.email;
+  const password = request.query.password;
+  getUser(email, pool)
+    .then(res => {
+      const hash = res.rows[0].password;
+      if (bcrypt.compareSync(password, hash)) {
+        response.send(res.rows[0]);
+      }
+    });
 });
 app.get('/api/:userId/movies', function (request, response) {
   getItemsById(request.params.userId, pool, `movies`)

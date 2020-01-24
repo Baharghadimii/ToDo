@@ -4,7 +4,6 @@ import NavBar from './NavBar';
 import Category from './Category';
 import axios from 'axios';
 import Login from './login';
-import { stat } from 'fs';
 
 function App() {
   const [state, setState] = React.useState({
@@ -28,7 +27,7 @@ function App() {
     setState({ ...state, list: updatedList });
   }
   const reset = () => {
-    setState({ ...state, showList: true })
+    window.location.reload(true);
   }
   const showList = (item) => {
     let temp = []
@@ -52,53 +51,8 @@ function App() {
     })
     setState({ ...state, list: temp, showList: true });
   }
-  const login = () => {
-    const userId = JSON.parse(localStorage.getItem('token')).session;
-
-    Promise.all([
-      Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/movies`, {
-        Headers: new Headers({ 'content-type': 'application/json' })
-      })),
-      Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/books`, {
-        Headers: new Headers({ 'content-type': 'application/json' })
-      })),
-      Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/products`, {
-        Headers: new Headers({ 'content-type': 'application/json' })
-      })),
-      Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/restaurants`, {
-        Headers: new Headers({ 'content-type': 'application/json' })
-      }))
-    ]).then(all => {
-      let temp = [];
-      const movies = all[0].data;
-      temp.push(movies);
-      const books = all[1].data;
-      if (all[1].data[0]) {
-        if (all[1].data[0].title.length > 20) {
-          books[0].title = `${books[0].title.slice(0, 20)}...`;
-        }
-      }
-      temp.push(books);
-      const products = all[2].data;
-      if (all[2].data[0]) {
-        if (all[2].data[0].title.length > 20) {
-          products[0].title = `${products[0].title.slice(0, 20)}...`;
-        }
-      }
-      temp.push(products);
-      const restaurants = all[3].data;
-      temp.push(restaurants);
-      setState({
-        ...state,
-        list: temp,
-        showList: true
-      })
-
-    })
-  }
 
   useEffect(() => {
-    console.log(state.token);
     if (state.token) {
       const userId = JSON.parse(localStorage.getItem('token')).session;
       Promise.all([
@@ -115,7 +69,7 @@ function App() {
           Headers: new Headers({ 'content-type': 'application/json' })
         }))
       ]).then(all => {
-        console.log(all);
+        // console.log(all);
         let temp = [];
         const movies = all[0].data;
         temp.push(movies);
@@ -143,13 +97,13 @@ function App() {
     }
 
   }, [])
-  console.log(state)
+  // console.log(state)
   return (
     <div className="App">
       <header className="App-header">
         <NavBar changeDisplay={changeDisplay} showList={showList} reset={reset} />
       </header>
-      {!localStorage.getItem('token') && <Login login={login} />}
+      {!localStorage.getItem('token') && <Login reset={reset} />}
       {state.showList && <Category delete={deleteItem} list={state.list} showList={showList} />}
     </div>
   );
