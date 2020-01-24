@@ -87,7 +87,8 @@ export default function NavBar(props) {
   }
   const add = (item) => {
     console.log(item);
-    axios.post(`http://localhost:3001/api/1/add/`, { item })
+    const userId = JSON.parse(localStorage.getItem('token')).session;
+    axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
       .then(res => {
 
       });
