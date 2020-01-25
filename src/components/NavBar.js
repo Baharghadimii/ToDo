@@ -105,15 +105,15 @@ export default function NavBar(props) {
     localStorage.clear();
   }
   return (
-    <div class="navBar" style={{ width: '100%', height: '3rem', backgroundColor: '#2F2FA2' }} >
-      <div className="container" style={{ top: 0 }}>
+    <div class="navBar" style={{ width: '100%', height: '3.5rem', backgroundColor: '#2F2FA2', display: 'flex', flexDirection: 'row' }} >
+      <div className="container" style={{ float: 'left' }}>
         <input type="text" placeholder="What're you looking for?" />
         <div class="search">
           <FaSearch style={{ marginLeft: '0.5rem', marginTop: '0.25rem', color: 'white' }} />
         </div>
       </div>
-      {/* <Navbar.Brand href="#home" style={{ margin: '0 auto', color: '#F64C72', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', padding: 0 }}>Smart ToDo</Navbar.Brand> */}
-      {/* <Nav.Link style={{ border: '2px solid #F64C72', borderRadius: '5px', color: '#F64C72', padding: '0.5rem' }} onClick={logOut} href="/home">Logout</Nav.Link> */}
+      <h1 href="#home" style={{ float: 'center', color: '#F64C72', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', }}>Smart ToDo</h1>
+      <button style={{ width: '4rem', height: '2rem', background: 'transparent', border: '2px solid #F64C72', borderRadius: '5px', color: '#F64C72', float: 'right', marginRight: '1rem', marginTop: '0.7rem' }} onClick={logOut} href="/home">Logout</button>
       {/* <Nav className="mr-auto"> */}
       {/* {searchBar &&
 
