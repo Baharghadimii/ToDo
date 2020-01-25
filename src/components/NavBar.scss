@@ -18,7 +18,7 @@
   background: #f64c72;
   border-radius: 3px;
   transition: all 1s;
-  z-index: 4;
+  z-index: 3;
 }
 input {
   font-family: "Inconsolata", monospace;
@@ -36,7 +36,7 @@ input {
   padding: 0 2px 0 1rem;
   transition: all 1s;
   opacity: 0;
-  z-index: 5;
+  z-index: 4;
   font-weight: bolder;
   border-radius: 3px;
   letter-spacing: 0.1em;
@@ -54,16 +54,15 @@ input {
     z-index: 6;
     &::before {
       top: 0;
-      left: 2.5rem;
+      left: 1rem;
       width: 25px;
     }
     &::after {
       top: 0;
-      left: 2rem;
+      left: 1rem;
       width: 20px;
       height: 2px;
       border: none;
-      background: white;
       transform: rotate(-45deg);
     }
   }

@@ -7,6 +7,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Modal from './ItemPicker';
 import axios from "axios";
+import { FaSearch } from 'react-icons/fa'
 import { googleApi, yelpApi, etsyApi, omdbApi } from '../api-keys';
 
 export default function NavBar(props) {
@@ -107,7 +108,9 @@ export default function NavBar(props) {
     <div class="navBar" style={{ width: '100%', height: '3rem', backgroundColor: '#2F2FA2' }} >
       <div className="container" style={{ top: 0 }}>
         <input type="text" placeholder="What're you looking for?" />
-        <div class="search"></div>
+        <div class="search">
+          <FaSearch style={{ marginLeft: '0.5rem', marginTop: '0.25rem', color: 'white' }} />
+        </div>
       </div>
       {/* <Navbar.Brand href="#home" style={{ margin: '0 auto', color: '#F64C72', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', padding: 0 }}>Smart ToDo</Navbar.Brand> */}
       {/* <Nav.Link style={{ border: '2px solid #F64C72', borderRadius: '5px', color: '#F64C72', padding: '0.5rem' }} onClick={logOut} href="/home">Logout</Nav.Link> */}
