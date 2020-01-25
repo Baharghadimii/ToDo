@@ -105,15 +105,16 @@ export default function NavBar(props) {
     localStorage.clear();
   }
   return (
-    <div class="navBar" style={{ width: '100%', height: '3.5rem', backgroundColor: '#2F2FA2', display: 'flex', flexDirection: 'row' }} >
-      <div className="container" style={{ float: 'left' }}>
+    <div class="navBar" style={{ width: '100%', height: '3.5rem', backgroundColor: '#2F2FA2', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
+      <div style={{ float: 'left', width: '5rem' }}>
+        <input type="text" placeholder="What're you looking for?" />
         <input type="text" placeholder="What're you looking for?" />
         <div class="search">
           <FaSearch style={{ marginLeft: '0.5rem', marginTop: '0.25rem', color: 'white' }} />
         </div>
       </div>
-      <h1 href="#home" style={{ float: 'center', color: '#F64C72', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', }}>Smart ToDo</h1>
-      <button style={{ width: '4rem', height: '2rem', background: 'transparent', border: '2px solid #F64C72', borderRadius: '5px', color: '#F64C72', float: 'right', marginRight: '1rem', marginTop: '0.7rem' }} onClick={logOut} href="/home">Logout</button>
+      <h1 href="#home" style={{ color: '#F64C72', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', marginTop: '0.75rem' }}>Smart ToDo</h1>
+      <button style={{ width: '4rem', height: '2rem', background: 'transparent', border: '2px solid #F64C72', borderRadius: '5px', color: '#F64C72', marginRight: '1rem', marginTop: '0.7rem' }} onClick={logOut} href="/home">Logout</button>
       {/* <Nav className="mr-auto"> */}
       {/* {searchBar &&
 
