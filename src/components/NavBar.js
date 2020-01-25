@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import './NavBar.scss';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
@@ -25,7 +26,7 @@ export default function NavBar(props) {
     setItem('');
     props.changeDisplay();
     Promise.all([
-      Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?tags=${item}&limit=12&includes=Images:1&api_key=${etsyApi}`)),
+      Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=pants&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=BaharehG-smartToD-PRD-fce6fb270-d459fe1a`)),
       Promise.resolve(axios.get('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search', {
         headers: {
           Authorization: `Bearer ${yelpApi}`,
@@ -38,12 +39,7 @@ export default function NavBar(props) {
       Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&s=${item}`)),
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
     ]).then(all => {
-      if (!all[0].data.results.length && all[2].data.Response === 'False') {
-        if (!all[3].data.totalItems && !all[1].data.businesses.length) {
-          setNoData(true)
-        }
-      }
-
+      console.log(all[0].data.findItemsByKeywordsResponse[0].searchResult[0].item[0]);
       const rowOneObjs = []
       const rowTwoObjs = []
       const rowThreeObjs = []
@@ -62,12 +58,12 @@ export default function NavBar(props) {
         rowThreeObjs.push({ id: 10, category: 'books', title: booksList[2].volumeInfo.title.slice(0, 20), image: booksList[2].volumeInfo.imageLinks || "", content: `Publisher: ${booksList[2].volumeInfo.publisher}`, link: booksList[2].volumeInfo.infoLink })
         rowFourObjs.push({ id: 14, category: 'books', title: booksList[3].volumeInfo.title.slice(0, 20), image: booksList[3].volumeInfo.imageLinks || "", content: `Publisher: ${booksList[3].volumeInfo.publisher}`, link: booksList[3].volumeInfo.infoLink })
       }
-      if (all[0].data.results.length) {
-        const productslist = all[0].data.results;
-        rowOneObjs.push({ id: 3, category: 'products', title: `${productslist[0].title.slice(0, 20)}...`, image: productslist[0].Images[0].url_170x135, content: `Price: ${productslist[0].price}`, link: productslist[0].url });
-        rowTwoObjs.push({ id: 7, category: 'products', title: `${productslist[1].title.slice(0, 20)}...`, image: productslist[1].Images[0].url_170x135, content: `Price: ${productslist[1].price}`, link: productslist[1].url, });
-        rowThreeObjs.push({ id: 11, category: 'products', title: `${productslist[2].title.slice(0, 20)}...`, image: productslist[2].Images[0].url_170x135, content: `Price: ${productslist[2].price}`, link: productslist[2].url });
-        rowFourObjs.push({ id: 15, category: 'products', title: `${productslist[3].title.slice(0, 20)}...`, image: productslist[3].Images[0].url_170x135, content: `Price: ${productslist[3].price}`, link: productslist[2].url });
+      if (all[0].data.findItemsByKeywordsResponse[0].searchResult[0].item) {
+        const productslist = all[0].data.findItemsByKeywordsResponse[0].searchResult[0].item;
+        rowOneObjs.push({ id: 3, category: 'products', title: `${productslist[0].title[0].slice(0, 20)}...`, image: productslist[0].galleryURL[0], content: `Price: ${productslist[0].sellingStatus[0].currentPrice[0]._value_}`, link: productslist[0].url });
+        rowTwoObjs.push({ id: 7, category: 'products', title: `${productslist[1].title[0].slice(0, 20)}...`, image: productslist[1].galleryURL[0], content: `Price: ${productslist[1].sellingStatus[0].currentPrice[0]._value_}`, link: productslist[1].url, });
+        rowThreeObjs.push({ id: 11, category: 'products', title: `${productslist[2].title[0].slice(0, 20)}...`, image: productslist[2].galleryURL[0], content: `Price: ${productslist[2].sellingStatus[0].currentPrice[0]._value_}`, link: productslist[2].url });
+        rowFourObjs.push({ id: 15, category: 'products', title: `${productslist[3].title[0].slice(0, 20)}...`, image: productslist[3].galleryURL[0], content: `Price: ${productslist[3].sellingStatus[0].currentPrice[0]._value_}`, link: productslist[2].url });
       }
       if (all[1].data.businesses.length) {
         const businessesList = all[1].data.businesses;
@@ -108,21 +104,23 @@ export default function NavBar(props) {
     localStorage.clear();
   }
   return (
-    <div className='Nav' >
-      <Navbar style={{ backgroundColor: '#2E4053' }} variant="dark">
-        <Navbar.Brand href="#home">ToDo</Navbar.Brand>
-        <Nav className="mr-auto">
-          {searchBar && <Nav.Item>
-            <Nav.Link onClick={logOut} href="/home">Logout</Nav.Link>
-          </Nav.Item>}
-        </Nav>
-        {searchBar && <Form inline
+    <div class="navBar" style={{ width: '100%', height: '3rem', backgroundColor: '#2F2FA2' }} >
+      <div className="container" style={{ top: 0 }}>
+        <input type="text" placeholder="What're you looking for?" />
+        <div class="search"></div>
+      </div>
+      {/* <Navbar.Brand href="#home" style={{ margin: '0 auto', color: '#F64C72', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', padding: 0 }}>Smart ToDo</Navbar.Brand> */}
+      {/* <Nav.Link style={{ border: '2px solid #F64C72', borderRadius: '5px', color: '#F64C72', padding: '0.5rem' }} onClick={logOut} href="/home">Logout</Nav.Link> */}
+      {/* <Nav className="mr-auto"> */}
+      {/* {searchBar &&
+
+        {/* </Nav> */}
+      {/* {searchBar && <Form inline
           onChange={(event) => setItem(event.target.value)}>
           <FormControl value={item} type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-info" style={{ width: '5rem', color: 'white', borderColor: 'white' }} onClick={() => search(item)}>Search</Button>
-        </Form>}
-      </Navbar>
-      {modal && <Modal list={state} onAdd={add} onClose={close} noData={noData} />}
-    </div>
+        </Form>} */}
+      {/* {modal && <Modal list={state} onAdd={add} onClose={close} noData={noData} />} */}
+    </div >
   )
 }
