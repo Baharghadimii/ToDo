@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import CardList from './CardList';
-import './Category.css'
+import './Category.scss'
 
 export default function Category(props) {
 

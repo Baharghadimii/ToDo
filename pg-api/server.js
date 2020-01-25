@@ -34,7 +34,10 @@ app.post('/api/register', function (request, response) {
         const hash = bcrypt.hashSync(request.body.user.password, saltRound);
         const email = request.body.user.email;
         addUser([email, hash], pool)
-          .then(data => response.send(data.rows[0]));
+          .then(data => {
+            console.log(data);
+            response.send(data.rows[0])
+          });
       } else {
         response.send(null);
       }
@@ -45,6 +48,7 @@ app.get('/api/user/', function (request, response) {
   const password = request.query.password;
   getUser(email, pool)
     .then(res => {
+      console.log(res.rows[0])
       const hash = res.rows[0].password;
       if (bcrypt.compareSync(password, hash)) {
         response.send(res.rows[0]);

@@ -3,7 +3,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert'
-import { stat } from 'fs';
 export default function Login(props) {
   const [state, setState] = useState({
     email: '',
@@ -22,6 +21,7 @@ export default function Login(props) {
     })
       .then(res => {
         if (res.data) {
+          console.log(res.data);
           const token = { session: res.data.id }
           localStorage.setItem('token', JSON.stringify(token));
           props.reset();

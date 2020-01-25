@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import NavBar from './NavBar';
 import Category from './Category';
 import axios from 'axios';
@@ -100,9 +100,9 @@ function App() {
   // console.log(state)
   return (
     <div className="App">
-      <header className="App-header">
-        <NavBar changeDisplay={changeDisplay} showList={showList} reset={reset} />
-      </header>
+      {/* <header className="App-header"> */}
+      <NavBar changeDisplay={changeDisplay} showList={showList} reset={reset} />
+      {/* </header> */}
       {!localStorage.getItem('token') && <Login reset={reset} />}
       {state.showList && <Category delete={deleteItem} list={state.list} showList={showList} />}
     </div>
