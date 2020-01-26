@@ -76,8 +76,19 @@ const addMovies = function (itemId, item, db) {
             RETURNING *;`
   );
 };
-const addRating = function (movieId, db) {
-
+const addRating = function (movieId, rating, db) {
+  return db.query(`
+INSERT INTO ratings(
+  source,
+  value,
+  movies_id
+) 
+VALUES(
+'${rating.source}',
+'${rating.value}',
+${movieId}
+)
+RETURNING *;`)
 }
 const deleteItem = function (id, db) {
   return db.query(`
@@ -89,7 +100,8 @@ module.exports = {
   addUser,
   getUser,
   getItemsById,
-  addItem,
+  addMovies,
+  addRating,
   addItemForUser,
   deleteItem
 };
