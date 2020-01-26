@@ -35,27 +35,50 @@ const addItemForUser = function (userId, db) {
   )
   RETURNING *;`);
 };
-const addItem = function (itemId, item, db) {
+const addMovies = function (itemId, item, db) {
   return db.query(
-    `INSERT INTO ${item[0]}
+    `INSERT INTO movies
           (item_id,
+            category,
             title,
+            year,
+            released,
+            writer,
+            genre,
+            awards,
+            plot,
+            director,
+            type,
+            production,
+            actors,
             image,
             link,
-            category,
-            description
+            duration
             )
             VALUES (
               ${itemId},
-              '${item[1]}',
-              '${item[2]}',
-              '${item[3]}',
-              '${item[0]}',
-              '${item[4]}'
+              '${item.category}',
+              '${item.title}',
+              '${item.year}',
+              '${item.released}',
+              '${item.writer}',
+              '${item.genre}',
+              '${item.awards}',
+              '${item.plot}',
+              '${item.director}',
+              '${item.type}',
+              '${item.production}',
+              '${item.actors}',
+              '${item.image}',
+              '${item.linke}',
+              '${item.duration}',
             )
             RETURNING *;`
   );
 };
+const addRating = function (movieId, db) {
+
+}
 const deleteItem = function (id, db) {
   return db.query(`
   DELETE FROM items
