@@ -54,10 +54,10 @@ app.get('/api/user/', function (request, response) {
       }
     });
 });
-// app.get('/api/:userId/movies', function (request, response) {
-//   getItemsById(request.params.userId, pool, `movies`)
-//     .then(data => response.send(data.rows));
-// });
+app.get('/api/:userId/movies', function (request, response) {
+  getItemsById(request.params.userId, pool, `movies`)
+    .then(data => response.send(data.rows));
+});
 // app.get('/api/:userId/books', function (request, response) {
 //   getItemsById(request.params.userId, pool, `books`)
 //     .then(data => response.send(data.rows));
@@ -78,9 +78,10 @@ app.post('/api/:userId/add', function (request, response) {
       itemId = data.rows[0].id;
       addMovies(itemId, item, pool)
         .then(data => {
+          response.send(data.rows[0])
           item.ratings.forEach(element => {
             addRatings(data.rows[0].id, element, pool)
-              .then(res => response.send(res.rows[0]));
+              .then(res => response.send(data.rows[0]));
           });
         })
         .catch(err => console.log(err));

@@ -25,7 +25,6 @@ export default function NavBar(props) {
     if (chosenOption.options[0].selected) {
       Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&t=${item}`))
         .then(res => {
-          console.log(res.data);
           const item = {
             category: 'movies',
             title: res.data.Title,
@@ -44,9 +43,7 @@ export default function NavBar(props) {
             ratings: res.data.Ratings,
           }
           axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
-            .then(res => {
-
-            });
+            .then(res => console.log(res));
         })
     } else if (chosenOption.options[1].selected) {
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
