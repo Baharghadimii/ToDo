@@ -25,6 +25,11 @@ export default function NavBar(props) {
     if (chosenOption.options[0].selected) {
       Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&t=${item}`))
         .then(data => console.log(data))
+    } else if (chosenOption.options[1].selected) {
+      Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
+        .then(res => console.log(res.data.items[0]));
+    } else if (chosenOption.options[2].selected) {
+
     }
     Promise.all([
       Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=pants&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=BaharehG-smartToD-PRD-fce6fb270-d459fe1a`)),
@@ -36,9 +41,7 @@ export default function NavBar(props) {
           location: 'vancouver',
           term: item,
         }
-      })),
-      ,
-      Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
+      }))
     ]).then(all => {
     })
   }
