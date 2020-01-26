@@ -87,10 +87,10 @@ export default function NavBar(props) {
           <button type="reset" class="search" id="search-btn" onClick={click}></button>
         </form>
         <select id='hide' className="show" name="options">
-          <option value="movies">Movies</option>
-          <option value="movies">Books</option>
-          <option value="movies">products</option>
-          <option value="movies">restaurants</option>
+          <option style={{ fontSize: '5px' }} value="movies">Movies</option>
+          <option style={{ fontSize: '5px' }} value="movies">Books</option>
+          <option style={{ fontSize: '5px' }} value="movies">Products</option>
+          <option style={{ fontSize: '5px' }} value="movies">Restaurants</option>
           <FaCaretDown />
         </select>
       </div>}
