@@ -126,15 +126,15 @@ export default function NavBar(props) {
           <button type="reset" class="search" id="search-btn" onClick={click}></button>
         </form>
         <select id='hide' className="show" selected="selected">
-          <FaCaretDown />
-          Movies
+          <option>Movies</option>
           <option>Books</option>
           <option>products</option>
           <option>restaurants</option>
+          <FaCaretDown />
         </select>
       </div>
       <h1 href="#home" style={{ color: '#e85a4f', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', marginTop: '0.75rem' }}>Smart ToDo</h1>
-      <button style={{ width: '4rem', height: '2rem', background: 'transparent', border: '2px solid #e85a4f', borderRadius: '5px', color: '#e85a4f', marginRight: '2rem', marginTop: '0.7rem' }} onClick={logOut} href="/home">Logout</button>
+      <button className='logout-btn' style={{ width: '4rem', height: '2rem', background: 'transparent', border: '2px solid #e85a4f', borderRadius: '5px', color: '#e85a4f', marginRight: '2rem', marginTop: '0.7rem' }} onClick={logOut} href="/home">Logout</button>
       {/* <Nav className="mr-auto"> */}
       {/* {searchBar &&
 

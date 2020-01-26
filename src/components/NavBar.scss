@@ -15,6 +15,9 @@ $transition: all 0.5s ease;
   bottom: 99.2%;
   right: 98%;
   transform: translate(100%, 50%);
+  &:focus {
+    outline: none;
+  }
 }
 
 #content.on {
@@ -26,13 +29,16 @@ $transition: all 0.5s ease;
   animation-timing-function: linear;
   -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
+  &:focus {
+    outline: none;
+  }
 }
 
 input {
   box-sizing: border-box;
   width: 30px;
   height: 30px;
-  border: 4px solid #e85a4f;
+  border: 1px solid #e85a4f;
   border-radius: 50%;
   background: none;
   color: #e85a4f;
@@ -49,6 +55,9 @@ input {
   -webkit-transform: translate(65%, 50%);
   -ms-transform: translate(65%, 50%);
   transform: translate(1%, 50%);
+  &:focus {
+    outline: none;
+  }
 }
 
 .search {
@@ -69,6 +78,9 @@ input {
   -webkit-transform: translate(70%, 50%);
   -ms-transform: translate(70%, 50%);
   transform: translate(5%, 50%);
+  &:focus {
+    outline: none;
+  }
 }
 
 .search:before {
@@ -84,6 +96,9 @@ input {
   margin-left: -23px;
   -webkit-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
+  &:focus {
+    outline: none;
+  }
 }
 
 .close {
@@ -91,6 +106,9 @@ input {
   transition: 0.4s ease-in-out;
   -webkit-transition-delay: 0.4s;
   transition-delay: 0.4s;
+  &:focus {
+    outline: none;
+  }
 }
 
 .close:before {
@@ -106,6 +124,9 @@ input {
   transform: rotate(-45deg);
   -webkit-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
+  &:focus {
+    outline: none;
+  }
 }
 
 .close:after {
@@ -120,6 +141,9 @@ input {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+  &:focus {
+    outline: none;
+  }
 }
 
 .square {
@@ -127,7 +151,7 @@ input {
   padding: 0 40px 0 25px;
   width: 300px;
   height: 30px;
-  border: 4px solid #e85a4f;
+  border: 1px solid #e85a4f;
   border-radius: 0;
   background: none;
   color: #242628;
@@ -144,43 +168,50 @@ input {
   -webkit-transform: translate(100%, 50%);
   -ms-transform: translate(100%, 50%);
   transform: translate(1%, 50%);
+  &:focus {
+    outline: none;
+  }
 }
 .show {
   box-sizing: border-box;
   width: 100px;
   height: 30px;
-  margin-left: 20.5rem;
-  margin-top: 0.1%;
+  margin-left: 22rem;
+  margin-top: 19%;
+  border-radius: 0;
   background-color: transparent;
-  border: 4px solid #e85a4f;
+  border: 1px solid #e85a4f;
   opacity: 0;
-  -webkit-transition: width 0.4s ease-in-out, border-radius 0.8s ease-in-out,
-    padding 0.2s;
-  transition: width 0.4s ease-in-out, border-radius 0.8s ease-in-out,
-    padding 0.2s;
-  -webkit-transition-delay: 0.4s;
-  transition-delay: 0.4s;
-  -webkit-transform: translate(65%, 50%);
-  -ms-transform: translate(65%, 50%);
-  transform: translate(1%, 50%);
+  padding-left: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url(http://www.stackoverflow.com/favicon.ico) 96% / 15% no-repeat
+    #eee;
+  &:focus {
+    outline: none;
+  }
 }
 .togg {
   width: 100px;
   height: 30px;
-  margin-left: 20.29rem;
-  margin-top: 0.55%;
-  background-color: transparent;
-  border: 4px solid #e85a4f;
+  margin-left: 20.5rem;
+  margin-top: 19%;
+  border: 1px solid #e85a4f;
   opacity: 1;
-  -webkit-transition: width 0.4s ease-in-out, border-radius 0.8s ease-in-out,
-    padding 0.2s;
-  transition: width 0.4s ease-in-out, border-radius 0.8s ease-in-out,
-    padding 0.2s;
-  -webkit-transition-delay: 0.4s;
-  transition-delay: 0.4s;
-  -webkit-transform: translate(65%, 50%);
-  -ms-transform: translate(65%, 50%);
-  transform: translate(1%, 50%);
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url(https://image.flaticon.com/icons/svg/60/60995.svg) 96% / 15%
+    no-repeat #eee;
+  background-color: transparent;
+  &:focus {
+    outline: none;
+  }
+}
+.logout-btn:focus {
+  outline: none;
 }
 .btn-outline-info:hover {
   background-color: #808b96;
