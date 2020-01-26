@@ -7,8 +7,7 @@ let pg = require('pg');
 let app = express();
 let bcrypt = require('bcrypt');
 saltRound = 10;
-
-{ addUser, getUser, getItemsById, addItem, addItemForUser, deleteItem } = require('./database');
+const { addUser, addMovies, addRatings, getUser, addItemForUser } = require('./database');
 
 let pool = new pg.Pool({
   port: 5432,
@@ -55,31 +54,35 @@ app.get('/api/user/', function (request, response) {
       }
     });
 });
-app.get('/api/:userId/movies', function (request, response) {
-  getItemsById(request.params.userId, pool, `movies`)
-    .then(data => response.send(data.rows));
-});
-app.get('/api/:userId/books', function (request, response) {
-  getItemsById(request.params.userId, pool, `books`)
-    .then(data => response.send(data.rows));
-});
-app.get('/api/:userId/products', function (request, response) {
-  getItemsById(request.params.userId, pool, `products`)
-    .then(data => response.send(data.rows));
-});
-app.get('/api/:userId/restaurants', function (request, response) {
-  getItemsById(request.params.userId, pool, `restaurants`)
-    .then(data => response.send(data.rows));
-});
+// app.get('/api/:userId/movies', function (request, response) {
+//   getItemsById(request.params.userId, pool, `movies`)
+//     .then(data => response.send(data.rows));
+// });
+// app.get('/api/:userId/books', function (request, response) {
+//   getItemsById(request.params.userId, pool, `books`)
+//     .then(data => response.send(data.rows));
+// });
+// app.get('/api/:userId/products', function (request, response) {
+//   getItemsById(request.params.userId, pool, `products`)
+//     .then(data => response.send(data.rows));
+// });
+// app.get('/api/:userId/restaurants', function (request, response) {
+//   getItemsById(request.params.userId, pool, `restaurants`)
+//     .then(data => response.send(data.rows));
+// });
 app.post('/api/:userId/add', function (request, response) {
   let itemId = 0;
   item = request.body.item;
-  console.log(item);
   addItemForUser(request.params.userId, pool)
     .then(data => {
       itemId = data.rows[0].id;
-      addItem(itemId, item, pool)
-        .then(data => response.send(data.rows))
+      addMovies(itemId, item, pool)
+        .then(data => {
+          item.ratings.forEach(element => {
+            addRatings(data.rows[0].id, element, pool)
+              .then(res => response.send(res.rows[0]));
+          });
+        })
         .catch(err => console.log(err));
     });
 
