@@ -21,10 +21,34 @@ export default function NavBar(props) {
   const search = (item) => {
     setItem('');
     const chosenOption = document.getElementsByName('options')[0];
-
+    const userId = JSON.parse(localStorage.getItem('token')).session;
     if (chosenOption.options[0].selected) {
       Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&t=${item}`))
-        .then(res => console.log(res))
+        .then(res => {
+          console.log(res.data);
+          const item = {
+            category: 'movies',
+            title: '',
+            year: '',
+            released: '',
+            runtime: '',
+            genre: '',
+            director: '',
+            writer: '',
+            actors: '',
+            plot: '',
+            awards: '',
+            poster: '',
+            ratings: '',
+            votes: '',
+            type: '',
+            production: '',
+          }
+          // axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
+          //   .then(res => {
+
+          //   });
+        })
     } else if (chosenOption.options[1].selected) {
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
         .then(res => console.log(res.data.items[0]));
@@ -44,11 +68,10 @@ export default function NavBar(props) {
     }
   }
   const add = (item) => {
-    const userId = JSON.parse(localStorage.getItem('token')).session;
-    axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
-      .then(res => {
+    // axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
+    //   .then(res => {
 
-      });
+    //   });
     props.reset();
     // setModal(false);
     // props.showList(item);
