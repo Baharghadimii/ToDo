@@ -1,14 +1,8 @@
 import React, { useEffect } from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
 import './NavBar.scss';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
-import Modal from './ItemPicker';
 import axios from "axios";
-import { FaSearch } from 'react-icons/fa'
 import { FaCaretDown } from 'react-icons/fa'
+import Modal from './ItemPicker';
 import { googleApi, yelpApi, etsyApi, omdbApi } from '../api-keys';
 
 
@@ -85,7 +79,6 @@ export default function NavBar(props) {
     });
   }
   const add = (item) => {
-    console.log(item)
     const userId = JSON.parse(localStorage.getItem('token')).session;
     axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
       .then(res => {
@@ -120,9 +113,15 @@ export default function NavBar(props) {
 
   return (
     <div class="navBar" style={{ width: '100%', height: '3.5rem', backgroundColor: '#eae7dc', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
-      <div style={{ float: 'left', width: '5rem' }}>
-        <form id="content">
-          <input type="text" name="input" class="input" id="search-input" />
+      {searchBar && <div style={{ float: 'left', width: '5rem' }}>
+        <form onSubmit={() => search(item)} id="content">
+          <input
+            value={item}
+            type="text"
+            name="input"
+            class="input"
+            id="search-input"
+            onChange={(event) => setItem(event.target.value)} />
           <button type="reset" class="search" id="search-btn" onClick={click}></button>
         </form>
         <select id='hide' className="show" selected="selected">
@@ -132,19 +131,10 @@ export default function NavBar(props) {
           <option>restaurants</option>
           <FaCaretDown />
         </select>
-      </div>
+      </div>}
+      {modal && <Modal list={state} onAdd={add} onClose={close} noData={noData} />}
       <h1 href="#home" style={{ color: '#e85a4f', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', marginTop: '0.75rem' }}>Smart ToDo</h1>
       <button className='logout-btn' style={{ width: '4rem', height: '2rem', background: 'transparent', border: '2px solid #e85a4f', borderRadius: '5px', color: '#e85a4f', marginRight: '2rem', marginTop: '0.7rem' }} onClick={logOut} href="/home">Logout</button>
-      {/* <Nav className="mr-auto"> */}
-      {/* {searchBar &&
-
-        {/* </Nav> */}
-      {/* {searchBar && <Form inline
-          onChange={(event) => setItem(event.target.value)}>
-          <FormControl value={item} type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info" style={{ width: '5rem', color: 'white', borderColor: 'white' }} onClick={() => search(item)}>Search</Button>
-        </Form>} */}
-      {/* {modal && <Modal list={state} onAdd={add} onClose={close} noData={noData} />} */}
     </div >
   )
 }
