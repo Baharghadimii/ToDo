@@ -20,8 +20,12 @@ export default function NavBar(props) {
 
   const search = (item) => {
     setItem('');
-    const chosenOption = document.getElementsByName('options');
-    console.log(chosenOption);
+    const chosenOption = document.getElementsByName('options')[0];
+
+    if (chosenOption.options[0].selected) {
+      Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&t=${item}`))
+        .then(data => console.log(data))
+    }
     Promise.all([
       Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=pants&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=BaharehG-smartToD-PRD-fce6fb270-d459fe1a`)),
       Promise.resolve(axios.get('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search', {
@@ -33,7 +37,7 @@ export default function NavBar(props) {
           term: item,
         }
       })),
-      Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&s=${item}`)),
+      ,
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
     ]).then(all => {
     })
