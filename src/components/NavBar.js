@@ -3,7 +3,7 @@ import './NavBar.scss';
 import axios from "axios";
 import { FaCaretDown } from 'react-icons/fa'
 import Modal from './ItemPicker';
-import { googleApi, yelpApi, etsyApi, omdbApi } from '../api-keys';
+import { googleApi, yelpApi, ebayApi, omdbApi } from '../api-keys';
 
 
 export default function NavBar(props) {
@@ -24,15 +24,15 @@ export default function NavBar(props) {
 
     if (chosenOption.options[0].selected) {
       Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&t=${item}`))
-        .then(data => console.log(data))
+        .then(res => console.log(res))
     } else if (chosenOption.options[1].selected) {
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
         .then(res => console.log(res.data.items[0]));
     } else if (chosenOption.options[2].selected) {
-
+      Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=${item}&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=${ebayApi}`))
+        .then(res => console.log(res.data.findItemsByKeywordsResponse[0].searchResult[0].item[0]))
     }
     Promise.all([
-      Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=pants&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=BaharehG-smartToD-PRD-fce6fb270-d459fe1a`)),
       Promise.resolve(axios.get('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search', {
         headers: {
           Authorization: `Bearer ${yelpApi}`,
