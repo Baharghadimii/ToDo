@@ -1,78 +1,223 @@
-@import url("https://fonts.googleapis.com/css?family=Inconsolata:700");
+$background-color: #2a2e37;
+$search-bg-color: #242628;
+$icon-color: #00fede;
+$transition: all 0.5s ease;
 
 .navBar {
   width: "100%";
   height: "10%";
-  background: "#2F2FA2";
+  background-color: #eae7dc;
+}
+#content {
+  position: absolute;
+  height: 10px;
+  width: 100px;
+  bottom: 99.2%;
+  right: 98%;
+  transform: translate(100%, 50%);
+  &:focus {
+    outline: none;
+  }
+}
+
+#content.on {
+  -webkit-animation-name: in-out;
+  animation-name: in-out;
+  -webkit-animation-duration: 0.7s;
+  animation-duration: 0.7s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  &:focus {
+    outline: none;
+  }
+}
+
+input {
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #e85a4f;
+  border-radius: 50%;
+  background: none;
+  color: #e85a4f;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: Roboto;
+  outline: 0;
+  -webkit-transition: width 0.4s ease-in-out, border-radius 0.8s ease-in-out,
+    padding 0.2s;
+  transition: width 0.4s ease-in-out, border-radius 0.8s ease-in-out,
+    padding 0.2s;
+  -webkit-transition-delay: 0.4s;
+  transition-delay: 0.4s;
+  -webkit-transform: translate(65%, 50%);
+  -ms-transform: translate(65%, 50%);
+  transform: translate(1%, 50%);
+  &:focus {
+    outline: none;
+  }
 }
 
 .search {
+  background: none;
   position: absolute;
-  // margin: auto;
-  top: 0.7rem;
-  right: 0;
-  bottom: 0;
-  left: 3rem;
-  width: 30px;
+  top: 0px;
+  left: 0;
   height: 30px;
-  background: #f64c72;
-  border-radius: 3px;
-  transition: all 1s;
-  z-index: 3;
-}
-input {
-  font-family: "Inconsolata", monospace;
-  position: absolute;
-  top: 0.7rem;
-  right: 0;
-  bottom: 0;
-  left: 3rem;
   width: 30px;
-  height: 30px;
-  outline: none;
-  border: none;
-  background-color: white;
-  color: #553d67;
-  padding: 0 2px 0 1rem;
-  transition: all 1s;
-  opacity: 0;
-  z-index: 4;
-  font-weight: bolder;
-  border-radius: 3px;
-  letter-spacing: 0.1em;
-  &:hover {
-    cursor: pointer;
-  }
+  padding: 0;
+  border-radius: 100%;
+  outline: 0;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+  -webkit-transform: translate(70%, 50%);
+  -ms-transform: translate(70%, 50%);
+  transform: translate(5%, 50%);
   &:focus {
-    width: 300px;
-    opacity: 1;
-    cursor: text;
-  }
-  &:focus ~ .search {
-    left: 2%;
-    background: #f64c72;
-    z-index: 6;
-    &::before {
-      top: 0;
-      left: 1rem;
-      width: 25px;
-    }
-    &::after {
-      top: 0;
-      left: 1rem;
-      width: 20px;
-      height: 2px;
-      border: none;
-      transform: rotate(-45deg);
-    }
-  }
-  &::placeholder {
-    color: #f64c72;
-    opacity: 0.5;
-    font-weight: bolder;
+    outline: none;
   }
 }
 
+.search:before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 4px;
+  background-color: #e85a4f;
+  -webkit-transform: rotate(-50deg);
+  -ms-transform: rotate(-50deg);
+  transform: rotate(-50deg);
+  margin-top: 17px;
+  margin-left: -23px;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+  &:focus {
+    outline: none;
+  }
+}
+
+.close {
+  -webkit-transition: 0.4s ease-in-out;
+  transition: 0.4s ease-in-out;
+  -webkit-transition-delay: 0.4s;
+  transition-delay: 0.4s;
+  &:focus {
+    outline: none;
+  }
+}
+
+.close:before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 3px;
+  margin-top: -1px;
+  margin-left: -8px;
+  background-color: #e85a4f;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+  &:focus {
+    outline: none;
+  }
+}
+
+.close:after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 3px;
+  background-color: #e85a4f;
+  margin-top: -1px;
+  margin-left: -8px;
+  cursor: pointer;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  &:focus {
+    outline: none;
+  }
+}
+
+.square {
+  box-sizing: border-box;
+  padding: 0 40px 0 25px;
+  width: 200px;
+  height: 30px;
+  border: 1px solid #e85a4f;
+  border-radius: 0;
+  background: none;
+  color: #242628;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  outline: 0;
+  -webkit-transition: width 0.4s ease-in-out, border-radius 0.4s ease-in-out,
+    padding 0.2s;
+  transition: width 0.4s ease-in-out, border-radius 0.4s ease-in-out,
+    padding 0.2s;
+  -webkit-transition-delay: 0.4s, 0s, 0.4s;
+  transition-delay: 0.4s, 0s, 0.4s;
+  -webkit-transform: translate(100%, 50%);
+  -ms-transform: translate(100%, 50%);
+  transform: translate(1%, 50%);
+  &:focus {
+    outline: none;
+  }
+}
+.show {
+  box-sizing: border-box;
+  width: 110px;
+  height: 30px;
+  margin-left: 15rem;
+  margin-top: 19%;
+  border-radius: 0;
+  font-size: 14px;
+  font-family: "Nunito", sans-serif;
+  background-color: transparent;
+  border: 1px solid #e85a4f;
+  opacity: 0;
+  padding-left: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url(http://www.stackoverflow.com/favicon.ico) 96% / 15% no-repeat
+    #eee;
+  &:focus {
+    outline: none;
+  }
+}
+.togg {
+  width: 110px;
+  height: 30px;
+  margin-left: 14.2rem;
+  margin-top: 19%;
+  border: 1px solid #e85a4f;
+  opacity: 1;
+  font-size: 14px;
+  font-family: "Nunito", sans-serif;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url(https://image.flaticon.com/icons/svg/60/60995.svg) 96% / 15%
+    no-repeat #eee;
+  background-color: transparent;
+  &:focus {
+    outline: none;
+  }
+}
+
+.logout-btn:focus {
+  outline: none;
+}
 .btn-outline-info:hover {
   background-color: #808b96;
 }

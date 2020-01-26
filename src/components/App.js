@@ -11,9 +11,6 @@ function App() {
     list: [],
     token: JSON.parse(localStorage.getItem('token')) || null
   });
-  const changeDisplay = () => {
-    setState({ ...state, showList: false })
-  }
   const deleteItem = (id) => {
     const userId = JSON.parse(localStorage.getItem('token')).session;
 
@@ -101,7 +98,7 @@ function App() {
   return (
     <div className="App">
       {/* <header className="App-header"> */}
-      <NavBar changeDisplay={changeDisplay} showList={showList} reset={reset} />
+      <NavBar showList={showList} reset={reset} />
       {/* </header> */}
       {!localStorage.getItem('token') && <Login reset={reset} />}
       {state.showList && <Category delete={deleteItem} list={state.list} showList={showList} />}
