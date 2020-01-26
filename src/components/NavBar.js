@@ -31,8 +31,7 @@ export default function NavBar(props) {
     } else if (chosenOption.options[2].selected) {
       Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=${item}&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=${ebayApi}`))
         .then(res => console.log(res.data.findItemsByKeywordsResponse[0].searchResult[0].item[0]))
-    }
-    Promise.all([
+    } else {
       Promise.resolve(axios.get('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search', {
         headers: {
           Authorization: `Bearer ${yelpApi}`,
@@ -41,9 +40,8 @@ export default function NavBar(props) {
           location: 'vancouver',
           term: item,
         }
-      }))
-    ]).then(all => {
-    })
+      })).then(res => console.log(res.data.businesses[0]))
+    }
   }
   const add = (item) => {
     const userId = JSON.parse(localStorage.getItem('token')).session;
