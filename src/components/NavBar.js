@@ -8,7 +8,9 @@ import Button from 'react-bootstrap/Button';
 import Modal from './ItemPicker';
 import axios from "axios";
 import { FaSearch } from 'react-icons/fa'
+import { FaCaretDown } from 'react-icons/fa'
 import { googleApi, yelpApi, etsyApi, omdbApi } from '../api-keys';
+
 
 export default function NavBar(props) {
   const [state, setState] = React.useState({
@@ -104,17 +106,35 @@ export default function NavBar(props) {
   const logOut = () => {
     localStorage.clear();
   }
+  const click = () => {
+    const searchBtn = document.getElementById("search-btn");
+    const input = document.getElementById("search-input");
+    const drop = document.getElementById('hide')
+    searchBtn.classList.toggle("close");
+    input.classList.toggle("square");
+    drop.classList.toggle('togg');
+
+    console.log(searchBtn)
+  }
+
+
   return (
-    <div class="navBar" style={{ width: '100%', height: '3.5rem', backgroundColor: '#2F2FA2', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
+    <div class="navBar" style={{ width: '100%', height: '3.5rem', backgroundColor: '#eae7dc', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
       <div style={{ float: 'left', width: '5rem' }}>
-        <input type="text" placeholder="What're you looking for?" />
-        <input type="text" placeholder="What're you looking for?" />
-        <div class="search">
-          <FaSearch style={{ marginLeft: '0.5rem', marginTop: '0.25rem', color: 'white' }} />
-        </div>
+        <form id="content">
+          <input type="text" name="input" class="input" id="search-input" />
+          <button type="reset" class="search" id="search-btn" onClick={click}></button>
+        </form>
+        <select id='hide' className="show" selected="selected">
+          <FaCaretDown />
+          Movies
+          <option>Books</option>
+          <option>products</option>
+          <option>restaurants</option>
+        </select>
       </div>
-      <h1 href="#home" style={{ color: '#F64C72', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', marginTop: '0.75rem' }}>Smart ToDo</h1>
-      <button style={{ width: '4rem', height: '2rem', background: 'transparent', border: '2px solid #F64C72', borderRadius: '5px', color: '#F64C72', marginRight: '1rem', marginTop: '0.7rem' }} onClick={logOut} href="/home">Logout</button>
+      <h1 href="#home" style={{ color: '#e85a4f', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', marginTop: '0.75rem' }}>Smart ToDo</h1>
+      <button style={{ width: '4rem', height: '2rem', background: 'transparent', border: '2px solid #e85a4f', borderRadius: '5px', color: '#e85a4f', marginRight: '2rem', marginTop: '0.7rem' }} onClick={logOut} href="/home">Logout</button>
       {/* <Nav className="mr-auto"> */}
       {/* {searchBar &&
 
