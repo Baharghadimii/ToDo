@@ -77,16 +77,17 @@ app.post('/api/:userId/add', function (request, response) {
   addItemForUser(request.params.userId, pool)
     .then(data => {
       itemId = data.rows[0].id;
-      addMovies(itemId, item, pool)
-        .then(data => {
-          response.send(data.rows[0])
-          item.ratings.forEach(element => {
-            addRatings(data.rows[0].id, element, pool)
-              .then(res => response.send(data.rows[0]));
-          });
-        })
-        .catch(err => console.log(err));
-    });
+
+      // addMovies(itemId, item, pool)
+      //   .then(data => {
+      //     response.send(data.rows[0])
+      //     item.ratings.forEach(element => {
+      //       addRatings(data.rows[0].id, element, pool)
+      //         .then(res => response.send(data.rows[0]));
+      //     });
+    })
+  // .catch(err => console.log(err));
+  // });
 
 });
 app.delete('/api/:userId/delete/:itemId', function (request, response) {

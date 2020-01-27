@@ -26,21 +26,21 @@ export default function NavBar(props) {
           console.log(res);
           const item = {
             category: 'movies',
-            title: res.data.Title,
-            year: res.data.Year,
-            released: res.data.Released,
-            duration: res.data.Runtime,
-            genre: res.data.Genre,
-            director: res.data.Director,
-            writer: res.data.Writer,
-            actors: res.data.Actors,
-            plot: res.data.Plot,
-            awards: res.data.Awards,
-            image: res.data.Poster,
-            type: res.data.Type,
+            title: res.data.items[0].volumeInfo.Title,
+            year: res.data.items[0].volumeInfo.Year,
+            released: res.data.items[0].volumeInfo.Released,
+            duration: res.data.items[0].volumeInfo.Runtime,
+            genre: res.data.items[0].volumeInfo.Genre,
+            director: res.data.items[0].volumeInfo.Director,
+            writer: res.data.items[0].volumeInfo.Writer,
+            actors: res.data.items[0].volumeInfo.Actors,
+            plot: res.data.items[0].volumeInfo.Plot,
+            awards: res.data.items[0].volumeInfo.Awards,
+            image: res.data.items[0].volumeInfo.Poster,
+            type: res.data.items[0].volumeInfo.Type,
             link: '',
-            production: res.data.Production,
-            ratings: res.data.Ratings,
+            production: res.data.items[0].volumeInfo.Production,
+            ratings: res.data.items[0].volumeInfo.Ratings,
           }
           axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
             .then(res => {
@@ -50,17 +50,18 @@ export default function NavBar(props) {
     } else if (chosenOption.options[1].selected) {
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
         .then(res => {
+          console.log(res);
           const item = {
             category: 'books',
-            title: res.data.title,
-            subtitle: res.data.subtitle,
-            author: res.data.authors[0],
-            publishedDate: res.data.publishedDate,
-            description: res.data.description,
-            pageCounts: res.data.pageCounts,
-            bookCategory: res.data.categories[0],
-            link: res.data.previewLink,
-            image: res.data.imageLinks.thumbnail
+            title: res.data.items[0].volumeInfo.title,
+            subtitle: res.data.items[0].volumeInfo.subtitle,
+            author: res.data.items[0].volumeInfo.authors[0],
+            publishedDate: res.data.items[0].volumeInfo.publishedDate,
+            description: res.data.items[0].volumeInfo.description,
+            pages: res.data.items[0].volumeInfo.pageCounts,
+            bookCategory: res.data.items[0].volumeInfo.categories[0],
+            link: res.data.items[0].volumeInfo.previewLink,
+            image: res.data.items[0].volumeInfo.imageLinks || ''
           }
           axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
             .then(res => {
@@ -70,7 +71,7 @@ export default function NavBar(props) {
         });
     } else if (chosenOption.options[2].selected) {
       Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=${item}&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=${ebayApi}`))
-        .then(res => console.log(res.data.findItemsByKeywordsResponse[0].searchResult[0].item[0]))
+        .then(res => console.log(res.data.items[0].volumeInfo.findItemsByKeywordsResponse[0].searchResult[0].item[0]))
     } else {
       Promise.resolve(axios.get('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search', {
         headers: {
@@ -80,7 +81,7 @@ export default function NavBar(props) {
           location: 'vancouver',
           term: item,
         }
-      })).then(res => console.log(res.data.businesses[0]))
+      })).then(res => console.log(res.data.items[0].volumeInfo.businesses[0]))
     }
   }
   const add = (item) => {
