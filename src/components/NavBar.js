@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import './NavBar.scss';
 import axios from "axios";
 import { FaCaretDown } from 'react-icons/fa'
-import Modal from './ItemPicker';
 import { googleApi, yelpApi, ebayApi, omdbApi } from '../api-keys';
-
 
 export default function NavBar(props) {
   const [state, setState] = React.useState({
@@ -51,7 +49,25 @@ export default function NavBar(props) {
         })
     } else if (chosenOption.options[1].selected) {
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
-        .then(res => console.log(res.data.items[0]));
+        .then(res => {
+          const item = {
+            category: 'books',
+            title: res.data.title,
+            subtitle: res.data.subtitle,
+            author: res.data.authors[0],
+            publishedDate: res.data.publishedDate,
+            description: res.data.description,
+            pageCounts: res.data.pageCounts,
+            bookCategory: res.data.categories[0],
+            link: res.data.previewLink,
+            image: res.data.imageLinks.thumbnail
+          }
+          axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
+            .then(res => {
+              console.log(res);
+              props.reset();
+            });
+        });
     } else if (chosenOption.options[2].selected) {
       Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=${item}&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=${ebayApi}`))
         .then(res => console.log(res.data.findItemsByKeywordsResponse[0].searchResult[0].item[0]))
