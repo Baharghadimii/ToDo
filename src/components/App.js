@@ -71,7 +71,7 @@ function App() {
         if (movies) {
           movies.forEach((element, index) => {
             if (element.title.length > 20) {
-              movies[index].title = `${movies[index].title.slice(0, 20)}...`;
+              movies[index].title = `${movies[index].title.slice(0, 10)}...`;
             }
           })
         }
@@ -79,14 +79,14 @@ function App() {
         const books = all[1].data;
         if (all[1].data[0]) {
           if (all[1].data[0].title.length > 20) {
-            books[0].title = `${books[0].title.slice(0, 20)}...`;
+            books[0].title = `${books[0].title.slice(0, 10)}...`;
           }
         }
         temp.push(books);
         const products = all[2].data;
         if (all[2].data[0]) {
           if (all[2].data[0].title.length > 20) {
-            products[0].title = `${products[0].title.slice(0, 20)}...`;
+            products[0].title = `${products[0].title.slice(0, 10)}...`;
           }
         }
         temp.push(products);
@@ -107,9 +107,9 @@ function App() {
       <NavBar showList={showList} reset={reset} />
       {/* </header> */}
       {!localStorage.getItem('token') && <Login reset={reset} />}
-      <div style={{ width: '100%', height: '25rem', marginTop: '1rem', backgroundColor: 'transparent' }}>
-        <h4 style={{ fontFamily: 'Nunito', marginLeft: '1rem', marginTop: '1rem', color: 'black' }}>Movies</h4>
-        <div style={{ width: '10%', height: '2px', backgroundColor: 'black', marginLeft: '1rem' }}></div>
+      <div style={{ width: '100%', height: '45rem', marginTop: '1rem', backgroundColor: 'transparent' }}>
+        <h4 style={{ fontFamily: 'Nunito', marginLeft: '1rem', marginTop: '1rem', color: '#f64c72' }}>Movies</h4>
+        <div style={{ width: '10%', height: '2px', backgroundColor: '#f64c72', marginLeft: '1rem' }}></div>
         <CardLsit list={state.list[0]} />
       </div>
       {/* {state.showList && <CardLsit list={state.list} />} */}

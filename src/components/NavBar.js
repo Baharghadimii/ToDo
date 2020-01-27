@@ -139,7 +139,7 @@ export default function NavBar(props) {
   }
 
   return (
-    <div class="navBar" style={{ width: '100%', height: '3.5rem', backgroundColor: '#e5e8e8', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
+    <div class="navBar" style={{ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.19)', width: '100%', height: '4rem', backgroundColor: '#e5e8e8', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
       {searchBar && <div style={{ float: 'left', width: '5rem' }}>
         <form onSubmit={() => search(item)} id="content">
           <input
@@ -159,7 +159,7 @@ export default function NavBar(props) {
           <FaCaretDown />
         </select>
       </div>}
-      <h1 href="#home" style={{ color: 'black', fontFamily: 'Nunito', fontWeight: '900', fontSize: '2rem', marginTop: '0.75rem' }}>Smart ToDo</h1>
+      <h1 href="#home" style={{ color: '#f64c72', fontFamily: 'Nunito', fontWeight: '900', fontSize: '2rem', marginTop: '0.75rem' }}>Smart ToDo</h1>
       <button className='logout-btn' style={{ width: '4rem', height: '2rem', background: 'transparent', border: '0.5px solid black', borderRadius: '5px', color: 'black', marginRight: '2rem', marginTop: '0.7rem', cursor: 'pointer' }} onClick={logOut} href="/home">Logout</button>
     </div >
   )

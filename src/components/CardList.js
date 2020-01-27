@@ -3,7 +3,7 @@ import CardListItem from './CardListItem';
 export default function CardList(props) {
 
   return (
-    <div style={{ width: '100%', display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+    <div style={{ width: '100%', display: 'flex', height: '18rem', flexDirection: 'row', overflow: 'auto' }}>
       {props.list && props.list.map(item => {
         console.log(item)
         return <CardListItem
