@@ -7,7 +7,12 @@ let pg = require('pg');
 let app = express();
 let bcrypt = require('bcrypt');
 saltRound = 10;
-const { getItemsById, addRestaurants, addUser, addMovies, addRatings, getUser, addItemForUser, addBooks, addProducts } = require('./database');
+const {
+  getItemsById,
+  addRestaurants,
+  addUser, addMovies,
+  addRatings, getUser,
+  addItemForUser, addBooks, addProducts } = require('./database');
 
 let pool = new pg.Pool({
   port: 5432,
@@ -73,14 +78,19 @@ app.get('/api/:userId/restaurants', function (request, response) {
 app.post('/api/:userId/add', function (request, response) {
   let itemId = 0;
   item = request.body.item;
+  console.log(item);
   addItemForUser(request.params.userId, pool)
     .then(data => {
+      // console.log(data.rows[0])
       itemId = data.rows[0].id;
       if (item.category === 'movies') {
         addMovies(itemId, item, pool)
           .then(data => {
+            console.log(data);
             response.send(data.rows[0]);
             item.ratings.forEach(element => {
+              console.log(data.rows[0].id)
+              console.log(element);
               addRatings(data.rows[0].id, element, pool)
                 .then(res => console.log(res));
             })

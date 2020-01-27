@@ -68,6 +68,13 @@ function App() {
       ]).then(all => {
         let temp = [];
         const movies = all[0].data;
+        if (movies) {
+          movies.forEach((element, index) => {
+            if (element.title.length > 20) {
+              movies[index].title = `${movies[index].title.slice(0, 20)}...`;
+            }
+          })
+        }
         temp.push(movies);
         const books = all[1].data;
         if (all[1].data[0]) {
@@ -101,8 +108,8 @@ function App() {
       {/* </header> */}
       {!localStorage.getItem('token') && <Login reset={reset} />}
       <div style={{ width: '100%', height: '25rem', marginTop: '1rem', backgroundColor: 'transparent' }}>
-        <h4 style={{ fontFamily: 'Nunito', marginLeft: '1rem', marginTop: '1rem', color: '#e85a4f' }}>Movies</h4>
-        <div style={{ width: '10%', height: '2px', backgroundColor: '#e85a4f', marginLeft: '1rem' }}></div>
+        <h4 style={{ fontFamily: 'Nunito', marginLeft: '1rem', marginTop: '1rem', color: 'black' }}>Movies</h4>
+        <div style={{ width: '10%', height: '2px', backgroundColor: 'black', marginLeft: '1rem' }}></div>
         <CardLsit list={state.list[0]} />
       </div>
       {/* {state.showList && <CardLsit list={state.list} />} */}

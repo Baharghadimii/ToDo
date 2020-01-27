@@ -15,7 +15,13 @@ export default function NavBar(props) {
     if (chosenOption.options[0].selected) {
       Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&t=${searchedItem}`))
         .then(res => {
-          console.log(res);
+          let plot = ``;
+          const text = res.data.Plot;
+          for (const char of text) {
+            if (char !== `'`) {
+              plot += char;
+            }
+          }
           const item = {
             category: 'movies',
             title: res.data.Title,
@@ -26,7 +32,7 @@ export default function NavBar(props) {
             director: res.data.Director,
             writer: res.data.Writer,
             actors: res.data.Actors,
-            plot: res.data.Plot,
+            plot: plot,
             awards: res.data.Awards,
             image: res.data.Poster,
             type: res.data.Type,
@@ -133,7 +139,7 @@ export default function NavBar(props) {
   }
 
   return (
-    <div class="navBar" style={{ width: '100%', height: '3.5rem', backgroundColor: '#eae7dc', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
+    <div class="navBar" style={{ width: '100%', height: '3.5rem', backgroundColor: '#e5e8e8', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
       {searchBar && <div style={{ float: 'left', width: '5rem' }}>
         <form onSubmit={() => search(item)} id="content">
           <input
@@ -153,8 +159,8 @@ export default function NavBar(props) {
           <FaCaretDown />
         </select>
       </div>}
-      <h1 href="#home" style={{ color: '#e85a4f', fontFamily: 'Nunito', fontWeight: '900', fontSize: '1.5rem', marginTop: '0.75rem' }}>Smart ToDo</h1>
-      <button className='logout-btn' style={{ width: '4rem', height: '2rem', background: 'transparent', border: '0.5px solid #e85a4f', borderRadius: '5px', color: '#e85a4f', marginRight: '2rem', marginTop: '0.7rem', cursor: 'pointer' }} onClick={logOut} href="/home">Logout</button>
+      <h1 href="#home" style={{ color: 'black', fontFamily: 'Nunito', fontWeight: '900', fontSize: '2rem', marginTop: '0.75rem' }}>Smart ToDo</h1>
+      <button className='logout-btn' style={{ width: '4rem', height: '2rem', background: 'transparent', border: '0.5px solid black', borderRadius: '5px', color: 'black', marginRight: '2rem', marginTop: '0.7rem', cursor: 'pointer' }} onClick={logOut} href="/home">Logout</button>
     </div >
   )
 }

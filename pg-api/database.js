@@ -36,6 +36,7 @@ const addItemForUser = function (userId, db) {
   RETURNING *;`);
 };
 const addMovies = function (itemId, item, db) {
+  console.log(itemId, item);
   return db.query(
     `INSERT INTO movies
           (item_id,
@@ -70,7 +71,7 @@ const addMovies = function (itemId, item, db) {
               '${item.production}',
               '${item.actors}',
               '${item.image}',
-              '${item.linke}',
+              '${item.link}',
               '${item.duration}'
             )
             RETURNING *;`
