@@ -14,11 +14,12 @@ export default function Category(props) {
   const [businesses, setBusinesses] = React.useState(props.list || null);
 
   useEffect(() => {
+    console.log(props.list)
     if (props.list) {
       setMovies(props.list[0]);
-      setBooks(props.list[1]);
-      setProducts(props.list[2]);
-      setBusinesses(props.list[3]);
+      // setBooks(props.list[1]);
+      // setProducts(props.list[2]);
+      // setBusinesses(props.list[3]);
     }
   }, [props.list]);
 
@@ -31,7 +32,7 @@ export default function Category(props) {
               <Nav.Item >
                 <Nav.Link eventKey="first">Movies</Nav.Link>
               </Nav.Item>
-              <Nav.Item>
+              {/* <Nav.Item>
                 <Nav.Link eventKey="second">Books</Nav.Link>
               </Nav.Item>
               <Nav.Item>
@@ -39,17 +40,18 @@ export default function Category(props) {
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="fourth">Restaurants</Nav.Link>
-              </Nav.Item>
+              </Nav.Item> */}
             </Nav>
           </Col>
           <Col sm={9}>
             <Tab.Content >
-              <Tab.Pane eventKey="first">
-                <CardList
-                  list={movies}
-                  onDelete={(id) => props.delete(id)} />
-              </Tab.Pane>
-              <Tab.Pane eventKey="second">
+              {/* <Tab.Pane eventKey="first"> */}
+              {/* hello */}
+              <CardList
+                list={movies}
+                onDelete={(id) => props.delete(id)} />
+              {/* </Tab.Pane> */}
+              {/* <Tab.Pane eventKey="second">
                 <CardList
                   list={books}
                   onDelete={(id) => props.delete(id)} />
@@ -63,7 +65,7 @@ export default function Category(props) {
                 <CardList
                   list={businesses}
                   onDelete={(id) => props.delete(id)} />
-              </Tab.Pane>
+              </Tab.Pane> */}
             </Tab.Content>
           </Col>
         </Row>
