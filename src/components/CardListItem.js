@@ -17,7 +17,7 @@ export default function CardList(props) {
           onClick={props.onDelete}>
           <FaTrashAlt />
         </button>
-        <button style={{ outline: 'none', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.19)', float: "right", marginRight: '1rem', borderRadius: '50%', backgroundColor: '#2f2fa2' }} variant="primary" href='#'>
+        <button onClick={props.show} style={{ outline: 'none', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.19)', float: "right", marginRight: '1rem', borderRadius: '50%', backgroundColor: '#2f2fa2' }} variant="primary" href='#'>
           <FaAngleDoubleRight style={{ color: 'white', border: 'none' }} />
         </button>
       </div>

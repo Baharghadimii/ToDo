@@ -4,15 +4,21 @@ import NavBar from './NavBar';
 import axios from 'axios';
 import Login from './login';
 import Category from './Category';
+import ItemCard from './ItemCard';
 
 function App() {
   const [state, setState] = React.useState({
     showList: localStorage.getItem('token') ? true : false,
     list: [],
-    token: JSON.parse(localStorage.getItem('token')) || null
+    token: JSON.parse(localStorage.getItem('token')) || null,
+    showItem: false,
+    item: {}
   });
   const reset = () => {
     window.location.reload(true);
+  }
+  const show = (chosenItem) => {
+    setState({ ...state, showItem: true, showList: false, item: chosenItem[0] })
   }
   useEffect(() => {
     if (state.token) {
@@ -71,15 +77,13 @@ function App() {
     }
 
   }, [])
-  console.log(state)
+  console.log(state);
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column' }}>
-      {/* <header className="App-header"> */}
       <NavBar reset={reset} />
-      {/* </header> */}
       {!localStorage.getItem('token') && <Login reset={reset} />}
-      <Category list={state.list} reset={reset} />
-      {/* {state.showList && <CardLsit list={state.list} />} */}
+      {state.showList && < Category list={state.list} reset={reset} show={show} />}
+      {state.showItem && <ItemCard item={state.item} showList={() => setState({ ...state, showItem: false, showList: true })} />}
     </div>
   );
 }
