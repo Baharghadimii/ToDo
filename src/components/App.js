@@ -18,7 +18,7 @@ function App() {
     window.location.reload(true);
   }
   const show = (chosenItem) => {
-    setState({ ...state, showItem: true, showList: false, item: chosenItem[0] })
+    setState({ ...state, showItem: true, showList: false, item: chosenItem })
   }
   useEffect(() => {
     if (state.token) {
@@ -43,12 +43,11 @@ function App() {
           movies.forEach((element, index) => {
             movies[index]['longTitle'] = movies[index].title;
             if (element.title.length > 10) {
-              movies[index]['shortTitle'] = `${movies[index].title.slice(0, 10)}...`;
+              movies[index].title = `${movies[index].title.slice(0, 10)}...`;
             }
           })
           temp.push({ category: 'Movies', value: movies });
         }
-        console.log(temp);
         const books = all[1].data;
         if (all[1].data[0]) {
           books[0]['longTitle'] = books[0].title;
@@ -60,6 +59,7 @@ function App() {
 
         const products = all[2].data;
         if (all[2].data[0]) {
+          products[0]['longTitle'] = products[0].title;
           if (all[2].data[0].title.length > 10) {
             products[0].title = `${products[0].title.slice(0, 10)}...`;
           }
@@ -67,6 +67,7 @@ function App() {
         }
         const restaurants = all[3].data;
         if (all[3].data[0]) {
+          restaurants[0]['longTitle'] = restaurants[0].title;
           if (all[3].data[0].name.length > 10) {
             restaurants[0].name = `${restaurants[0].name.slice(0, 10)}...`;
           }

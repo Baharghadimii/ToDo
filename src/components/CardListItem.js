@@ -10,7 +10,6 @@ export default function CardList(props) {
       <img style={{ width: '6rem', height: '7rem', borderRadius: '50%', marginTop: '-3rem' }} variant="top" src={props.img} />
       <p style={{ fonstSize: '1rem', fontFamily: 'Nunito', margin: '5px', marginTop: '0.5rem', color: 'black' }}>
         {props.title}
-
       </p>
       <div style={{ marginTop: '1rem' }}>
         <button style={{ outline: 'none', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.19)', float: "left", marginLeft: '1rem', borderRadius: '50%' }} variant="primary"

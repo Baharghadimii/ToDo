@@ -13,16 +13,27 @@ export default function ItemCard(props) {
         <button style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', float: 'right', width: '3rem', height: '3rem', }} onClick={props.showList}>
           <FaTimesCircle size={35} />
         </button>
-        <h1 style={{ marginTop: '3.5rem', marginLeft: '1rem' }}>{props.item.longTitle}</h1>
-        <h5 style={{ marginLeft: '1rem' }}>Director</h5>
-        <h5 style={{ marginLeft: '1rem' }}>Actors</h5>
-        <h5 style={{ marginLeft: '1rem' }}>Duration</h5>
-        <h5 style={{ marginLeft: '1rem' }}>Genre</h5>
-        <h5 style={{ marginLeft: '1rem' }}>Ratings</h5>
-        <p style={{ marginLeft: '1rem' }}>Plot</p>
+        <h3 style={{ marginTop: '3.5rem', marginLeft: '1rem' }}>{props.item.longTitle}</h3>
+        {props.item.director && <h6 style={{ marginLeft: '1rem' }}><strong>Director: </strong>{props.item.director}</h6>}
+        {props.item.actors && <h6 style={{ marginLeft: '1rem' }}><strong>Actors: </strong>{props.item.actors}</h6>}
+        {props.item.duration && <h6 style={{ marginLeft: '1rem' }}><strong>Duration: </strong>{props.item.duration}</h6>}
+        {props.item.genre && <h6 style={{ marginLeft: '1rem' }}><strong>Genre: </strong>{props.item.genre}</h6>}
+        {props.item.ratings && <h6 style={{ marginLeft: '1rem' }}><strong>Ratings: </strong></h6>}
+        {props.item.plot && <div style={{ width: '100%', height: '10rem' }}>
+          <p style={{ marginLeft: '1rem' }}><strong>Plot: </strong><br />{`"${props.item.plot}"`}</p>
+        </div>}
+        {props.item.author && <h6 style={{ marginLeft: '1rem' }}><strong>Authors: </strong>{props.item.author}</h6>}
+        {/* {props.item.actors && <h6 style={{ marginLeft: '1rem' }}><strong>Actors: </strong>{props.item.actors}</h6>}
+        {props.item.duration && <h6 style={{ marginLeft: '1rem' }}><strong>Duration: </strong>{props.item.duration}</h6>}
+        {props.item.genre && <h6 style={{ marginLeft: '1rem' }}><strong>Genre: </strong>{props.item.genre}</h6>}
+        {props.item.ratings && <h6 style={{ marginLeft: '1rem' }}><strong>Ratings: </strong></h6>}
+        {props.item.plot && <div style={{ width: '100%', height: '10rem' }}>
+          <p style={{ marginLeft: '1rem' }}><strong>Plot: </strong><br />{`"${props.item.plot}"`}</p>
+        </div>} */}
         <FaLink style={{ float: 'right', marginRight: '2rem' }} size={25} />
         <FaHeart style={{ float: 'right', marginRight: '1rem' }} size={25} />
         <FaStar style={{ float: 'right', marginRight: '1rem' }} size={25} />
+
       </div>
     </div>
   )

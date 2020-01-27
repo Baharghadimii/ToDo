@@ -1,5 +1,5 @@
 import React from 'react';
-import CardLsit from './CardList';
+import CardList from './CardList';
 import axios from 'axios';
 
 export default function Category(props) {
@@ -19,7 +19,7 @@ export default function Category(props) {
           <div style={{ width: '100%', height: '20rem', marginTop: '1rem', backgroundColor: 'transparent' }}>
             <h4 style={{ fontFamily: 'Nunito', marginLeft: '1rem', marginTop: '1rem', color: '#f64c72' }}>{item.category}</h4>
             <div style={{ width: '10%', height: '2px', backgroundColor: '#f64c72', marginLeft: '1rem' }}></div>
-            <CardLsit list={item.value} onDelete={deleteItem} show={() => props.show(item.value)} />
+            <CardList list={item.value} onDelete={deleteItem} show={props.show} />
           </div>)
       })}
     </div>
