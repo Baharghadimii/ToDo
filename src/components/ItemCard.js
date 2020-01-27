@@ -19,17 +19,16 @@ export default function ItemCard(props) {
         {props.item.duration && <h6 style={{ marginLeft: '1rem' }}><strong>Duration: </strong>{props.item.duration}</h6>}
         {props.item.genre && <h6 style={{ marginLeft: '1rem' }}><strong>Genre: </strong>{props.item.genre}</h6>}
         {props.item.ratings && <h6 style={{ marginLeft: '1rem' }}><strong>Ratings: </strong></h6>}
-        {props.item.plot && <div style={{ width: '100%', height: '10rem' }}>
-          <p style={{ marginLeft: '1rem' }}><strong>Plot: </strong><br />{`"${props.item.plot}"`}</p>
+        {props.item.plot && <div style={{ width: '100%', height: '12rem', overflow: 'auto', marginRight: '1rem' }}>
+          <p style={{ marginLeft: '1rem', marginRight: '3rem' }}><strong>Plot: </strong><br />{`"${props.item.plot}"`}</p>
         </div>}
         {props.item.author && <h6 style={{ marginLeft: '1rem' }}><strong>Authors: </strong>{props.item.author}</h6>}
-        {/* {props.item.actors && <h6 style={{ marginLeft: '1rem' }}><strong>Actors: </strong>{props.item.actors}</h6>}
-        {props.item.duration && <h6 style={{ marginLeft: '1rem' }}><strong>Duration: </strong>{props.item.duration}</h6>}
-        {props.item.genre && <h6 style={{ marginLeft: '1rem' }}><strong>Genre: </strong>{props.item.genre}</h6>}
-        {props.item.ratings && <h6 style={{ marginLeft: '1rem' }}><strong>Ratings: </strong></h6>}
-        {props.item.plot && <div style={{ width: '100%', height: '10rem' }}>
-          <p style={{ marginLeft: '1rem' }}><strong>Plot: </strong><br />{`"${props.item.plot}"`}</p>
-        </div>} */}
+        {props.item.published_date && <h6 style={{ marginLeft: '1rem' }}><strong>Published Date: </strong>{props.item.published_date}</h6>}
+        {props.item.pages && <h6 style={{ marginLeft: '1rem' }}><strong>Pages: </strong>{props.item.pages}</h6>}
+        {props.item.book_category && <h6 style={{ marginLeft: '1rem' }}><strong>Category: </strong>{props.item.book_category}</h6>}
+        {props.item.description && <div style={{ width: '100%', height: '12rem', overflow: 'auto' }}>
+          <p style={{ marginLeft: '1rem', marginRight: '3rem' }}><strong>Plot: </strong><br />{`"${props.item.description}"`}</p>
+        </div>}
         <FaLink style={{ float: 'right', marginRight: '2rem' }} size={25} />
         <FaHeart style={{ float: 'right', marginRight: '1rem' }} size={25} />
         <FaStar style={{ float: 'right', marginRight: '1rem' }} size={25} />
