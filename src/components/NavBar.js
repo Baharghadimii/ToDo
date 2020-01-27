@@ -103,7 +103,26 @@ export default function NavBar(props) {
           location: 'vancouver',
           term: searchedItem,
         }
-      })).then(res => console.log(res.data.items[0].volumeInfo.businesses[0]))
+      })).then(res => {
+        const business = res.data.businesses[0];
+        const item = {
+          category: 'restaurants',
+          name: business.name,
+          reviewCount: business.review_count,
+          latitude: business.coordinates.latitude,
+          longitude: business.coordinates.latitude,
+          rating: business.rating,
+          price: business.price,
+          phone: business.display_phone,
+          location: business.location.address1,
+          image: business.image_url,
+          link: business.url,
+        }
+        axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
+          .then(res => {
+            props.reset();
+          });
+      })
     }
   }
   const add = (item) => {
