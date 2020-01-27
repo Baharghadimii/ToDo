@@ -66,7 +66,6 @@ function App() {
           Headers: new Headers({ 'content-type': 'application/json' })
         }))
       ]).then(all => {
-        console.log(all);
         let temp = [];
         const movies = all[0].data;
         temp.push(movies);
@@ -101,10 +100,10 @@ function App() {
       <NavBar showList={showList} reset={reset} />
       {/* </header> */}
       {!localStorage.getItem('token') && <Login reset={reset} />}
-      <div style={{ width: '100%', height: '20rem', marginTop: '1rem', backgroundColor: 'transparent' }}>
+      <div style={{ width: '100%', height: '25rem', marginTop: '1rem', backgroundColor: 'transparent' }}>
         <h4 style={{ fontFamily: 'Nunito', marginLeft: '1rem', marginTop: '1rem', color: '#e85a4f' }}>Movies</h4>
         <div style={{ width: '10%', height: '2px', backgroundColor: '#e85a4f', marginLeft: '1rem' }}></div>
-        <CardLsit list={state.list} />
+        <CardLsit list={state.list[0]} />
       </div>
       {/* {state.showList && <CardLsit list={state.list} />} */}
     </div>
