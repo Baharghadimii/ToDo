@@ -150,6 +150,39 @@ ${movieId}
 )
 RETURNING *;`)
 }
+const addRestaurants = function (itemId, item, db) {
+  return db.query(`
+  INSERT INTO products
+          (item_id,
+            category,
+            name,
+            review_counts,
+            rating,
+            image,
+            link,
+            location,
+            phone,
+            latitude,
+            longitude,
+            price
+            )
+            VALUES (
+              ${itemId},
+              '${item.category}',
+              '${item.name}',
+              '${item.reviewCount}',
+              '${item.rating}',
+              '${item.image}',
+              '${item.link}',
+              '${item.location}',
+              '${item.phone}',
+              '${item.latitude}',
+              '${item.longitude}',
+              '${item.price}'
+            )
+            RETURNING *;
+  `);
+}
 const deleteItem = function (id, db) {
   return db.query(`
   DELETE FROM items
@@ -165,5 +198,6 @@ module.exports = {
   addItemForUser,
   deleteItem,
   addBooks,
-  addProducts
+  addProducts,
+  addRestaurants
 };
