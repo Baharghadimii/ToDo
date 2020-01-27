@@ -76,6 +76,66 @@ const addMovies = function (itemId, item, db) {
             RETURNING *;`
   );
 };
+const addBooks = function (itemId, item, db) {
+  return db.query(`
+  INSERT INTO books
+          (item_id,
+            category,
+            title,
+            subtitle,
+            author,
+            book_category,
+            pages,
+            image,
+            link,
+            published_date,
+            description
+            )
+            VALUES (
+              ${itemId},
+              '${item.category}',
+              '${item.title}',
+              '${item.subtitle}',
+              '${item.author}',
+              '${item.bookCategory}',
+              '${item.pages}',
+              '${item.image}',
+              '${item.link}',
+              '${item.publishedDate}',
+              '${item.description}'
+            )
+            RETURNING *;
+  `);
+
+}
+const addProducts = function (itemId, item, db) {
+  return db.query(`
+  INSERT INTO products
+          (item_id,
+            category,
+            title,
+            subtitle,
+            product_category,
+            image,
+            link,
+            country,
+            price
+            )
+            VALUES (
+              ${itemId},
+              '${item.category}',
+              '${item.title}',
+              '${item.subtitle}',
+              '${item.productCategory}',
+              '${item.image}',
+              '${item.link}',
+              '${item.country}',
+              '${item.price}'
+            )
+            RETURNING *;
+  `);
+
+}
 const addRatings = function (movieId, rating, db) {
   return db.query(`
 INSERT INTO ratings(
@@ -90,6 +150,39 @@ ${movieId}
 )
 RETURNING *;`)
 }
+const addRestaurants = function (itemId, item, db) {
+  return db.query(`
+  INSERT INTO restaurants
+          (item_id,
+            category,
+            name,
+            review_counts,
+            rating,
+            image,
+            link,
+            location,
+            phone,
+            latitude,
+            longitude,
+            price
+            )
+            VALUES (
+              ${itemId},
+              '${item.category}',
+              '${item.name}',
+              ${item.reviewCount},
+              ${item.rating},
+              '${item.image}',
+              '${item.link}',
+              '${item.location}',
+              '${item.phone}',
+              ${item.latitude},
+              ${item.longitude},
+              '${item.price}'
+            )
+            RETURNING *;
+  `);
+}
 const deleteItem = function (id, db) {
   return db.query(`
   DELETE FROM items
@@ -103,5 +196,8 @@ module.exports = {
   addMovies,
   addRatings,
   addItemForUser,
-  deleteItem
+  deleteItem,
+  addBooks,
+  addProducts,
+  addRestaurants
 };

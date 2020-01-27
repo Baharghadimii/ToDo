@@ -7,7 +7,7 @@ let pg = require('pg');
 let app = express();
 let bcrypt = require('bcrypt');
 saltRound = 10;
-const { getItemsById, addUser, addMovies, addRatings, getUser, addItemForUser } = require('./database');
+const { getItemsById, addRestaurants, addUser, addMovies, addRatings, getUser, addItemForUser, addBooks, addProducts } = require('./database');
 
 let pool = new pg.Pool({
   port: 5432,
@@ -73,20 +73,30 @@ app.get('/api/:userId/movies', function (request, response) {
 app.post('/api/:userId/add', function (request, response) {
   let itemId = 0;
   item = request.body.item;
-  console.log(item);
   addItemForUser(request.params.userId, pool)
     .then(data => {
       itemId = data.rows[0].id;
-      addMovies(itemId, item, pool)
-        .then(data => {
-          response.send(data.rows[0])
-          item.ratings.forEach(element => {
-            addRatings(data.rows[0].id, element, pool)
-              .then(res => response.send(data.rows[0]));
-          });
-        })
-        .catch(err => console.log(err));
-    });
+      if (item.category === 'movies') {
+        addMovies(itemId, item, pool)
+          .then(data => {
+            response.send(data.rows[0]);
+            item.ratings.forEach(element => {
+              addRatings(data.rows[0].id, element, pool)
+                .then(res => console.log(res));
+            })
+          })
+      } else if (item.category === 'books') {
+        addBooks(itemId, item, pool)
+          .then(res => console.log(res));
+      } else if (item.category === 'products') {
+        addProducts(itemId, item, pool)
+          .then(res => console.log(res));
+      } else {
+        addRestaurants(itemId, item, pool)
+          .then(res => console.log(res));
+      }
+    })
+
 
 });
 app.delete('/api/:userId/delete/:itemId', function (request, response) {
