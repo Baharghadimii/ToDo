@@ -25,29 +25,29 @@ export default function NavBar(props) {
     if (chosenOption.options[0].selected) {
       Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&t=${item}`))
         .then(res => {
-          console.log(res.data);
+          console.log(res);
           const item = {
             category: 'movies',
-            title: '',
-            year: '',
-            released: '',
-            runtime: '',
-            genre: '',
-            director: '',
-            writer: '',
-            actors: '',
-            plot: '',
-            awards: '',
-            poster: '',
-            ratings: '',
-            votes: '',
-            type: '',
-            production: '',
+            title: res.data.Title,
+            year: res.data.Year,
+            released: res.data.Released,
+            duration: res.data.Runtime,
+            genre: res.data.Genre,
+            director: res.data.Director,
+            writer: res.data.Writer,
+            actors: res.data.Actors,
+            plot: res.data.Plot,
+            awards: res.data.Awards,
+            image: res.data.Poster,
+            type: res.data.Type,
+            link: '',
+            production: res.data.Production,
+            ratings: res.data.Ratings,
           }
-          // axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
-          //   .then(res => {
-
-          //   });
+          axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
+            .then(res => {
+              props.reset();
+            });
         })
     } else if (chosenOption.options[1].selected) {
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))

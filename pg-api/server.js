@@ -2,13 +2,12 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let cors = require('cors');
 let morgan = require('morgan');
-const PORT = 3001;
+PORT = 3001;
 let pg = require('pg');
 let app = express();
 let bcrypt = require('bcrypt');
-const saltRound = 10;
-
-const { addUser, getUser, getItemsById, addItem, addItemForUser, deleteItem } = require('./database');
+saltRound = 10;
+const { getItemsById, addUser, addMovies, addRatings, getUser, addItemForUser } = require('./database');
 
 let pool = new pg.Pool({
   port: 5432,
@@ -27,12 +26,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //routes
 app.post('/api/register', function (request, response) {
-  const email = request.body.user.email;
+  email = request.body.user.email;
   getUser(email, pool)
     .then(res => {
       if (!res.rows.length) {
-        const hash = bcrypt.hashSync(request.body.user.password, saltRound);
-        const email = request.body.user.email;
+        hash = bcrypt.hashSync(request.body.user.password, saltRound);
+        email = request.body.user.email;
         addUser([email, hash], pool)
           .then(data => {
             console.log(data);
@@ -44,12 +43,12 @@ app.post('/api/register', function (request, response) {
     });
 });
 app.get('/api/user/', function (request, response) {
-  const email = request.query.email;
-  const password = request.query.password;
+  email = request.query.email;
+  password = request.query.password;
   getUser(email, pool)
     .then(res => {
       console.log(res.rows[0])
-      const hash = res.rows[0].password;
+      hash = res.rows[0].password;
       if (bcrypt.compareSync(password, hash)) {
         response.send(res.rows[0]);
       }
@@ -59,35 +58,36 @@ app.get('/api/:userId/movies', function (request, response) {
   getItemsById(request.params.userId, pool, `movies`)
     .then(data => response.send(data.rows));
 });
-app.get('/api/:userId/books', function (request, response) {
-  getItemsById(request.params.userId, pool, `books`)
-    .then(data => response.send(data.rows));
-});
-app.get('/api/:userId/products', function (request, response) {
-  getItemsById(request.params.userId, pool, `products`)
-    .then(data => response.send(data.rows));
-});
-app.get('/api/:userId/restaurants', function (request, response) {
-  getItemsById(request.params.userId, pool, `restaurants`)
-    .then(data => response.send(data.rows));
-});
+// app.get('/api/:userId/books', function (request, response) {
+//   getItemsById(request.params.userId, pool, `books`)
+//     .then(data => response.send(data.rows));
+// });
+// app.get('/api/:userId/products', function (request, response) {
+//   getItemsById(request.params.userId, pool, `products`)
+//     .then(data => response.send(data.rows));
+// });
+// app.get('/api/:userId/restaurants', function (request, response) {
+//   getItemsById(request.params.userId, pool, `restaurants`)
+//     .then(data => response.send(data.rows));
+// });
 app.post('/api/:userId/add', function (request, response) {
   let itemId = 0;
-  const item = request.body.item;
-  item.forEach(element => {
-    addItemForUser(request.params.userId, pool)
-      .then(data => {
-        itemId = data.rows[0].id;
-        const category = element.category;
-        const title = element.title;
-        const image = element.image;
-        const link = element.link;
-        const content = element.content;
-        addItem(itemId, [category, title, image, link, content], pool)
-          .then(data => response.send(data.rows))
-          .catch(err => console.log(err));
-      });
-  });
+  item = request.body.item;
+  console.log(item);
+  addItemForUser(request.params.userId, pool)
+    .then(data => {
+      itemId = data.rows[0].id;
+      addMovies(itemId, item, pool)
+        .then(data => {
+          response.send(data.rows[0])
+          item.ratings.forEach(element => {
+            addRatings(data.rows[0].id, element, pool)
+              .then(res => response.send(data.rows[0]));
+          });
+        })
+        .catch(err => console.log(err));
+    });
+
 });
 app.delete('/api/:userId/delete/:itemId', function (request, response) {
   deleteItem(request.params.itemId, pool)
