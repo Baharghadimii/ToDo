@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaAngleDoubleRight } from 'react-icons/fa';
 import { FaTrashAlt } from 'react-icons/fa';
 
 export default function CardList(props) {
-  console.log(props);
+  useEffect(() => {
+    console.log(props)
+    if (typeof props.img[0] === 'object') {
+      console.log('hello')
+    }
+  }, [])
   return (
     <div style={{ displey: 'flex', flexDirection: 'column', textAlign: 'center', margin: '0.5rem', width: '10rem', height: '15rem', marginTop: '1rem', backgroundColor: '#F8F9F9', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.19)', borderRadius: '10px' }}>
       <div style={{ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.19)', width: '10rem', height: '5rem', backgroundColor: '#2f2fa2', borderRadius: '10px 10px 35px 35px' }}></div>

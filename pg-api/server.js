@@ -12,7 +12,8 @@ const {
   addRestaurants,
   addUser, addMovies,
   addRatings, getUser,
-  addItemForUser, addBooks, addProducts } = require('./database');
+  addItemForUser, addBooks,
+  addProducts, deleteItem } = require('./database');
 
 let pool = new pg.Pool({
   port: 5432,
@@ -78,6 +79,7 @@ app.get('/api/:userId/restaurants', function (request, response) {
 app.post('/api/:userId/add', function (request, response) {
   let itemId = 0;
   item = request.body.item;
+  console.log(item);
   addItemForUser(request.params.userId, pool)
     .then(data => {
       itemId = data.rows[0].id;
@@ -91,6 +93,7 @@ app.post('/api/:userId/add', function (request, response) {
             })
           })
       } else if (item.category === 'books') {
+        item.image = item.image.thumbnail;
         addBooks(itemId, item, pool)
           .then(res => console.log(res));
       } else if (item.category === 'products') {

@@ -18,7 +18,9 @@ export default function NavBar(props) {
           let plot = ``;
           const text = res.data.Plot;
           for (const char of text) {
-            if (char !== `'`) {
+            if (char === `'`) {
+              plot += char + `'`;
+            } else {
               plot += char;
             }
           }
@@ -48,23 +50,26 @@ export default function NavBar(props) {
     } else if (chosenOption.options[1].selected) {
       Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchedItem}&key=${googleApi}`))
         .then(res => {
-          const items = res.data.items;
           const item = {};
-          for (let i = 0; i < 5; i++) {
-            const capitalItem = searchedItem.charAt(0).toUpperCase() + searchedItem.slice(1, searchedItem.length);
-            if (items[i].volumeInfo.title === searchedItem || items[i].volumeInfo.title === capitalItem) {
-              item.category = 'books';
-              item.title = res.data.items[i].volumeInfo.title;
-              item.subtitle = res.data.items[i].volumeInfo.subtitle;
-              item.author = res.data.items[i].volumeInfo.authors[0];
-              item.publishedDate = res.data.items[i].volumeInfo.publishedDate;
-              item.description = res.data.items[i].volumeInfo.description;
-              item.pages = res.data.items[i].volumeInfo.pageCount;
-              item.bookCategory = res.data.items[i].volumeInfo.categories[0];
-              item.link = res.data.items[i].volumeInfo.previewLink;
-              item.image = res.data.items[i].volumeInfo.imageLinks || '';
+          let plot = ``;
+          const text = res.data.items[1].volumeInfo.description;
+          for (const char of text) {
+            if (char === `'`) {
+              plot += char + `'`;
+            } else {
+              plot += char;
             }
           }
+          item.category = 'books';
+          item.title = res.data.items[1].volumeInfo.title;
+          item.subtitle = res.data.items[1].volumeInfo.subtitle;
+          item.author = res.data.items[1].volumeInfo.authors[0];
+          item.publishedDate = res.data.items[1].volumeInfo.publishedDate;
+          item.description = plot;
+          item.pages = res.data.items[1].volumeInfo.pageCount;
+          item.bookCategory = res.data.items[1].volumeInfo.categories[0];
+          item.link = res.data.items[1].volumeInfo.previewLink;
+          item.image = res.data.items[1].volumeInfo.imageLinks || '';
           axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
             .then(res => {
               props.reset();

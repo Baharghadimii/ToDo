@@ -9,7 +9,6 @@ export default function CardList(props) {
         return <CardListItem
           img={item.image}
           title={item.title}
-          content={item.production}
           onDelete={() => props.onDelete(item.item_id)} />
       })}
     </div>
