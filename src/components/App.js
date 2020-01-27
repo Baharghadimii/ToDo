@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import './App.scss';
 import NavBar from './NavBar';
-import Category from './Category';
 import axios from 'axios';
 import Login from './login';
+import CardLsit from './CardList';
 
 function App() {
   const [state, setState] = React.useState({
@@ -56,36 +56,36 @@ function App() {
         Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/movies`, {
           Headers: new Headers({ 'content-type': 'application/json' })
         })),
-        // Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/books`, {
-        //   Headers: new Headers({ 'content-type': 'application/json' })
-        // })),
-        // Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/products`, {
-        //   Headers: new Headers({ 'content-type': 'application/json' })
-        // })),
-        // Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/restaurants`, {
-        //   Headers: new Headers({ 'content-type': 'application/json' })
-        // }))
+        Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/books`, {
+          Headers: new Headers({ 'content-type': 'application/json' })
+        })),
+        Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/products`, {
+          Headers: new Headers({ 'content-type': 'application/json' })
+        })),
+        Promise.resolve(axios.get(`http://localhost:3001/api/${userId}/restaurants`, {
+          Headers: new Headers({ 'content-type': 'application/json' })
+        }))
       ]).then(all => {
         console.log(all);
         let temp = [];
         const movies = all[0].data;
         temp.push(movies);
-        // const books = all[1].data;
-        // if (all[1].data[0]) {
-        //   if (all[1].data[0].title.length > 20) {
-        //     books[0].title = `${books[0].title.slice(0, 20)}...`;
-        //   }
-        // }
-        // temp.push(books);
-        // const products = all[2].data;
-        // if (all[2].data[0]) {
-        //   if (all[2].data[0].title.length > 20) {
-        //     products[0].title = `${products[0].title.slice(0, 20)}...`;
-        //   }
-        // }
-        // temp.push(products);
-        // const restaurants = all[3].data;
-        // temp.push(restaurants);
+        const books = all[1].data;
+        if (all[1].data[0]) {
+          if (all[1].data[0].title.length > 20) {
+            books[0].title = `${books[0].title.slice(0, 20)}...`;
+          }
+        }
+        temp.push(books);
+        const products = all[2].data;
+        if (all[2].data[0]) {
+          if (all[2].data[0].title.length > 20) {
+            products[0].title = `${products[0].title.slice(0, 20)}...`;
+          }
+        }
+        temp.push(products);
+        const restaurants = all[3].data;
+        temp.push(restaurants);
         setState({
           ...state,
           list: temp
@@ -101,7 +101,12 @@ function App() {
       <NavBar showList={showList} reset={reset} />
       {/* </header> */}
       {!localStorage.getItem('token') && <Login reset={reset} />}
-      {state.showList && <Category delete={deleteItem} list={state.list} showList={showList} />}
+      <div style={{ width: '100%', height: '20rem', marginTop: '1rem', backgroundColor: 'transparent' }}>
+        <h4 style={{ fontFamily: 'Nunito', marginLeft: '1rem', marginTop: '1rem', color: '#e85a4f' }}>Movies</h4>
+        <div style={{ width: '10%', height: '2px', backgroundColor: '#e85a4f', marginLeft: '1rem' }}></div>
+        <CardLsit list={state.list} />
+      </div>
+      {/* {state.showList && <CardLsit list={state.list} />} */}
     </div>
   );
 }
