@@ -101,7 +101,12 @@ function App() {
       <NavBar showList={showList} reset={reset} />
       {/* </header> */}
       {!localStorage.getItem('token') && <Login reset={reset} />}
-      {state.showList && <CardLsit list={state.list} />}
+      <div style={{ width: '100%', height: '20rem', marginTop: '1rem', backgroundColor: 'transparent' }}>
+        <h4 style={{ fontFamily: 'Nunito', marginLeft: '1rem', marginTop: '1rem', color: '#e85a4f' }}>Movies</h4>
+        <div style={{ width: '10%', height: '2px', backgroundColor: '#e85a4f', marginLeft: '1rem' }}></div>
+        <CardLsit list={state.list} />
+      </div>
+      {/* {state.showList && <CardLsit list={state.list} />} */}
     </div>
   );
 }
