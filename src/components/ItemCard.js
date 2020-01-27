@@ -13,7 +13,7 @@ export default function ItemCard(props) {
         <button style={{ backgroundColor: 'transparent', border: 'none', outline: 'none', float: 'right', width: '3rem', height: '3rem', }} onClick={props.showList}>
           <FaTimesCircle size={35} />
         </button>
-        <h1 style={{ marginTop: '3.5rem', marginLeft: '1rem' }}>title</h1>
+        <h1 style={{ marginTop: '3.5rem', marginLeft: '1rem' }}>{props.item.longTitle}</h1>
         <h5 style={{ marginLeft: '1rem' }}>Director</h5>
         <h5 style={{ marginLeft: '1rem' }}>Actors</h5>
         <h5 style={{ marginLeft: '1rem' }}>Duration</h5>

@@ -41,14 +41,17 @@ function App() {
         const movies = all[0].data;
         if (movies[0]) {
           movies.forEach((element, index) => {
+            movies[index]['longTitle'] = movies[index].title;
             if (element.title.length > 10) {
-              movies[index].title = `${movies[index].title.slice(0, 10)}...`;
+              movies[index]['shortTitle'] = `${movies[index].title.slice(0, 10)}...`;
             }
           })
           temp.push({ category: 'Movies', value: movies });
         }
+        console.log(temp);
         const books = all[1].data;
         if (all[1].data[0]) {
+          books[0]['longTitle'] = books[0].title;
           if (all[1].data[0].title.length > 10) {
             books[0].title = `${books[0].title.slice(0, 10)}...`;
           }
