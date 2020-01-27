@@ -152,7 +152,7 @@ RETURNING *;`)
 }
 const addRestaurants = function (itemId, item, db) {
   return db.query(`
-  INSERT INTO products
+  INSERT INTO restaurants
           (item_id,
             category,
             name,
@@ -170,14 +170,14 @@ const addRestaurants = function (itemId, item, db) {
               ${itemId},
               '${item.category}',
               '${item.name}',
-              '${item.reviewCount}',
-              '${item.rating}',
+              ${item.reviewCount},
+              ${item.rating},
               '${item.image}',
               '${item.link}',
               '${item.location}',
               '${item.phone}',
-              '${item.latitude}',
-              '${item.longitude}',
+              ${item.latitude},
+              ${item.longitude},
               '${item.price}'
             )
             RETURNING *;

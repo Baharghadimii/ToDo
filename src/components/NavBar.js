@@ -118,6 +118,7 @@ export default function NavBar(props) {
           image: business.image_url,
           link: business.url,
         }
+        console.log(item);
         axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
           .then(res => {
             props.reset();
