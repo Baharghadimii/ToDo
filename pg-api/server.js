@@ -73,7 +73,6 @@ app.get('/api/:userId/movies', function (request, response) {
 app.post('/api/:userId/add', function (request, response) {
   let itemId = 0;
   item = request.body.item;
-  console.log(item);
   addItemForUser(request.params.userId, pool)
     .then(data => {
       itemId = data.rows[0].id;
@@ -88,6 +87,9 @@ app.post('/api/:userId/add', function (request, response) {
           })
       } else if (item.category === 'books') {
         addBooks(itemId, item, pool)
+          .then(res => console.log(res));
+      } else if (item.category === 'products') {
+        addProducts(itemId, item, pool)
           .then(res => console.log(res));
       }
     })

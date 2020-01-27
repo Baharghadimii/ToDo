@@ -77,16 +77,18 @@ export default function NavBar(props) {
       Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=${searchedItem}&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=${ebayApi}`))
         .then(res => {
           const product = res.data.findItemsByKeywordsResponse[0].searchResult[0].item[0];
+          console.log(product);
           const item = {
             category: 'products',
-            title: item.title[0],
-            subtitle: item.subtitle[0],
-            productCategory: item.primaryCategory[0].categoryName[0],
-            image: item.galleryURL[0],
-            country: item.country[0],
-            link: item.viewItemURL[0],
-            price: item.sellingStatus[0].currentPrice[0]._value_
+            title: product.title[0],
+            subtitle: product.subtitle[0],
+            productCategory: product.primaryCategory[0].categoryName[0],
+            image: product.galleryURL[0],
+            country: product.country[0],
+            link: product.viewItemURL[0],
+            price: product.sellingStatus[0].currentPrice[0].__value__
           }
+          console.log(product.sellingStatus[0].currentPrice[0]);
           axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
             .then(res => {
               props.reset();
