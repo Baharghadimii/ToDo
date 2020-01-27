@@ -7,7 +7,7 @@ let pg = require('pg');
 let app = express();
 let bcrypt = require('bcrypt');
 saltRound = 10;
-const { getItemsById, addUser, addMovies, addRatings, getUser, addItemForUser } = require('./database');
+const { getItemsById, addUser, addMovies, addRatings, getUser, addItemForUser, addBooks } = require('./database');
 
 let pool = new pg.Pool({
   port: 5432,

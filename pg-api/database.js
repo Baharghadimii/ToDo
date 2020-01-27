@@ -76,6 +76,38 @@ const addMovies = function (itemId, item, db) {
             RETURNING *;`
   );
 };
+const addBooks = function (itemId, item, db) {
+  return db.query(`
+  INSERT INTO movies
+          (item_id,
+            category,
+            title,
+            subtitle,
+            author,
+            book_category,
+            pages,
+            image,
+            link,
+            published_date,
+            description
+            )
+            VALUES (
+              ${itemId},
+              '${item.category}',
+              '${item.title}',
+              '${item.subtitle}',
+              '${item.author}',
+              '${item.bookCategory}',
+              '${item.pages}',
+              '${item.image}',
+              '${item.link}',
+              '${item.publishedDate}',
+              '${item.description}'
+            )
+            RETURNING *;
+  `);
+
+}
 const addRatings = function (movieId, rating, db) {
   return db.query(`
 INSERT INTO ratings(
@@ -103,5 +135,6 @@ module.exports = {
   addMovies,
   addRatings,
   addItemForUser,
-  deleteItem
+  deleteItem,
+  addBooks
 };
