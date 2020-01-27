@@ -78,7 +78,7 @@ const addMovies = function (itemId, item, db) {
 };
 const addBooks = function (itemId, item, db) {
   return db.query(`
-  INSERT INTO movies
+  INSERT INTO books
           (item_id,
             category,
             title,

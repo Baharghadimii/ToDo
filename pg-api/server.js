@@ -87,8 +87,8 @@ app.post('/api/:userId/add', function (request, response) {
             })
           })
       } else if (item.category === 'books') {
-
-
+        addBooks(itemId, item, pool)
+          .then(res => console.log(res));
       }
     })
 

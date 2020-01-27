@@ -16,12 +16,12 @@ export default function NavBar(props) {
   const [modal, setModal] = React.useState(false);
   const [searchBar, setSearchBar] = React.useState();
 
-  const search = (item) => {
+  const search = (searchedItem) => {
     setItem('');
     const chosenOption = document.getElementsByName('options')[0];
     const userId = JSON.parse(localStorage.getItem('token')).session;
     if (chosenOption.options[0].selected) {
-      Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&t=${item}`))
+      Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&t=${searchedItem}`))
         .then(res => {
           console.log(res);
           const item = {
@@ -48,29 +48,33 @@ export default function NavBar(props) {
             });
         })
     } else if (chosenOption.options[1].selected) {
-      Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${item}&key=${googleApi}`))
+      Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchedItem}&key=${googleApi}`))
         .then(res => {
-          console.log(res);
-          const item = {
-            category: 'books',
-            title: res.data.items[0].volumeInfo.title,
-            subtitle: res.data.items[0].volumeInfo.subtitle,
-            author: res.data.items[0].volumeInfo.authors[0],
-            publishedDate: res.data.items[0].volumeInfo.publishedDate,
-            description: res.data.items[0].volumeInfo.description,
-            pages: res.data.items[0].volumeInfo.pageCounts,
-            bookCategory: res.data.items[0].volumeInfo.categories[0],
-            link: res.data.items[0].volumeInfo.previewLink,
-            image: res.data.items[0].volumeInfo.imageLinks || ''
+          // console.log(res);
+          const items = res.data.items;
+          const item = {};
+          for (let i = 0; i < 5; i++) {
+            const capitalItem = searchedItem.charAt(0).toUpperCase() + searchedItem.slice(1, searchedItem.length);
+            if (items[i].volumeInfo.title === searchedItem || items[i].volumeInfo.title === capitalItem) {
+              item.category = 'books';
+              item.title = res.data.items[i].volumeInfo.title;
+              item.subtitle = res.data.items[i].volumeInfo.subtitle;
+              item.author = res.data.items[i].volumeInfo.authors[0];
+              item.publishedDate = res.data.items[i].volumeInfo.publishedDate;
+              item.description = res.data.items[i].volumeInfo.description;
+              item.pages = res.data.items[i].volumeInfo.pageCount;
+              item.bookCategory = res.data.items[i].volumeInfo.categories[0];
+              item.link = res.data.items[i].volumeInfo.previewLink;
+              item.image = res.data.items[i].volumeInfo.imageLinks || '';
+            }
           }
           axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
             .then(res => {
-              console.log(res);
               props.reset();
             });
         });
     } else if (chosenOption.options[2].selected) {
-      Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=${item}&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=${ebayApi}`))
+      Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=${searchedItem}&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=${ebayApi}`))
         .then(res => console.log(res.data.items[0].volumeInfo.findItemsByKeywordsResponse[0].searchResult[0].item[0]))
     } else {
       Promise.resolve(axios.get('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search', {
@@ -79,7 +83,7 @@ export default function NavBar(props) {
         },
         params: {
           location: 'vancouver',
-          term: item,
+          term: searchedItem,
         }
       })).then(res => console.log(res.data.items[0].volumeInfo.businesses[0]))
     }
