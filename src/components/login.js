@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert'
+import Col from 'react-bootstrap/Col';
 export default function Login(props) {
   const [state, setState] = useState({
     email: '',
@@ -51,56 +52,44 @@ export default function Login(props) {
   return (
     <div>
       {state.showLogin &&
-        <div>
+        <div style={{ width: '100%', height: 'auto' }}>
           {state.error && (
             < Alert style={{ width: '30%', margin: '0 auto', marginTop: '3%' }} variant='danger'>
               Email or password is incorrect!
           </Alert>)}
-          <Form style={{ width: '30%', margin: '0 auto', marginTop: '5%', textAlign: 'left' }}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control onChange={e => setState({ ...state, email: e.target.value })} type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-              </Form.Text>
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control onChange={e => setState({ ...state, password: e.target.value })} type="password" placeholder="Password" />
-            </Form.Group>
-          </Form>
+          <form style={{ width: '50%', height: '20rem', margin: '0 auto', display: 'flex', flexDirection: 'column' }}>
+            <label style={{ marginLeft: '5rem', marginTop: '3.5rem', fontFamily: 'Nunito', fontSize: '20px' }}>Email address</label>
+            <input style={{ paddingLeft: '1rem', margin: '0 auto', width: '70%', borderRadius: '5px', backgroundColor: 'white', borderColor: '#ABB2B9', color: '#ABB2B9', fontFamily: 'Nunito', marginTop: '-15px', height: '2.5rem' }} onChange={e => setState({ ...state, email: e.target.value })} type="email" placeholder="Enter email" />
+            <label style={{ marginLeft: '5rem', marginTop: '2rem', fontFamily: 'Nunito', fontSize: '20px' }}>Password</label>
+            <input style={{ paddingLeft: '1rem', margin: '0 auto', width: '70%', borderRadius: '5px', backgroundColor: 'white', borderColor: '#ABB2B9', color: '#ABB2B9', fontFamily: 'Nunito', marginTop: '-15px', height: '2.5rem' }} onChange={e => setState({ ...state, password: e.target.value })} type="password" placeholder="Password" />
+          </form>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <Button style={{ width: '20%', margin: '0 auto' }} variant="primary" type="submit" onClick={login} >
+            <Button style={{ width: '20%', margin: '0 auto', marginTop: '-4rem', marginBottom: '1.5rem' }} variant="primary" type="submit" onClick={login} >
               Login
       </Button>
-            <a style={{ marginTop: '1%', cursor: 'pointer' }} href='#' onClick={showRegister}>Don't Have an account?!</a>
+            <a style={{ cursor: 'pointer', margin: '0 auto' }} href='#' onClick={showRegister}>Don't Have an account?!</a>
           </div>
         </div>
       }
 
       {!state.showLogin && (
         <div>
-          <Form style={{ width: '30%', margin: '0 auto', marginTop: '5%', textAlign: 'left' }}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control onChange={e => setState({ ...state, email: e.target.value })} type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-          </Form.Text>
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control onChange={e => setState({ ...state, password: e.target.value })} type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control onChange={e => setState({ ...state, passwordConfirmation: e.target.value })} type="password" placeholder="Password" />
-            </Form.Group>
-          </Form>
+          <form style={{ width: '50%', height: '23rem', margin: '0 auto', display: 'flex', flexDirection: 'column' }}>
+            <label style={{ marginLeft: '5rem', marginTop: '2rem', fontFamily: 'Nunito', fontSize: '20px' }}>Email address</label>
+            <input style={{ paddingLeft: '1rem', margin: '0 auto', width: '70%', borderRadius: '5px', backgroundColor: 'white', borderColor: '#ABB2B9', color: '#ABB2B9', fontFamily: 'Nunito', marginTop: '-15px', height: '2.5rem' }} onChange={e => setState({ ...state, email: e.target.value })} type="email" placeholder="Enter email" />
+            <p style={{ margin: '0 auto', marginTop: '2rem' }} className="text-muted">
+              We'll never share your email with anyone else.
+          </p>
+            <label style={{ marginLeft: '5rem', marginTop: '0.5rem', fontFamily: 'Nunito', fontSize: '20px' }}>Password</label>
+            <input style={{ paddingLeft: '1rem', margin: '0 auto', width: '70%', borderRadius: '5px', backgroundColor: 'white', borderColor: '#ABB2B9', color: '#ABB2B9', fontFamily: 'Nunito', marginTop: '-15px', height: '2.5rem' }} onChange={e => setState({ ...state, email: e.target.value })} type="email" placeholder="Enter password" />
+            <label style={{ marginLeft: '5rem', marginTop: '2rem', fontFamily: 'Nunito', fontSize: '20px' }}>Password Confirmation</label>
+            <input style={{ paddingLeft: '1rem', margin: '0 auto', width: '70%', borderRadius: '5px', backgroundColor: 'white', borderColor: '#ABB2B9', color: '#ABB2B9', fontFamily: 'Nunito', marginTop: '-15px', height: '2.5rem' }} onChange={e => setState({ ...state, email: e.target.value })} type="email" placeholder="Enter password" />
+          </form>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <Button style={{ width: '20%', margin: '0 auto' }} variant="primary" type="submit" onClick={register} >
               Create Acoount
             </Button>
-            <a style={{ marginTop: '1%', cursor: 'pointer' }} href='#' onClick={showLogin}>Already have an account?!</a>
+            <a style={{ margin: '0 auto', marginTop: '2%', cursor: 'pointer' }} href='#' onClick={showLogin}>Already have an account?!</a>
           </div>
         </div>)}
     </div >
