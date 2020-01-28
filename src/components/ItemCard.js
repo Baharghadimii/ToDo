@@ -29,6 +29,12 @@ export default function ItemCard(props) {
         {props.item.description && <div style={{ width: '100%', height: '12rem', overflow: 'auto' }}>
           <p style={{ marginLeft: '1rem', marginRight: '3rem' }}><strong>Plot: </strong><br />{`"${props.item.description}"`}</p>
         </div>}
+        {props.item.product_category && <h6 style={{ marginLeft: '1rem' }}><strong>Category: </strong>{props.item.product_category}</h6>}
+        {props.item.country && <h6 style={{ marginLeft: '1rem' }}><strong>Country: </strong>{props.item.country}</h6>}
+        {props.item.price && <h6 style={{ marginLeft: '1rem' }}><strong>Price: </strong>{props.item.price}</h6>}
+        {props.item.product_category && <div style={{ width: '100%', height: '12rem', overflow: 'auto' }}>
+          <p style={{ marginLeft: '1rem', marginRight: '3rem' }}><strong></strong><br /></p>
+        </div>}
         <FaLink style={{ float: 'right', marginRight: '2rem' }} size={25} />
         <FaHeart style={{ float: 'right', marginRight: '1rem' }} size={25} />
         <FaStar style={{ float: 'right', marginRight: '1rem' }} size={25} />
