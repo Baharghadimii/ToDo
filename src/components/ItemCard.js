@@ -41,10 +41,9 @@ export default function ItemCard(props) {
         {props.item.phone && <div style={{ width: '100%', height: '12rem', overflow: 'auto' }}>
           <p style={{ marginLeft: '1rem', marginRight: '3rem' }}><strong></strong><br /></p>
         </div>}
-        <FaLink style={{ float: 'right', marginRight: '2rem' }} size={25} />
+        <FaLink style={{ float: 'right', marginRight: '2rem' }} size={25} onClick={() => window.open(props.item.link)} />
         <FaHeart style={{ float: 'right', marginRight: '1rem' }} size={25} />
         <FaStar style={{ float: 'right', marginRight: '1rem' }} size={25} />
-
       </div>
     </div>
   )
