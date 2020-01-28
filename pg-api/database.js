@@ -36,6 +36,7 @@ const addItemForUser = function (userId, db) {
   RETURNING *;`);
 };
 const addMovies = function (itemId, item, db) {
+  console.log(itemId, item);
   return db.query(
     `INSERT INTO movies
           (item_id,
@@ -70,7 +71,7 @@ const addMovies = function (itemId, item, db) {
               '${item.production}',
               '${item.actors}',
               '${item.image}',
-              '${item.linke}',
+              '${item.link}',
               '${item.duration}'
             )
             RETURNING *;`
@@ -114,7 +115,6 @@ const addProducts = function (itemId, item, db) {
           (item_id,
             category,
             title,
-            subtitle,
             product_category,
             image,
             link,
@@ -125,7 +125,6 @@ const addProducts = function (itemId, item, db) {
               ${itemId},
               '${item.category}',
               '${item.title}',
-              '${item.subtitle}',
               '${item.productCategory}',
               '${item.image}',
               '${item.link}',
@@ -155,7 +154,7 @@ const addRestaurants = function (itemId, item, db) {
   INSERT INTO restaurants
           (item_id,
             category,
-            name,
+            title,
             review_counts,
             rating,
             image,
