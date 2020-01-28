@@ -50,27 +50,34 @@ function App() {
         }
         const books = all[1].data;
         if (all[1].data[0]) {
-          books[0]['longTitle'] = books[0].title;
-          if (all[1].data[0].title.length > 10) {
-            books[0].title = `${books[0].title.slice(0, 10)}...`;
-          }
+          books.forEach((element, index) => {
+            books[0]['longTitle'] = books[0].title;
+            if (element.title.length > 10) {
+              books[index].title = `${books[index].title.slice(0, 10)}...`;
+            }
+          })
           temp.push({ category: 'Books', value: books });
         }
 
         const products = all[2].data;
+        console.log(all[2].data);
         if (all[2].data[0]) {
-          products[0]['longTitle'] = products[0].title;
-          if (all[2].data[0].title.length > 10) {
-            products[0].title = `${products[0].title.slice(0, 10)}...`;
-          }
+          products.forEach((element, index) => {
+            products[0]['longTitle'] = products[0].title;
+            if (element.title.length > 10) {
+              products[index].title = `${products[index].title.slice(0, 10)}...`;
+            }
+          })
           temp.push({ category: 'Products', value: products });
         }
         const restaurants = all[3].data;
         if (all[3].data[0]) {
-          restaurants[0]['longTitle'] = restaurants[0].title;
-          if (all[3].data[0].name.length > 10) {
-            restaurants[0].name = `${restaurants[0].name.slice(0, 10)}...`;
-          }
+          restaurants.forEach((element, index) => {
+            restaurants[0]['longTitle'] = restaurants[0].title;
+            if (element.title.length > 10) {
+              restaurants[index].title = `${restaurants[index].title.slice(0, 10)}...`;
+            }
+          })
           temp.push({ category: 'Restaurants', value: restaurants });
         }
         setState({
