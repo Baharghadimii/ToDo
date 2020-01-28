@@ -88,19 +88,19 @@ app.post('/api/:userId/add', function (request, response) {
             response.send(data.rows[0]);
             item.ratings.forEach(element => {
               addRatings(data.rows[0].id, element, pool)
-                .then(res => console.log(res));
+                .then(res => response.send(res));
             })
           })
       } else if (item.category === 'books') {
         item.image = item.image.thumbnail;
         addBooks(itemId, item, pool)
-          .then(res => console.log(res));
+          .then(res => response.send(res));
       } else if (item.category === 'products') {
         addProducts(itemId, item, pool)
-          .then(res => console.log(res));
+          .then(res => response.send(res));
       } else {
         addRestaurants(itemId, item, pool)
-          .then(res => console.log(res));
+          .then(res => response.send(res));
       }
     })
 

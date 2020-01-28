@@ -72,7 +72,9 @@ export default function NavBar(props) {
           item.image = res.data.items[1].volumeInfo.imageLinks || '';
           axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
             .then(res => {
-              props.reset();
+              if (res) {
+                props.reset();
+              }
             });
         });
     } else if (chosenOption.options[2].selected) {
@@ -89,10 +91,12 @@ export default function NavBar(props) {
             link: product.viewItemURL[0],
             price: product.sellingStatus[0].currentPrice[0].__value__
           }
-          console.log(item);
           axios.post(`http://localhost:3001/api/${userId}/add/`, { item })
             .then(res => {
-              props.reset();
+              console.log(res)
+              if (res) {
+                props.reset();
+              }
             });
         })
     } else {
