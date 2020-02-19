@@ -174,7 +174,7 @@ export default function NavBar(props) {
         <button className='logout-btn' style={{ width: '4rem', height: '2rem', background: 'transparent', border: '0.5px solid black', borderRadius: '5px', color: 'black', marginRight: '2rem', marginTop: '0.7rem', cursor: 'pointer' }} onClick={logOut} href="/home">Logout</button>
       </div >)}
       {!logged && (
-        <div class="navBar" style={{ paddingTop: '0.5rem', width: '100%', height: '4rem', marginLeft: '1rem' }} >
+        <div class="navBar" style={{ width: '100%', height: '4rem', marginLeft: '1rem' }} >
           <h1 href="#home" style={{ marginTop: '1rem', float: 'left', color: '#3750b2', fontFamily: 'Nunito', fontWeight: '900', fontSize: '2rem' }}>Smart ToDo</h1>
           <button className="sgnup btn">Signup</button>
           <button className="log btn">Login</button>
