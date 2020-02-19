@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import './App.scss';
 import NavBar from './NavBar';
 import axios from 'axios';
-import Login from './login';
+// import Login from './login';
 import Category from './Category';
 import ItemCard from './ItemCard';
+import Home from './Home';
 
 function App() {
   const [state, setState] = React.useState({
@@ -88,11 +89,11 @@ function App() {
     }
 
   }, [])
-  console.log(state);
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column' }}>
       <NavBar reset={reset} />
-      {!localStorage.getItem('token') && <Login reset={reset} />}
+      {!localStorage.getItem('token') && <Home />}
+      {/* {!localStorage.getItem('token') && <Login reset={reset} />} */}
       {state.showList && < Category list={state.list} reset={reset} show={show} />}
       {state.showItem && <ItemCard item={state.item} showList={() => setState({ ...state, showItem: false, showList: true })} />}
     </div>

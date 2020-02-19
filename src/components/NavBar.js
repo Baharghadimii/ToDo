@@ -134,7 +134,7 @@ export default function NavBar(props) {
 
   useEffect(() => {
     setLogged(localStorage.getItem('token') ? true : false)
-  })
+  }, [])
   const logOut = () => {
     localStorage.clear();
     props.reset()
