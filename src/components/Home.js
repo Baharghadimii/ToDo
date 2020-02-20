@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Home.scss';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 // ..
@@ -33,10 +34,14 @@ export default function Home() {
         {assetThree && <img data-aos='fade-right' style={{ marginTop: '3.5rem', marginLeft: '-45rem', width: '45%', height: '25rem' }} src="https://smarttodolist.s3.ca-central-1.amazonaws.com/Asset+2%403x.png" />}
 
       </div>
-      <div style={{ textAlign: 'center', marginTop: '5rem', marginLeft: '-5rem' }}>
-        {mainText && <div data-aos="fade-left" ><span style={{ paddingTop: '5rem', fontSize: '4rem' }}><strong>Organzie your free time</strong></span><br />
-          <span style={{ fontSize: '30px' }}> with Smart ToDo.</span></div>}
-      </div>
+      {mainText &&
+        <div style={{ textAlign: 'center', marginTop: '5rem', marginLeft: '-5rem' }}>
+          <div data-aos="fade-left" ><span style={{ paddingTop: '5rem', fontSize: '4rem' }}><strong>Organzie your free time</strong></span><br />
+            <span style={{ fontSize: '30px' }}> with Smart ToDo.</span>
+          </div>
+          <button className="sgn-btn">Sign Up</button>
+        </div>
+      }
     </div>
   )
 }

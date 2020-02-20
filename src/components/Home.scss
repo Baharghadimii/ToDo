@@ -1,0 +1,13 @@
+.sgn-btn {
+  background-color: #ff2d56;
+  width: 15rem;
+  height: 4rem;
+  margin-top: 5rem;
+  border-radius: 10px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  &:hover {
+    background-color: #ac1b38;
+  }
+}
