@@ -218,20 +218,17 @@ input {
 .btn-outline-info:hover {
   background-color: #808b96;
 }
-.btn {
+.log-btn {
   float: right;
   background-color: transparent;
+  color: #3750b2;
+  margin-right: 4rem;
   padding: 1rem;
   border-radius: 0;
+  border: none;
   font-size: 20px;
   &:hover {
     border-bottom: 2px solid #3750b2;
     background-color: #fafafa;
   }
-}
-.log {
-}
-.sgnup {
-  color: #3750b2;
-  margin-right: 4rem;
 }

@@ -176,8 +176,7 @@ export default function NavBar(props) {
       {!logged && (
         <div class="navBar" style={{ width: '100%', height: '4rem', marginLeft: '1rem' }} >
           <h1 href="#home" style={{ marginTop: '1rem', float: 'left', color: '#3750b2', fontFamily: 'Nunito', fontWeight: '900', fontSize: '2rem' }}>Smart ToDo</h1>
-          <button className="sgnup btn">Signup</button>
-          <button className="log btn">Login</button>
+          <button className="log-btn">Login</button>
         </div>
       )}
     </div>
