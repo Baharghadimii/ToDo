@@ -1,37 +1,39 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Login.scss'
+import './Login.scss';
 
 export default function Login(props) {
 
   const [state, setState] = useState({
+    name: '',
     email: '',
     password: '',
-    passwordConfirmation: '',
     error: false,
     showLogin: props.displayLogin ? true : false,
   });
 
-  // const login = () => {
-  //   axios.get(`http://localhost:3001/api/user/`, {
-  //     params: {
-  //       email: state.email,
-  //       password: state.password
-  //     }
-  //   })
-  //     .then(res => {
-  //       if (res.data) {
-  //         console.log(res.data);
-  //         const token = { session: res.data.id }
-  //         localStorage.setItem('token', JSON.stringify(token));
-  //         props.reset();
-  //       } else {
-  //         setState({ ...state, error: true })
-  //       }
-  //     });
-  // }
+  const login = () => {
+    axios.get(`http://localhost:3001/api/user/`, {
+      params: {
+        email: state.email,
+        password: state.password
+      }
+    })
+      .then(res => {
+        if (res.data) {
+          const token = { session: res.data.id }
+          localStorage.setItem('token', JSON.stringify(token));
+          props.reset();
+        } else {
+          setState({ ...state, error: true })
+        }
+      });
+  }
   const register = () => {
-    axios.post(`http://localhost:3001/api/register/`, { user: { email: state.email, password: state.password } })
+    axios.post(`http://localhost:3001/api/register/`, {
+      user:
+        { name: state.name, email: state.email, password: state.password }
+    })
       .then(res => {
         const token = { session: res.data.id }
         localStorage.setItem('token', JSON.stringify(token));
@@ -57,13 +59,21 @@ export default function Login(props) {
           <label>Name</label>
         </div>}
         {!state.showLogin && <div className='input'>
-          <input type='text' placeholder="Enter your Name"></input>
+          <input
+            value={state.name}
+            onChange={(e) => setState({ ...state, name: e.target.value })}
+            type='text'
+            placeholder="Enter your Name"></input>
         </div>}
         {!state.showLogin && <div className='label'>
           <label >Email</label>
         </div>}
         {!state.showLogin && <div className='input'>
-          <input type='email' placeholder="Enter your email"></input>
+          <input
+            value={state.email}
+            onChange={(e) => setState({ ...state, email: e.target.value })}
+            type='email'
+            placeholder="Enter your email"></input>
         </div>}
         {state.showLogin && <div
           className='label'
@@ -71,16 +81,24 @@ export default function Login(props) {
           <label >Email</label>
         </div>}
         {state.showLogin && <div className='input'>
-          <input type='email' placeholder="Enter your email"></input>
+          <input
+            type='email'
+            placeholder="Enter your email"
+            value={state.email}
+            onChange={(e) => setState({ ...state, email: e.target.value })}></input>
         </div>}
         <div className='label'>
           <label>Password</label>
         </div>
         <div className='input'>
-          <input type='password' placeholder="Enter your Password"></input>
+          <input
+            value={state.password}
+            onChange={(e) => setState({ ...state, password: e.target.value })}
+            type='password'
+            placeholder="Enter your Password"></input>
         </div>
         {!state.showLogin && < button className='login-btn' onClick={register}> Sign Up</button>}
-        {state.showLogin && < button className='login-btn'> Log In</button>}
+        {state.showLogin && < button className='login-btn' onClick={login}> Log In</button>}
 
       </div>
       <img
