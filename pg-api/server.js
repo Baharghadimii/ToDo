@@ -32,21 +32,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //routes
 app.post('/api/register', function (request, response) {
+  console.log(request.body)
   email = request.body.user.email;
-  getUser(email, pool)
-    .then(res => {
-      if (!res.rows.length) {
-        hash = bcrypt.hashSync(request.body.user.password, saltRound);
-        email = request.body.user.email;
-        addUser([email, hash], pool)
-          .then(data => {
-            console.log(data);
-            response.send(data.rows[0])
-          });
-      } else {
-        response.send(null);
-      }
-    });
+  // getUser(email, pool)
+  //   .then(res => {
+  //     if (!res.rows.length) {
+  //       hash = bcrypt.hashSync(request.body.user.password, saltRound);
+  //       email = request.body.user.email;
+  //       addUser([email, hash], pool)
+  //         .then(data => {
+  //           console.log(data);
+  //           response.send(data.rows[0])
+  //         });
+  //     } else {
+  //       response.send(null);
+  //     }
+  //   });
 });
 app.get('/api/user/', function (request, response) {
   email = request.query.email;
