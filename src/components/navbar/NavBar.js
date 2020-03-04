@@ -154,6 +154,7 @@ export default function NavBar(props) {
         <div style={{ float: 'left', width: '5rem' }}>
           <form onSubmit={() => search(item)} id="content">
             <input
+              className='nav-input'
               value={item}
               type="text"
               name="input"

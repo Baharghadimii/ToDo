@@ -58,8 +58,8 @@ export default function Login(props) {
         <div className='input'>
           <input type='email' placeholder="Enter your email"></input>
         </div>
-        <label>Password</label>
-        <input type='password' placeholder="Enter your password"></input>
+        {/* <label>Password</label>
+        <input type='password' placeholder="Enter your password"></input> */}
       </div>
     </div >
 
