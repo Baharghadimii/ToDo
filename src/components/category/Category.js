@@ -1,5 +1,5 @@
 import React from 'react';
-import CardList from './CardList';
+import CardList from '../card-list/CardList';
 import axios from 'axios';
 
 export default function Category(props) {
