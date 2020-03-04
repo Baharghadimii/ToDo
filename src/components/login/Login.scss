@@ -11,3 +11,19 @@
   margin-top: 8%;
   border-radius: 10px;
 }
+.input {
+  width: 80%;
+  height: 10%;
+  background-color: #eaecee;
+  margin: 0 auto;
+}
+.label {
+  width: 80%;
+  height: 10%;
+  margin: 0 auto;
+  margin-top: 3%;
+  label {
+    float: left;
+    font-size: 1.5rem;
+  }
+}

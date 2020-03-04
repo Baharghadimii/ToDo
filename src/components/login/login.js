@@ -52,7 +52,9 @@ export default function Login(props) {
   return (
     <div className='main'>
       <div className="card">
-        <label className='label'>Email</label>
+        <div className='label'>
+          <label >Email</label>
+        </div>
         <div className='input'>
           <input type='email' placeholder="Enter your email"></input>
         </div>
