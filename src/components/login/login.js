@@ -52,14 +52,26 @@ export default function Login(props) {
   return (
     <div className='main'>
       <div className="card">
+        {!state.showLogin && <div className='label'>
+          <label>Name</label>
+        </div>}
+        {!state.showLogin && <div className='input'>
+          <input type='text' placeholder="Enter your Name"></input>
+        </div>}
         <div className='label'>
           <label >Email</label>
         </div>
         <div className='input'>
           <input type='email' placeholder="Enter your email"></input>
         </div>
-        {/* <label>Password</label>
-        <input type='password' placeholder="Enter your password"></input> */}
+        <div className='label'>
+          <label>Password</label>
+        </div>
+        <div className='input'>
+          <input type='password' placeholder="Enter your Password"></input>
+        </div>
+        {!state.showLogin && < button className='login-btn' > Sign Up</button>}
+        {state.showLogin && < button className='login-btn'> Log In</button>}
       </div>
     </div >
 
