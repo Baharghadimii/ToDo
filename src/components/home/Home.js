@@ -5,7 +5,7 @@ import 'aos/dist/aos.css'; // You can also use <link> for styles
 // ..
 AOS.init();
 
-export default function Home() {
+export default function Home(props) {
   const [assetOne, setAssetOne] = useState(false);
   const [assetTwo, setAssetTwo] = useState(false);
   const [assetThree, setAssetThree] = useState(false);
@@ -51,7 +51,9 @@ export default function Home() {
           <div data-aos="fade-left" ><span style={{ paddingTop: '5rem', fontSize: '4rem' }}><strong>Organzie your free time</strong></span><br />
             <span style={{ fontSize: '30px' }}> with Smart ToDo.</span>
           </div>
-          <button className="sgn-btn">Sign Up</button>
+          <button
+            className="sgn-btn"
+            onClick={props.showSignUp}>Sign Up</button>
         </div>
       }
     </div>

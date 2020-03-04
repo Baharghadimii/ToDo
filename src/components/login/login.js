@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
+
 export default function Login(props) {
+
   const [state, setState] = useState({
     email: '',
     password: '',
     passwordConfirmation: '',
     error: false,
-    showLogin: true,
+    showLogin: props.displayLogin ? true : false,
   });
 
   const login = () => {
@@ -45,7 +47,6 @@ export default function Login(props) {
     setState({ ...state, showLogin: false })
   }
   const showLogin = () => {
-    setState({ ...state, showLogin: true })
   }
   return (
     <div>
@@ -64,7 +65,7 @@ export default function Login(props) {
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <Button style={{ width: '20%', margin: '0 auto', marginTop: '-4rem', marginBottom: '1.5rem' }} variant="primary" type="submit" onClick={login} >
               Login
-      </Button>
+            </Button>
             <a style={{ cursor: 'pointer', margin: '0 auto' }} href='#' onClick={showRegister}>Don't Have an account?!</a>
           </div>
         </div>

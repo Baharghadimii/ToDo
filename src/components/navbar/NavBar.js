@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './NavBar.scss';
 import axios from "axios";
 import { FaCaretDown } from 'react-icons/fa'
-import { googleApi, yelpApi, ebayApi, omdbApi } from '../api-keys';
+import { googleApi, yelpApi, ebayApi, omdbApi } from '../../api-keys';
 
 export default function NavBar(props) {
   const [item, setItem] = React.useState('');
@@ -170,13 +170,17 @@ export default function NavBar(props) {
             <FaCaretDown />
           </select>
         </div>
-        <h1 href="#home" style={{ color: '#f64c72', fontFamily: 'Nunito', fontWeight: '900', fontSize: '2rem', marginTop: '0.75rem' }}>Smart ToDo</h1>
+        <h1
+          href="#home"
+          style={{ color: '#f64c72', fontFamily: 'Nunito', fontWeight: '900', fontSize: '2rem', marginTop: '0.75rem' }}
+        >
+          Smart ToDo</h1>
         <button className='logout-btn' style={{ width: '4rem', height: '2rem', background: 'transparent', border: '0.5px solid black', borderRadius: '5px', color: 'black', marginRight: '2rem', marginTop: '0.7rem', cursor: 'pointer' }} onClick={logOut} href="/home">Logout</button>
       </div >)}
       {!logged && (
         <div class="navBar" style={{ width: '100%', height: '4rem', marginLeft: '1rem' }} >
-          <h1 href="#home" style={{ marginTop: '1rem', float: 'left', color: '#3750b2', fontFamily: 'Nunito', fontWeight: '900', fontSize: '2rem' }}>Smart ToDo</h1>
-          <button className="log-btn">Login</button>
+          <h1 href="#home" style={{ margin: '1.5rem 0 0 2rem', float: 'left', color: '#3750b2', fontFamily: 'Nunito', fontWeight: '900', fontSize: '2rem' }}>Smart ToDo</h1>
+          <button className="log-btn" onClick={props.showLogin}>Login</button>
         </div>
       )}
     </div>

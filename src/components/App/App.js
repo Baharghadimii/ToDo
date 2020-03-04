@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import './App.scss';
-import NavBar from './NavBar';
+import NavBar from '../navbar/NavBar';
 import axios from 'axios';
-// import Login from './login';
-import Category from './Category';
-import ItemCard from './ItemCard';
-import Home from './Home';
+import Login from '../login/login';
+import Category from '../category/Category';
+import ItemCard from '../item-card/ItemCard';
+import Home from '../home/Home';
 
 function App() {
   const [state, setState] = React.useState({
+    signUp: false,
+    login: false,
+    home: localStorage.getItem('token') ? false : true,
     showList: localStorage.getItem('token') ? true : false,
     list: [],
     token: JSON.parse(localStorage.getItem('token')) || null,
@@ -20,6 +23,13 @@ function App() {
   }
   const show = (chosenItem) => {
     setState({ ...state, showItem: true, showList: false, item: chosenItem })
+  }
+  const displayForm = (type) => {
+    if (type === 'login') {
+      setState({ ...state, login: true, home: false })
+    } else {
+      setState({ ...state, signUp: true, home: false })
+    }
   }
   useEffect(() => {
     if (state.token) {
@@ -61,7 +71,6 @@ function App() {
         }
 
         const products = all[2].data;
-        console.log(all[2].data);
         if (all[2].data[0]) {
           products.forEach((element, index) => {
             products[0]['longTitle'] = products[0].title;
@@ -91,9 +100,13 @@ function App() {
   }, [])
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column' }}>
-      <NavBar reset={reset} />
-      {!localStorage.getItem('token') && <Home />}
-      {/* {!localStorage.getItem('token') && <Login reset={reset} />} */}
+      {state.home &&
+        <div>
+          < NavBar reset={reset} showLogin={() => displayForm('login')} />
+          <Home showSignUp={() => displayForm('signup')} />
+        </div>}
+      {state.signUp && <Login reset={reset} displayLogin={false} />}
+      {state.login && <Login reset={reset} displayLogin={true} />}
       {state.showList && < Category list={state.list} reset={reset} show={show} />}
       {state.showItem && <ItemCard item={state.item} showList={() => setState({ ...state, showItem: false, showList: true })} />}
     </div>

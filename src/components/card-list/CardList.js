@@ -1,5 +1,5 @@
 import React from 'react'
-import CardListItem from './CardListItem';
+import CardListItem from '../card-list-item/CardListItem';
 export default function CardList(props) {
 
   return (
