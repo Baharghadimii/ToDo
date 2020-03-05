@@ -51,10 +51,12 @@ app.post('/api/register', function (request, response) {
 });
 app.get('/api/user/', function (request, response) {
   email = request.query.email;
-  password = request.query.password;
+  if (request.query.password) {
+
+    password = request.query.password;
+  }
   getUser(email, pool)
     .then(res => {
-      console.log(res.rows[0])
       hash = res.rows[0].password;
       if (bcrypt.compareSync(password, hash)) {
         response.send(res.rows[0]);
