@@ -16,6 +16,7 @@ export default function Category(props) {
   return (
     <div className="dashboard">
       <div className='menu'>
+        <img src="https://smarttodo.s3.ca-central-1.amazonaws.com/LogoMakr_3oDwIw.png"></img>
       </div>
       <div className='list'>
       </div>
