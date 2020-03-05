@@ -22,6 +22,8 @@ export default function Category(props) {
         <img src='https://smarttodo.s3.ca-central-1.amazonaws.com/book.png' />
         <img src='https://smarttodo.s3.ca-central-1.amazonaws.com/product.png' />
         <img src="https://smarttodo.s3.ca-central-1.amazonaws.com/coffee-cup.png" />
+        <img style={{ padding: '17%' }} src="https://smarttodo.s3.ca-central-1.amazonaws.com/next.png" />
+        <img style={{ padding: '16%' }} src="https://smarttodo.s3.ca-central-1.amazonaws.com/star.png" />
       </div>
       <div className='list'>
       </div>

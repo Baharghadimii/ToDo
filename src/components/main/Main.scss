@@ -10,26 +10,29 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  .icon {
-    width: 5vw;
-    height: 10vh;
-    margin: 0 auto;
-    margin-top: 10%;
-    margin-bottom: 40%;
-  }
+
   img {
     width: 4.5vw;
     height: 8.5vh;
     margin: 0 auto;
-    margin-top: 5vh;
+    margin-top: 2vh;
     cursor: pointer;
-    padding: 10%;
+    padding: 15%;
     cursor: pointer;
     border-radius: 10px;
     &:hover {
       background-color: aliceblue;
     }
   }
+  .icon {
+    width: 5vw;
+    height: 10vh;
+    margin: 0 auto;
+    margin-top: 10%;
+    margin-bottom: 40%;
+    padding: 4%;
+  }
+
   #divider {
     width: 4vw;
     height: 0.1vh;
