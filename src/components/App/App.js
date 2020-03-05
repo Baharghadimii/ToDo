@@ -3,7 +3,7 @@ import './App.scss';
 import NavBar from '../navbar/NavBar';
 import axios from 'axios';
 import Login from '../login/login';
-import Category from '../category/Category';
+import Main from '../main/Main';
 import ItemCard from '../item-card/ItemCard';
 import Home from '../home/Home';
 
@@ -100,7 +100,7 @@ function App() {
   }, []);
   console.log(state);
   return (
-    <div className="App" style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className="App">
       {state.home &&
         <div>
           < NavBar reset={reset} showLogin={() => displayForm('login')} />
@@ -108,7 +108,7 @@ function App() {
         </div>}
       {state.signUp && <Login reset={reset} displayLogin={false} />}
       {state.login && <Login reset={reset} displayLogin={true} />}
-      {state.showList && < Category list={state.list} reset={reset} show={show} />}
+      {state.showList && < Main list={state.list} reset={reset} show={show} />}
       {state.showItem && <ItemCard item={state.item} showList={() => setState({ ...state, showItem: false, showList: true })} />}
     </div>
   );
