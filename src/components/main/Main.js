@@ -15,7 +15,12 @@ export default function Category(props) {
   // }
   return (
     <div className="dashboard">
-
+      <div className='menu'>
+      </div>
+      <div className='list'>
+      </div>
+      <div className='profile'>
+      </div>
     </div>
 
 
