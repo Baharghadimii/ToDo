@@ -42,8 +42,42 @@
 }
 .list-header {
   width: 100%;
-  background-color: green;
   height: 15%;
+  h1 {
+    float: left;
+    margin: 3%;
+  }
+  div {
+    float: right;
+    margin: 4%;
+    background-color: white;
+    border-radius: 10px;
+    input {
+      width: 0;
+      height: 0;
+      background-color: white;
+      border: none;
+      outline: none;
+      transition: all 0.3s;
+    }
+    button {
+      background-color: white;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+
+      i {
+        font-size: 30px;
+        margin: 1vh;
+      }
+    }
+    &:focus-within {
+      input {
+        width: 17vw;
+        height: 4.5vh;
+      }
+    }
+  }
 }
 .list {
   height: 100%;

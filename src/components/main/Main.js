@@ -26,7 +26,15 @@ export default function Category(props) {
         <img style={{ padding: '16%' }} src="https://smarttodo.s3.ca-central-1.amazonaws.com/star.png" />
       </div>
       <div className='list'>
-        <div className="list-header"></div>
+        <div className="list-header">
+          <h1>Check List</h1>
+          <div>
+            <input type="text"></input>
+            <button>
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
         <CardList />
       </div>
       <div className='profile'>
