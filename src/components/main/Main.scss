@@ -8,10 +8,18 @@
   height: 100%;
   width: 8%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
   img {
-    width: 50%;
-    height: 8%;
+    width: 4vw;
+    height: 8vh;
+    margin: 0 auto;
     margin-top: 10%;
+  }
+  i {
+    margin-top: 10vh;
+    font-size: 35px;
+    color: #3750b2;
   }
 }
 .list {
