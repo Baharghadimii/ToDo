@@ -24,7 +24,7 @@ export default function Home(props) {
     }, 900)
   }, [])
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '80rem' }}>
+    <div style={{ marginTop: '2%', display: 'flex', flexDirection: 'row', width: '100%', height: '80rem' }}>
       <div style={{ width: '55%' }}>
         <img
           alt='background'
