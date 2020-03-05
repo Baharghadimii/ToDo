@@ -16,10 +16,6 @@
     margin: 0 auto;
     margin-top: 10%;
     margin-bottom: 40%;
-    cursor: pointer;
-    &:hover {
-      background-color: aliceblue;
-    }
   }
   img {
     width: 4.5vw;
@@ -28,6 +24,17 @@
     margin-top: 5vh;
     cursor: pointer;
     padding: 10%;
+    cursor: pointer;
+    border-radius: 10px;
+    &:hover {
+      background-color: aliceblue;
+    }
+  }
+  #divider {
+    width: 4vw;
+    height: 0.1vh;
+    margin: 0 auto;
+    background-color: #7c839e;
   }
 }
 .list {

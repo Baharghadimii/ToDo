@@ -17,6 +17,7 @@ export default function Category(props) {
     <div className="dashboard">
       <div className='menu'>
         <img className="icon" src="https://smarttodo.s3.ca-central-1.amazonaws.com/LogoMakr_3oDwIw.png" />
+        <div id='divider'></div>
         <img src="https://smarttodo.s3.ca-central-1.amazonaws.com/clapperboard.png" />
         <img src='https://smarttodo.s3.ca-central-1.amazonaws.com/book.png' />
         <img src='https://smarttodo.s3.ca-central-1.amazonaws.com/product.png' />
