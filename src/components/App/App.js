@@ -97,7 +97,8 @@ function App() {
       })
     }
 
-  }, [])
+  }, []);
+  console.log(state);
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column' }}>
       {state.home &&

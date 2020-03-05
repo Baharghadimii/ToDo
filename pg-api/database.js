@@ -1,10 +1,12 @@
-const addUser = ([email, password], db) => {
+const addUser = ([email, password, name], db) => {
   return db.query(`
 INSERT INTO users(
+  name,
   email,
   password
 )
 VALUES(
+  '${name}',
   '${email}',
   '${password}'
 )

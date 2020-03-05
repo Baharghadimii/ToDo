@@ -38,7 +38,8 @@ app.post('/api/register', function (request, response) {
       if (!res.rows.length) {
         hash = bcrypt.hashSync(request.body.user.password, saltRound);
         email = request.body.user.email;
-        addUser([email, hash], pool)
+        name = request.body.user.name;
+        addUser([email, hash, name], pool)
           .then(data => {
             console.log(data);
             response.send(data.rows[0])
