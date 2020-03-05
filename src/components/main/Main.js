@@ -16,11 +16,11 @@ export default function Category(props) {
   return (
     <div className="dashboard">
       <div className='menu'>
-        <img src="https://smarttodo.s3.ca-central-1.amazonaws.com/LogoMakr_3oDwIw.png" />
-        <i class="fa fa-film"></i>
-        <img className='icon' src='https://smarttodo.s3.ca-central-1.amazonaws.com/book.png' />
-        <img className='icon' src='https://smarttodo.s3.ca-central-1.amazonaws.com/product.png' />
-        <img className="icon" src="https://smarttodo.s3.ca-central-1.amazonaws.com/coffee-cup.png" />
+        <img className="icon" src="https://smarttodo.s3.ca-central-1.amazonaws.com/LogoMakr_3oDwIw.png" />
+        <img src="https://smarttodo.s3.ca-central-1.amazonaws.com/clapperboard.png" />
+        <img src='https://smarttodo.s3.ca-central-1.amazonaws.com/book.png' />
+        <img src='https://smarttodo.s3.ca-central-1.amazonaws.com/product.png' />
+        <img src="https://smarttodo.s3.ca-central-1.amazonaws.com/coffee-cup.png" />
       </div>
       <div className='list'>
       </div>
