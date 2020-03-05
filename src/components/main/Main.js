@@ -1,5 +1,5 @@
 import React from 'react';
-// import CardList from '../card-list/CardList';
+import CardList from '../card-list/CardList.js';
 // import axios from 'axios';
 import './Main.scss';
 
@@ -26,6 +26,8 @@ export default function Category(props) {
         <img style={{ padding: '16%' }} src="https://smarttodo.s3.ca-central-1.amazonaws.com/star.png" />
       </div>
       <div className='list'>
+        <div className="list-header"></div>
+        <CardList />
       </div>
       <div className='profile'>
       </div>

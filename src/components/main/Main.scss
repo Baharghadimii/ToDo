@@ -40,10 +40,17 @@
     background-color: #7c839e;
   }
 }
+.list-header {
+  width: 100%;
+  background-color: green;
+  height: 15%;
+}
 .list {
   height: 100%;
   width: 65%;
-  background-color: red;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
 }
 .profile {
   height: 100%;
