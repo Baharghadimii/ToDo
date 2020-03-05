@@ -6,6 +6,7 @@ import Login from '../login/login';
 import Category from '../category/Category';
 import ItemCard from '../item-card/ItemCard';
 import Home from '../home/Home';
+import { Z_FIXED } from 'zlib';
 
 function App() {
   const [state, setState] = React.useState({
@@ -98,7 +99,6 @@ function App() {
     }
 
   }, []);
-  console.log(state);
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column' }}>
       {state.home &&

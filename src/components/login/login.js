@@ -40,11 +40,6 @@ export default function Login(props) {
         props.reset();
       });
   }
-  // const showRegister = () => {
-  //   setState({ ...state, showLogin: false })
-  // }
-  // const showLogin = () => {
-  // }
   return (
     <div className='main'>
       <img
@@ -71,8 +66,8 @@ export default function Login(props) {
         {!state.showLogin && <div className='input'>
           <input
             value={state.email}
-            onChange={(e) => setState({ ...state, email: e.target.value })}
             type='email'
+            onChange={(e) => setState({ ...state, email: e.target.value })}
             placeholder="Enter your email"></input>
         </div>}
         {state.showLogin && <div
@@ -85,7 +80,8 @@ export default function Login(props) {
             type='email'
             placeholder="Enter your email"
             value={state.email}
-            onChange={(e) => setState({ ...state, email: e.target.value })}></input>
+            onChange={e => setState({ ...state, email: e.target.value })}
+          ></input>
         </div>}
         <div className='label'>
           <label>Password</label>
