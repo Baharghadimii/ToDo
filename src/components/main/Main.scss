@@ -108,6 +108,7 @@
       float: right;
       font-size: 30px;
       margin: 5.5%;
+      color: #3750b2;
     }
   }
   img {
@@ -154,17 +155,17 @@
   }
   .edit {
     text-align: right;
-    margin: 10%;
+    margin: 20% 0;
     i {
       font-size: 30px;
+      color: #3750b2;
+      margin: 5% 10%;
     }
     #signout {
       width: 2rem;
       height: 2rem;
       float: left;
-      margin: 0;
-      margin-left: 6%;
-      margin-top: -1%;
+      margin: 5% 10%;
     }
   }
 }
