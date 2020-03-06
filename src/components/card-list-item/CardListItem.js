@@ -22,7 +22,9 @@ export default function CardList(props) {
         <h1>Matrix</h1>
         <p>1998</p>
       </div>
-      <button></button>
+      <button>
+        <i class="fa fa-arrow-right"></i>
+      </button>
     </div>
 
   )
