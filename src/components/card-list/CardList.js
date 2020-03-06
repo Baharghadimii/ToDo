@@ -5,7 +5,10 @@ import './CardList.scss';
 export default function CardList() {
   return (
     <div className="card-list">
-      {/* <CardListItem /> */}
+      <CardListItem color={'blue'} />
+      <CardListItem color={'red'} />
+      <CardListItem color={'yellow'} />
+      <CardListItem color={'green'} />
     </div>
   )
 }

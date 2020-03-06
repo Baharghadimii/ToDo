@@ -1,6 +1,8 @@
 .card-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin: 0 auto;
-  width: 80%;
-  height: 10%;
-  background-color: black;
+  width: 90%;
+  height: auto;
 }
