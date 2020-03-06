@@ -38,6 +38,10 @@ export default function Category(props) {
         <CardList />
       </div>
       <div className='profile'>
+        <div className="header">
+          <h1>Profile</h1>
+          <i class="fa fa-bell"></i>
+        </div>
       </div>
     </div>
 
