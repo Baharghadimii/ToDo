@@ -93,6 +93,9 @@
 .profile {
   height: 100%;
   width: 27%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   .header {
     width: 100%;
     height: 10%;
@@ -105,6 +108,63 @@
       float: right;
       font-size: 30px;
       margin: 5.5%;
+    }
+  }
+  img {
+    width: 50%;
+    height: 20%;
+    margin: 10% 25%;
+    border-radius: 50%;
+  }
+  h1 {
+    font-size: 30px;
+  }
+  .details {
+    width: 80%;
+    height: 35%;
+    margin: 0 auto;
+    .detail-main {
+      width: 100%;
+      height: 20%;
+      margin-top: 3%;
+      display: flex;
+      flex-direction: row;
+      .dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        display: flex;
+        margin: 8% 4% 0 0;
+      }
+      .blue {
+        background-color: #3750b2;
+      }
+      .red {
+        background-color: #ff2d56;
+      }
+      .desc {
+        width: 60%;
+        height: 100%;
+        text-align: left;
+        p {
+          color: #bdc3c7;
+        }
+      }
+    }
+  }
+  .edit {
+    text-align: right;
+    margin: 10%;
+    i {
+      font-size: 30px;
+    }
+    #signout {
+      width: 2rem;
+      height: 2rem;
+      float: left;
+      margin: 0;
+      margin-left: 6%;
+      margin-top: -1%;
     }
   }
 }
