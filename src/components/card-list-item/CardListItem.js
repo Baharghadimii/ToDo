@@ -13,13 +13,14 @@ export default function CardList(props) {
     } else {
       card.current.style.borderLeft = '8px solid rgb(180, 240, 243)'
     }
-  }, [])
+  }, []);
+  console.log(props.item);
   return (
     <div data-aos="fade-right" ref={card} className="item-card" >
-      <img src="https://images.pexels.com/photos/462030/pexels-photo-462030.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
+      <img src={props.item.image} />
       <div>
-        <h1>Matrix</h1>
-        <p>1998</p>
+        <h1>{props.item.title}</h1>
+        <p>{props.item.year}</p>
       </div>
       <button>
         <i class="fa fa-arrow-right"></i>

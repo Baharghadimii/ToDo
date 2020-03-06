@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CardListItem from '../card-list-item/CardListItem';
 import './CardList.scss';
 
 export default function CardList(props) {
-  console.log(props.item);
-
+  const [itemList, setItemList] = useState([])
+  useEffect(() => {
+    if (props.items) {
+      props.items.forEach(item => setItemList(item.value));
+    }
+  });
   return (
     <div className="card-list">
-      <CardListItem color={'blue'} item={props.item} />
+      {itemList.map(item => {
+        return <CardListItem color={'blue'} item={item} />
+      })}
     </div>
   )
 }

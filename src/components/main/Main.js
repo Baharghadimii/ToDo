@@ -6,7 +6,7 @@ import './Main.scss';
 
 export default function Category(props) {
   const [state, setState] = useState({
-    item: {},
+    items: [],
     name: ''
   });
   const [group, setGroup] = useState('movie');
@@ -60,11 +60,7 @@ export default function Category(props) {
               production: res.data.Production,
               ratings: res.data.Ratings,
             }
-            setState({
-              ...state,
-              item: temp
-            });
-            if (state.item) {
+            if (state.items) {
               axios.post(`http://localhost:3001/api/1/add/`, { temp })
                 .then(res => {
                   props.reset();
@@ -73,7 +69,6 @@ export default function Category(props) {
           })
       }
     }
-
   };
   return (
     <div className="dashboard">
@@ -124,7 +119,7 @@ export default function Category(props) {
             </button>
           </div>
         </div>
-        <CardList item={state.item} />
+        <CardList items={props.list} group={group} />
       </div>
       <div className='profile'>
         <div className="header">
