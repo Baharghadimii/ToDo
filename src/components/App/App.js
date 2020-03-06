@@ -98,7 +98,6 @@ function App() {
     }
 
   }, []);
-  console.log(state);
   return (
     <div className="App">
       {state.home &&

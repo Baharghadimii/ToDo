@@ -32,6 +32,9 @@
     margin-bottom: 10%;
     padding: 4%;
   }
+  #movie {
+    background-color: aliceblue;
+  }
 
   #divider {
     width: 4vw;
@@ -107,8 +110,14 @@
     i {
       float: right;
       font-size: 30px;
-      margin: 5.5%;
       color: #3750b2;
+      padding: 3%;
+      border-radius: 10px;
+      margin: 2% 3%;
+      cursor: pointer;
+      &:hover {
+        background-color: aliceblue;
+      }
     }
   }
   img {
@@ -136,11 +145,6 @@
         border-radius: 50%;
         display: flex;
         margin: 8% 4% 0 0;
-      }
-      .blue {
-        background-color: #3750b2;
-      }
-      .red {
         background-color: #ff2d56;
       }
       .desc {
@@ -159,13 +163,25 @@
     i {
       font-size: 30px;
       color: #3750b2;
-      margin: 5% 10%;
+      margin: 3% 10%;
+      padding: 3%;
+      border-radius: 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: aliceblue;
+      }
     }
     #signout {
-      width: 2rem;
-      height: 2rem;
+      width: 3rem;
+      height: 3rem;
       float: left;
-      margin: 5% 10%;
+      margin: 4% 13%;
+      padding: 2%;
+      cursor: pointer;
+      border-radius: 10px;
+      &:hover {
+        background-color: aliceblue;
+      }
     }
   }
 }

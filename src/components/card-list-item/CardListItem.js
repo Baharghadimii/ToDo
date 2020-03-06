@@ -3,7 +3,6 @@ import './CardListItem.scss';
 
 export default function CardList(props) {
   const card = useRef();
-  console.log(card);
   useEffect(() => {
     if (props.color === "blue") {
       card.current.style.borderLeft = '8px solid #3750b2'
@@ -16,7 +15,7 @@ export default function CardList(props) {
     }
   }, [])
   return (
-    <div ref={card} className="item-card" >
+    <div data-aos="fade-right" ref={card} className="item-card" >
       <img src="https://images.pexels.com/photos/462030/pexels-photo-462030.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
       <div>
         <h1>Matrix</h1>
