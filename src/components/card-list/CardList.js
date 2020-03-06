@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import CardListItem from '../card-list-item/CardListItem';
-export default function CardList(props) {
+import './CardList.scss';
 
+export default function CardList(props) {
+  const [itemList, setItemList] = useState([])
+  useEffect(() => {
+    if (props.items) {
+      props.items.forEach(item => setItemList(item.value));
+    }
+  });
   return (
-    <div style={{ width: '100%', display: 'flex', height: '18rem', flexDirection: 'row', overflow: 'auto' }}>
-      {props.list && props.list.map(item => {
-        return <CardListItem
-          img={item.image}
-          title={item.title}
-          show={() => props.show(item)}
-          onDelete={() => props.onDelete(item.item_id)} />
+    <div className="card-list">
+      {itemList.map(item => {
+        return <CardListItem color={'blue'} item={item} />
       })}
     </div>
   )

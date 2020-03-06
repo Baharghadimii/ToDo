@@ -10,39 +10,178 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  .icon {
-    width: 5vw;
-    height: 10vh;
-    margin: 0 auto;
-    margin-top: 10%;
-    margin-bottom: 40%;
-  }
+
   img {
     width: 4.5vw;
     height: 8.5vh;
     margin: 0 auto;
-    margin-top: 5vh;
+    margin-top: 2vh;
     cursor: pointer;
-    padding: 10%;
+    padding: 15%;
     cursor: pointer;
     border-radius: 10px;
     &:hover {
       background-color: aliceblue;
     }
   }
+  .icon {
+    width: 3vw;
+    height: 6vh;
+    margin: 0 auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    padding: 4%;
+  }
+  #movie {
+    background-color: aliceblue;
+  }
+
   #divider {
     width: 4vw;
     height: 0.1vh;
     margin: 0 auto;
+    margin-bottom: 30%;
     background-color: #7c839e;
+  }
+}
+.list-header {
+  width: 100%;
+  height: 10%;
+  h1 {
+    float: left;
+    margin: 2% 4%;
+    font-size: 25px;
+  }
+  div {
+    float: right;
+    margin: 2% 3%;
+    background-color: white;
+    border-radius: 10px;
+    input {
+      width: 0;
+      height: 0;
+      background-color: white;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    button {
+      background-color: white;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      padding: 0;
+      i {
+        font-size: 20px;
+        margin: 1vh;
+      }
+    }
+    &:focus-within {
+      input {
+        width: 17vw;
+        height: 4.5vh;
+        padding-left: 7%;
+      }
+    }
   }
 }
 .list {
   height: 100%;
   width: 65%;
-  background-color: red;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
 }
 .profile {
   height: 100%;
   width: 27%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  .header {
+    width: 100%;
+    height: 10%;
+    h1 {
+      font-size: 25px;
+      margin: 5% 7%;
+      float: left;
+    }
+    i {
+      float: right;
+      font-size: 30px;
+      color: #3750b2;
+      padding: 3%;
+      border-radius: 10px;
+      margin: 2% 3%;
+      cursor: pointer;
+      &:hover {
+        background-color: aliceblue;
+      }
+    }
+  }
+  img {
+    width: 50%;
+    height: 20%;
+    margin: 10% 25%;
+    border-radius: 50%;
+  }
+  h1 {
+    font-size: 30px;
+  }
+  .details {
+    width: 80%;
+    height: 35%;
+    margin: 0 auto;
+    .detail-main {
+      width: 100%;
+      height: 20%;
+      margin-top: 3%;
+      display: flex;
+      flex-direction: row;
+      .dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        display: flex;
+        margin: 8% 4% 0 0;
+        background-color: #ff2d56;
+      }
+      .desc {
+        width: 60%;
+        height: 100%;
+        text-align: left;
+        p {
+          color: #bdc3c7;
+        }
+      }
+    }
+  }
+  .edit {
+    text-align: right;
+    margin: 20% 0;
+    i {
+      font-size: 30px;
+      color: #3750b2;
+      margin: 3% 10%;
+      padding: 3%;
+      border-radius: 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: aliceblue;
+      }
+    }
+    #signout {
+      width: 3rem;
+      height: 3rem;
+      float: left;
+      margin: 4% 13%;
+      padding: 2%;
+      cursor: pointer;
+      border-radius: 10px;
+      &:hover {
+        background-color: aliceblue;
+      }
+    }
+  }
 }

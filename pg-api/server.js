@@ -81,7 +81,7 @@ app.get('/api/:userId/restaurants', function (request, response) {
 });
 app.post('/api/:userId/add', function (request, response) {
   let itemId = 0;
-  item = request.body.item;
+  item = request.body.temp;
   addItemForUser(request.params.userId, pool)
     .then(data => {
       itemId = data.rows[0].id;
