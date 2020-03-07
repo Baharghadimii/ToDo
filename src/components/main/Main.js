@@ -28,8 +28,7 @@ export default function Category(props) {
         products: props.list[2].value.length,
         businesses: props.list[3].value.length,
       })
-    }, 2000)
-
+    }, 500)
   }, []);
   const [group, setGroup] = useState('movie');
   const iconClick = (group) => {
@@ -88,7 +87,6 @@ export default function Category(props) {
                   props.reset();
                 });
             }
-
           }).catch(err => console.log(err))
       } else if (group === 'book') {
         Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${state.name}&key=${googleApi}`))
@@ -226,7 +224,7 @@ export default function Category(props) {
           {group === 'product' && < h1 > Products List</h1>}
           {group === 'business' && < h1 > Restaurants List</h1>}
           {group === 'upcoming' && < h1 > Upcoming List</h1>}
-          {group === 'favorite' && < h1 > favorite List</h1>}
+          {group === 'favorite' && < h1 > Favorite List</h1>}
           <div>
             <input
               type="text"
@@ -240,9 +238,12 @@ export default function Category(props) {
         </div>
         {group === 'movie' && <CardList items={props.list[0]} group={group}
           showItem={showItem} />}
-        {group === 'book' && <CardList items={props.list[1]} group={group} />}
-        {group === 'product' && <CardList items={props.list[2]} group={group} />}
-        {group === 'business' && <CardList items={props.list[3]} group={group} />}
+        {group === 'book' && <CardList items={props.list[1]} group={group}
+          showItem={showItem} />}
+        {group === 'product' && <CardList items={props.list[2]} group={group}
+          showItem={showItem} />}
+        {group === 'business' && <CardList items={props.list[3]} group={group}
+          showItem={showItem} />}
       </div>
       <div className='profile'>
         <div className="header">
