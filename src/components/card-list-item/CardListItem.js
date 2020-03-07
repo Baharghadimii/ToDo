@@ -14,6 +14,9 @@ export default function CardList(props) {
       card.current.style.borderLeft = '8px solid rgb(180, 240, 243)'
     }
   }, []);
+  const handleFullView = () => {
+
+  }
   console.log(props.item);
   return (
     <div
@@ -25,7 +28,7 @@ export default function CardList(props) {
         <h1>{props.item.title}</h1>
         <p>{props.item.year}</p>
       </div>
-      <button>
+      <button onClick={handleFullView}>
         <i class="fa fa-arrow-right"></i>
       </button>
     </div>
