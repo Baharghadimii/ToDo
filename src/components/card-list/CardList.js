@@ -12,7 +12,11 @@ export default function CardList(props) {
   return (
     <div className="card-list">
       {itemList.map((item, index) => {
-        return <CardListItem color={'blue'} item={item} delay={index * 200} />
+        return <CardListItem
+          color={'blue'}
+          item={item}
+          delay={index * 200}
+          onClick={() => props.showItem(item)} />
       })}
     </div>
   )

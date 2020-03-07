@@ -185,6 +185,9 @@ export default function Category(props) {
       }
     }
   };
+  const showItem = (item) => {
+    props.showItem(item);
+  }
   console.log(itemList);
   return (
     <div className="dashboard">
@@ -235,7 +238,8 @@ export default function Category(props) {
             </button>
           </div>
         </div>
-        {group === 'movie' && <CardList items={props.list[0]} group={group} />}
+        {group === 'movie' && <CardList items={props.list[0]} group={group}
+          showItem={showItem} />}
         {group === 'book' && <CardList items={props.list[1]} group={group} />}
         {group === 'product' && <CardList items={props.list[2]} group={group} />}
         {group === 'business' && <CardList items={props.list[3]} group={group} />}

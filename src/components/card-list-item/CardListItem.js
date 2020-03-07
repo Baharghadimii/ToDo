@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './CardListItem.scss';
 
 export default function CardList(props) {
@@ -14,10 +14,6 @@ export default function CardList(props) {
       card.current.style.borderLeft = '8px solid rgb(180, 240, 243)'
     }
   }, []);
-  const handleFullView = () => {
-
-  }
-  console.log(props.item);
   return (
     <div
       data-aos="fade-right"
@@ -28,7 +24,7 @@ export default function CardList(props) {
         <h1>{props.item.title}</h1>
         <p>{props.item.year}</p>
       </div>
-      <button onClick={handleFullView}>
+      <button onClick={props.onClick}>
         <i class="fa fa-arrow-right"></i>
       </button>
     </div>
