@@ -22,7 +22,7 @@ function App() {
     window.location.reload(true);
   }
   const showItem = (chosenItem) => {
-    console.log(chosenItem);
+    document.getElementById('root').style.backgroundColor = "aliceblue";
     setState({ ...state, showItem: true, showList: false, item: chosenItem })
   }
   const displayForm = (type) => {
@@ -33,6 +33,7 @@ function App() {
     }
   }
   const showList = () => {
+    document.getElementById('root').style.backgroundColor = "transparent";
     setState({ ...state, showList: true, showItem: false })
   }
   useEffect(() => {
@@ -112,7 +113,7 @@ function App() {
       {state.signUp && <Login reset={reset} displayLogin={false} />}
       {state.login && <Login reset={reset} displayLogin={true} />}
       {state.showList && state.list && < Main list={state.list} reset={reset} showItem={showItem} />}
-      {state.showItem && <ItemCard item={state.item} showItem={() => setState({ ...state, showItem: false, showList: true })} showList={showList} />}
+      {state.showItem && <ItemCard item={state.item} showList={showList} />}
     </div>
   );
 }
