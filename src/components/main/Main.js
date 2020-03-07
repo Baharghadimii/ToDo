@@ -240,9 +240,12 @@ export default function Category(props) {
         </div>
         {group === 'movie' && <CardList items={props.list[0]} group={group}
           showItem={showItem} />}
-        {group === 'book' && <CardList items={props.list[1]} group={group} />}
-        {group === 'product' && <CardList items={props.list[2]} group={group} />}
-        {group === 'business' && <CardList items={props.list[3]} group={group} />}
+        {group === 'book' && <CardList items={props.list[1]} group={group}
+          showItem={showItem} />}
+        {group === 'product' && <CardList items={props.list[2]} group={group}
+          showItem={showItem} />}
+        {group === 'business' && <CardList items={props.list[3]} group={group}
+          showItem={showItem} />}
       </div>
       <div className='profile'>
         <div className="header">

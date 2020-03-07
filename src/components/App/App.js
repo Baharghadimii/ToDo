@@ -32,6 +32,9 @@ function App() {
       setState({ ...state, signUp: true, home: false })
     }
   }
+  const showList = () => {
+    setState({ ...state, showList: true, showItem: false })
+  }
   useEffect(() => {
     if (state.token) {
       const userId = JSON.parse(localStorage.getItem('token')).session;
@@ -109,7 +112,7 @@ function App() {
       {state.signUp && <Login reset={reset} displayLogin={false} />}
       {state.login && <Login reset={reset} displayLogin={true} />}
       {state.showList && state.list && < Main list={state.list} reset={reset} showItem={showItem} />}
-      {state.showItem && <ItemCard item={state.item} showItem={() => setState({ ...state, showItem: false, showList: true })} />}
+      {state.showItem && <ItemCard item={state.item} showItem={() => setState({ ...state, showItem: false, showList: true })} showList={showList} />}
     </div>
   );
 }
