@@ -21,7 +21,8 @@ function App() {
   const reset = () => {
     window.location.reload(true);
   }
-  const show = (chosenItem) => {
+  const showItem = (chosenItem) => {
+    console.log(chosenItem);
     setState({ ...state, showItem: true, showList: false, item: chosenItem })
   }
   const displayForm = (type) => {
@@ -98,7 +99,6 @@ function App() {
     }
 
   }, []);
-  // console.log(state);
   return (
     <div className="App">
       {state.home &&
@@ -108,8 +108,8 @@ function App() {
         </div>}
       {state.signUp && <Login reset={reset} displayLogin={false} />}
       {state.login && <Login reset={reset} displayLogin={true} />}
-      {state.showList && < Main list={state.list} reset={reset} show={show} />}
-      {state.showItem && <ItemCard item={state.item} showList={() => setState({ ...state, showItem: false, showList: true })} />}
+      {state.showList && state.list && < Main list={state.list} reset={reset} showItem={showItem} />}
+      {state.showItem && <ItemCard item={state.item} showItem={() => setState({ ...state, showItem: false, showList: true })} />}
     </div>
   );
 }

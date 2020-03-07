@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './CardListItem.scss';
 
 export default function CardList(props) {
@@ -14,15 +14,17 @@ export default function CardList(props) {
       card.current.style.borderLeft = '8px solid rgb(180, 240, 243)'
     }
   }, []);
-  console.log(props.item);
   return (
-    <div data-aos="fade-right" ref={card} className="item-card" >
+    <div
+      data-aos="fade-right"
+      data-aos-delay={`${props.delay}`}
+      ref={card} className="item-card" >
       <img src={props.item.image} />
       <div>
         <h1>{props.item.title}</h1>
         <p>{props.item.year}</p>
       </div>
-      <button>
+      <button onClick={props.onClick}>
         <i class="fa fa-arrow-right"></i>
       </button>
     </div>
