@@ -28,7 +28,7 @@ export default function Category(props) {
         products: props.list[2].value.length,
         businesses: props.list[3].value.length,
       })
-    }, 2000)
+    }, 500)
 
   }, []);
   const [group, setGroup] = useState('movie');
@@ -226,7 +226,7 @@ export default function Category(props) {
           {group === 'product' && < h1 > Products List</h1>}
           {group === 'business' && < h1 > Restaurants List</h1>}
           {group === 'upcoming' && < h1 > Upcoming List</h1>}
-          {group === 'favorite' && < h1 > favorite List</h1>}
+          {group === 'favorite' && < h1 > Favorite List</h1>}
           <div>
             <input
               type="text"
