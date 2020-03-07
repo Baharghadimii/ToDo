@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardList from '../card-list/CardList.js';
 import axios from 'axios';
 import { googleApi, yelpApi, ebayApi, omdbApi } from '../../api-keys';
@@ -6,9 +6,31 @@ import './Main.scss';
 
 export default function Category(props) {
   const [state, setState] = useState({
-    items: [],
     name: ''
   });
+  const [itemList, setItemList] = useState({
+    movies: [],
+    books: [],
+    products: [],
+    businesses: []
+  })
+  const [counts, setCounts] = useState({
+    movies: 0,
+    books: 0,
+    products: 0,
+    businesses: 0
+  })
+  useEffect(() => {
+    setTimeout(() => {
+      setCounts({
+        movies: props.list[0].value.length,
+        books: props.list[1].value.length,
+        products: props.list[2].value.length,
+        businesses: props.list[3].value.length,
+      })
+    }, 2000)
+
+  }, []);
   const [group, setGroup] = useState('movie');
   const iconClick = (group) => {
     setGroup(group);
@@ -33,8 +55,47 @@ export default function Category(props) {
       if (group === 'movie') {
         Promise.resolve(axios.get(`http://www.omdbapi.com/?apikey=${omdbApi}&t=${state.name}`))
           .then(res => {
+            if (res.data) {
+              let plot = ``;
+              const text = res.data.Plot;
+              for (const char of text) {
+                if (char === `'`) {
+                  plot += char + `'`;
+                } else {
+                  plot += char;
+                }
+              }
+              const temp = {
+                category: 'movies',
+                title: res.data.Title,
+                year: res.data.Year,
+                released: res.data.Released,
+                duration: res.data.Runtime,
+                genre: res.data.Genre,
+                director: res.data.Director,
+                writer: res.data.Writer,
+                actors: res.data.Actors,
+                plot: plot,
+                awards: res.data.Awards,
+                image: res.data.Poster,
+                type: res.data.Type,
+                link: '',
+                production: res.data.Production,
+                ratings: res.data.Ratings,
+              }
+              axios.post(`http://localhost:3001/api/1/add/`, { temp })
+                .then(res => {
+                  props.reset();
+                });
+            }
+
+          }).catch(err => console.log(err))
+      } else if (group === 'book') {
+        Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${state.name}&key=${googleApi}`))
+          .then(res => {
+            const item = {};
             let plot = ``;
-            const text = res.data.Plot;
+            const text = res.data.items[1].volumeInfo.description;
             for (const char of text) {
               if (char === `'`) {
                 plot += char + `'`;
@@ -42,34 +103,89 @@ export default function Category(props) {
                 plot += char;
               }
             }
-            const temp = {
-              category: 'movies',
-              title: res.data.Title,
-              year: res.data.Year,
-              released: res.data.Released,
-              duration: res.data.Runtime,
-              genre: res.data.Genre,
-              director: res.data.Director,
-              writer: res.data.Writer,
-              actors: res.data.Actors,
-              plot: plot,
-              awards: res.data.Awards,
-              image: res.data.Poster,
-              type: res.data.Type,
-              link: '',
-              production: res.data.Production,
-              ratings: res.data.Ratings,
-            }
-            if (state.items) {
-              axios.post(`http://localhost:3001/api/1/add/`, { temp })
-                .then(res => {
+            item.category = 'books';
+            item.title = res.data.items[1].volumeInfo.title;
+            item.subtitle = res.data.items[1].volumeInfo.subtitle;
+            item.author = res.data.items[1].volumeInfo.authors[0];
+            item.publishedDate = res.data.items[1].volumeInfo.publishedDate;
+            item.description = plot;
+            item.pages = res.data.items[1].volumeInfo.pageCount;
+            item.bookCategory = res.data.items[1].volumeInfo.categories[0];
+            item.link = res.data.items[1].volumeInfo.previewLink;
+            item.image = res.data.items[1].volumeInfo.imageLinks || '';
+            console.log(item);
+
+            axios.post(`http://localhost:3001/api/1/add/`, { item })
+              .then(res => {
+                if (res) {
                   props.reset();
-                });
+                }
+              });
+          });
+      } else if (group === 'product') {
+        Promise.resolve(axios.get(`https://cors-anywhere.herokuapp.com/https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&keywords=${state.name}&RESPONSE-DATA-FORMAT=JSON&SECURITY-APPNAME=${ebayApi}`))
+          .then(res => {
+            const product = res.data.findItemsByKeywordsResponse[0].searchResult[0].item[0];
+            let title = ``;
+            const text = product.title[0];
+            for (const char of text) {
+              if (char === `'`) {
+                title += char + `'`;
+              } else {
+                title += char;
+              }
             }
+            product.title[0].replace(`'`, '');
+            const item = {
+              category: 'products',
+              title: title,
+              productCategory: product.primaryCategory[0].categoryName[0],
+              image: product.galleryURL[0],
+              country: product.country[0],
+              link: product.viewItemURL[0],
+              price: product.sellingStatus[0].currentPrice[0].__value__
+            }
+            axios.post(`http://localhost:3001/api/1/add/`, { item })
+              .then(res => {
+                console.log(res)
+                if (res) {
+                  props.reset();
+                }
+              });
           })
+      } else {
+        Promise.resolve(axios.get('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search', {
+          headers: {
+            Authorization: `Bearer ${yelpApi}`,
+          },
+          params: {
+            location: 'vancouver',
+            term: state.name,
+          }
+        })).then(res => {
+          const business = res.data.businesses[0];
+          const item = {
+            category: 'restaurants',
+            name: business.name,
+            reviewCount: business.review_count,
+            latitude: business.coordinates.latitude,
+            longitude: business.coordinates.latitude,
+            rating: business.rating,
+            price: business.price,
+            phone: business.display_phone,
+            location: business.location.address1,
+            image: business.image_url,
+            link: business.url,
+          }
+          axios.post(`http://localhost:3001/api/1/add/`, { item })
+            .then(res => {
+              props.reset();
+            });
+        })
       }
     }
   };
+  console.log(itemList);
   return (
     <div className="dashboard">
       <div className='menu'>
@@ -119,12 +235,15 @@ export default function Category(props) {
             </button>
           </div>
         </div>
-        <CardList items={props.list} group={group} />
+        {group === 'movie' && <CardList items={props.list[0]} group={group} />}
+        {group === 'book' && <CardList items={props.list[1]} group={group} />}
+        {group === 'product' && <CardList items={props.list[2]} group={group} />}
+        {group === 'business' && <CardList items={props.list[3]} group={group} />}
       </div>
       <div className='profile'>
         <div className="header">
           <h1>Profile</h1>
-          <i class="fa fa-bell"></i>
+          <i class="fa fa-edit"></i>
         </div>
         <img src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"></img>
         <h1>Mary Luis</h1>
@@ -133,34 +252,33 @@ export default function Category(props) {
             <div className='dot'></div>
             <div className='desc'>
               <span>Movies to watch</span>
-              <p>4</p>
+              <p>{counts.movies}</p>
             </div>
           </div>
           <div className="detail-main">
             <div className='dot'></div>
             <div className='desc'>
               <span>Boos to read</span>
-              <p>2</p>
+              <p>{counts.books}</p>
             </div>
           </div>
           <div className="detail-main">
             <div className='dot'></div>
             <div className='desc'>
               <span>Stuffs to buy</span>
-              <p>1</p>
+              <p>{counts.products}</p>
             </div>
           </div>
           <div className="detail-main">
             <div className='dot'></div>
             <div className='desc'>
               <span>Places to go</span>
-              <p>7</p>
+              <p>{counts.businesses}</p>
             </div>
           </div>
         </div>
         <div className='edit'>
           <img id='signout' src="https://smarttodo.s3.ca-central-1.amazonaws.com/logout.png"></img>
-          <i class="fa fa-edit"></i>
         </div>
       </div>
     </div >

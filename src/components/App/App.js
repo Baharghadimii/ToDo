@@ -98,7 +98,6 @@ function App() {
     }
 
   }, []);
-  // console.log(state);
   return (
     <div className="App">
       {state.home &&
@@ -108,7 +107,7 @@ function App() {
         </div>}
       {state.signUp && <Login reset={reset} displayLogin={false} />}
       {state.login && <Login reset={reset} displayLogin={true} />}
-      {state.showList && < Main list={state.list} reset={reset} show={show} />}
+      {state.showList && state.list && < Main list={state.list} reset={reset} show={show} />}
       {state.showItem && <ItemCard item={state.item} showList={() => setState({ ...state, showItem: false, showList: true })} />}
     </div>
   );

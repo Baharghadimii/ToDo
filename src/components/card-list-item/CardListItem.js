@@ -16,7 +16,10 @@ export default function CardList(props) {
   }, []);
   console.log(props.item);
   return (
-    <div data-aos="fade-right" ref={card} className="item-card" >
+    <div
+      data-aos="fade-right"
+      data-aos-delay={`${props.delay}`}
+      ref={card} className="item-card" >
       <img src={props.item.image} />
       <div>
         <h1>{props.item.title}</h1>
