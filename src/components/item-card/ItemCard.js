@@ -8,7 +8,7 @@ export default function ItemCard(props) {
     <div
       data-aos="fade-down"
       data-aos-easing="linear"
-      data-aos-duration="1500"
+      data-aos-duration="800"
       className="card-item-div">
       <img alt="thumbnail" src={props.item.image} style={{ borderRadius: '10px', backgroundColor: 'red', width: '20rem', height: '25rem', marginTop: '2.7rem', marginLeft: '1rem' }}></img>
       <div style={{ overflow: 'auto', width: '39rem', height: '100%' }}>

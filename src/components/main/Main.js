@@ -29,7 +29,6 @@ export default function Category(props) {
         businesses: props.list[3].value.length,
       })
     }, 500)
-
   }, []);
   const [group, setGroup] = useState('movie');
   const iconClick = (group) => {
@@ -88,7 +87,6 @@ export default function Category(props) {
                   props.reset();
                 });
             }
-
           }).catch(err => console.log(err))
       } else if (group === 'book') {
         Promise.resolve(axios.get(`https://www.googleapis.com/books/v1/volumes?q=${state.name}&key=${googleApi}`))
