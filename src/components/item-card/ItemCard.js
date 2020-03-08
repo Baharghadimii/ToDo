@@ -47,7 +47,6 @@ export default function ItemCard(props) {
         </div>
 
         <FaLink style={{ float: 'right', marginRight: '2rem' }} size={25} color='#3750b2' onClick={() => window.open(props.item.link)} />
-        <FaHeart style={{ float: 'right', marginRight: '1rem' }} size={25} color='#3750b2' />
         <FaStar style={{ float: 'right', marginRight: '1rem' }} size={25} color='#3750b2' />
       </div>
     </div>
