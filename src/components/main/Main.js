@@ -23,10 +23,10 @@ export default function Category(props) {
   useEffect(() => {
     setTimeout(() => {
       setCounts({
-        movies: props.list[0].value.length,
-        books: props.list[1].value.length,
-        products: props.list[2].value.length,
-        businesses: props.list[3].value.length,
+        movies: props.list[0] ? props.list[0].value.length : 0,
+        books: props.list[1] ? props.list[1].value.length : 0,
+        products: props.list[2] ? props.list[2].value.length : 0,
+        businesses: props.list[3] ? props.list[3].value.length : 0,
       })
     }, 500)
   }, []);
@@ -247,6 +247,8 @@ export default function Category(props) {
         {group === 'product' && <CardList items={props.list[2]} group={group}
           showItem={showItem} />}
         {group === 'business' && <CardList items={props.list[3]} group={group}
+          showItem={showItem} />}
+        {group === 'favorite' && <CardList items={JSON.parse(localStorage.getItem('token')).favorites} group={group}
           showItem={showItem} />}
       </div>
       <div className='profile'>

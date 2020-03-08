@@ -6,7 +6,11 @@ export default function CardList(props) {
   const [itemList, setItemList] = useState([])
   useEffect(() => {
     if (props.items) {
-      setItemList(props.items.value);
+      if (props.items.value) {
+        setItemList(props.items.value);
+      } else {
+        setItemList(props.items);
+      }
     }
   });
   return (
