@@ -186,6 +186,10 @@ export default function Category(props) {
   const showItem = (item) => {
     props.showItem(item);
   }
+  const logout = () => {
+    localStorage.clear();
+    props.reset();
+  }
   console.log(itemList);
   return (
     <div className="dashboard">
@@ -283,7 +287,10 @@ export default function Category(props) {
           </div>
         </div>
         <div className='edit'>
-          <img id='signout' src="https://smarttodo.s3.ca-central-1.amazonaws.com/logout.png"></img>
+          <img
+            id='signout'
+            src="https://smarttodo.s3.ca-central-1.amazonaws.com/logout.png"
+            onClick={logout}></img>
         </div>
       </div>
     </div >
