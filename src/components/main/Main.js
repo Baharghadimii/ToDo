@@ -248,6 +248,8 @@ export default function Category(props) {
           showItem={showItem} />}
         {group === 'business' && <CardList items={props.list[3]} group={group}
           showItem={showItem} />}
+        {group === 'favorite' && <CardList items={JSON.parse(localStorage.getItem('token')).favorites} group={group}
+          showItem={showItem} />}
       </div>
       <div className='profile'>
         <div className="header">
