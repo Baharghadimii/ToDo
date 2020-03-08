@@ -5,9 +5,8 @@ import './ItemCard.scss';
 export default function ItemCard(props) {
   const handleFavorite = () => {
     const token = JSON.parse(localStorage.getItem('token'));
-    const item = { favorites: [props.item] };
-    const newToken = Object.assign(token, item);
-    localStorage.setItem('token', JSON.stringify(newToken));
+    token.favorites.push(props.item);
+    localStorage.setItem('token', JSON.stringify(token));
   }
   return (
     <div

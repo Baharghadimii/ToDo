@@ -21,7 +21,7 @@ export default function Login(props) {
     })
       .then(res => {
         if (res.data) {
-          const token = { session: res.data.id }
+          const token = { session: res.data.id, favorites: [] }
           localStorage.setItem('token', JSON.stringify(token));
           props.reset();
         } else {
