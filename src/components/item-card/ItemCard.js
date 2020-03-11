@@ -1,13 +1,18 @@
 import React from 'react';
 import { FaTimesCircle, FaLink, FaHeart, FaStar } from 'react-icons/fa';
 import './ItemCard.scss';
+import axios from 'axios';
 
 export default function ItemCard(props) {
   const handleFavorite = () => {
     const token = JSON.parse(localStorage.getItem('token'));
     token.favorites.push(props.item);
     localStorage.setItem('token', JSON.stringify(token));
-    document.getElementById('star').style.color = '#ff2d56';
+    document.getElementById('star').style.color = '#ff2d56  ';
+    const itemId = props.item.id;
+    console.log(itemId);
+    axios.post(`http://localhost:3001/${itemId}/favorite`)
+      .then(res => console.log(res));
   }
   return (
     <div
