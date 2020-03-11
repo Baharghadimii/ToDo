@@ -20,8 +20,9 @@ const getUser = (email, db) => {
 };
 const addFavorite = function (id, db) {
   return db.query(`
-  INSERT INTO items(favorite) 
-  VALUES(true) WHERE id=$1
+  UPDATE items
+  SET favorite=true 
+  WHERE id=$1
   RETURNING *;` , [`${id}`])
 }
 const getItemsById = function (id, db, category) {
