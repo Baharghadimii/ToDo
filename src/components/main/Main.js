@@ -21,6 +21,8 @@ export default function Category(props) {
     businesses: 0
   })
   useEffect(() => {
+    axios.get('http://localhost:3001/api/favorites')
+      .then(res => console.log(res));
     setTimeout(() => {
       setCounts({
         movies: props.list[0] ? props.list[0].value.length : 0,
@@ -248,7 +250,7 @@ export default function Category(props) {
           showItem={showItem} />}
         {group === 'business' && <CardList items={props.list[3]} group={group}
           showItem={showItem} />}
-        {group === 'favorite' && <CardList items={JSON.parse(localStorage.getItem('token')).favorites} group={group}
+        {group === 'favorite' && <CardList group={group}
           showItem={showItem} />}
       </div>
       <div className='profile'>
