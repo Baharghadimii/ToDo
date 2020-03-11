@@ -3,6 +3,7 @@ import CardList from '../card-list/CardList.js';
 import axios from 'axios';
 import { googleApi, yelpApi, ebayApi, omdbApi } from '../../api-keys';
 import './Main.scss';
+import { element } from 'prop-types';
 
 export default function Category(props) {
   const [state, setState] = useState({
@@ -20,9 +21,8 @@ export default function Category(props) {
     products: 0,
     businesses: 0
   })
+  let favorites = []
   useEffect(() => {
-    axios.get('http://localhost:3001/api/favorites')
-      .then(res => console.log(res));
     setTimeout(() => {
       setCounts({
         movies: props.list[0] ? props.list[0].value.length : 0,
@@ -30,7 +30,19 @@ export default function Category(props) {
         products: props.list[2] ? props.list[2].value.length : 0,
         businesses: props.list[3] ? props.list[3].value.length : 0,
       })
-    }, 500)
+    }, 500);
+    favorites = props.list.filter(item => {
+      const favoriteItems = [];
+      item.value.forEach(element => {
+        if (element.favorite) {
+          favoriteItems.push(element);
+        }
+      });
+      if (favoriteItems.length > 0) {
+        return favoriteItems;
+      }
+    });
+    console.log('favorites:', favorites)
   }, []);
   const [group, setGroup] = useState('movie');
   const iconClick = (group) => {
@@ -250,7 +262,7 @@ export default function Category(props) {
           showItem={showItem} />}
         {group === 'business' && <CardList items={props.list[3]} group={group}
           showItem={showItem} />}
-        {group === 'favorite' && <CardList group={group}
+        {group === 'favorite' && <CardList items={favorites} group={group}
           showItem={showItem} />}
       </div>
       <div className='profile'>

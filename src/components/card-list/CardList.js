@@ -3,7 +3,7 @@ import CardListItem from '../card-list-item/CardListItem';
 import './CardList.scss';
 
 export default function CardList(props) {
-  const [itemList, setItemList] = useState([])
+  const [itemList, setItemList] = useState([]);
   useEffect(() => {
     if (props.items) {
       if (props.items.value) {
@@ -13,6 +13,7 @@ export default function CardList(props) {
       }
     }
   });
+  console.log(itemList);
   return (
     <div className="card-list">
       {itemList.map((item, index) => {
