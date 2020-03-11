@@ -111,9 +111,8 @@ app.post('/api/:userId/add', function (request, response) {
 
 });
 app.post('/api/:itemId/favorite', function (request, response) {
-  console.log(request.params.itemId);
   addFavorite(request.params.itemId, pool)
-    .then(res => console.log(res));
+    .then(res => respond.send(res));
 });
 app.delete('/api/:userId/delete/:itemId', function (request, response) {
   deleteItem(request.params.itemId, pool)
