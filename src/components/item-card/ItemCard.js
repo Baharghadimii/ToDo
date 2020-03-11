@@ -10,8 +10,7 @@ export default function ItemCard(props) {
     localStorage.setItem('token', JSON.stringify(token));
     document.getElementById('star').style.color = '#ff2d56  ';
     const itemId = props.item.id;
-    console.log(itemId);
-    axios.post(`http://localhost:3001/${itemId}/favorite`)
+    axios.post(`http://localhost:3001/api/${itemId}/favorite`)
       .then(res => console.log(res));
   }
   return (
