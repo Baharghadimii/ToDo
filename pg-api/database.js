@@ -18,6 +18,12 @@ const getUser = (email, db) => {
   users WHERE users.email = '${email}';
   `);
 };
+const addFavorite = function (id, db) {
+  return db.query(`
+  INSERT INTO items(favorite) 
+  VALUES(true) WHERE id=$1
+  RETURNING *;` , [`${id}`])
+}
 const getItemsById = function (id, db, category) {
   return db.query(
     `SELECT * FROM 
@@ -200,5 +206,6 @@ module.exports = {
   deleteItem,
   addBooks,
   addProducts,
-  addRestaurants
+  addRestaurants,
+  addFavorite
 };
