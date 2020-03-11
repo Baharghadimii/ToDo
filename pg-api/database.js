@@ -44,11 +44,6 @@ const addItemForUser = function (userId, db) {
   )
   RETURNING *;`);
 };
-const getFavorites = function (db) {
-  return db.query(`
-  SELECT * FROM items
-  WHERE favorite=true;`)
-}
 const addMovies = function (itemId, item, db) {
   console.log(itemId, item);
   return db.query(
@@ -213,6 +208,5 @@ module.exports = {
   addBooks,
   addProducts,
   addRestaurants,
-  addFavorite,
-  getFavorites
+  addFavorite
 };
