@@ -3,25 +3,17 @@ import CardList from '../card-list/CardList.js';
 import axios from 'axios';
 import { googleApi, yelpApi, ebayApi, omdbApi } from '../../api-keys';
 import './Main.scss';
-import { element } from 'prop-types';
 
 export default function Category(props) {
   const [state, setState] = useState({
     name: ''
   });
-  const [itemList, setItemList] = useState({
-    movies: [],
-    books: [],
-    products: [],
-    businesses: []
-  })
   const [counts, setCounts] = useState({
     movies: 0,
     books: 0,
     products: 0,
     businesses: 0
   })
-  let favorites = []
   useEffect(() => {
     setTimeout(() => {
       setCounts({
@@ -31,19 +23,7 @@ export default function Category(props) {
         businesses: props.list[3] ? props.list[3].value.length : 0,
       })
     }, 500);
-    favorites = props.list.filter(item => {
-      const favoriteItems = [];
-      item.value.forEach(element => {
-        if (element.favorite) {
-          favoriteItems.push(element);
-        }
-      });
-      if (favoriteItems.length > 0) {
-        return favoriteItems;
-      }
-    });
-    console.log('favorites:', favorites)
-  }, []);
+  });
   const [group, setGroup] = useState('movie');
   const iconClick = (group) => {
     setGroup(group);
@@ -204,33 +184,38 @@ export default function Category(props) {
     localStorage.clear();
     props.reset();
   }
-  console.log(itemList);
   return (
     <div className="dashboard">
       <div className='menu'>
-        <img className="icon" src="https://smarttodo.s3.ca-central-1.amazonaws.com/LogoMakr_3oDwIw.png" />
+        <img alt="logo" className="icon" src="https://smarttodo.s3.ca-central-1.amazonaws.com/LogoMakr_3oDwIw.png" />
         <div id='divider'></div>
         <img
+          alt="movie icon"
           id='movie'
           onClick={() => iconClick('movie')}
           src="https://smarttodo.s3.ca-central-1.amazonaws.com/clapperboard.png" />
         <img
+          alt="book icon"
           id='book'
           onClick={() => iconClick('book')}
           src='https://smarttodo.s3.ca-central-1.amazonaws.com/book.png' />
         <img
+          alt="product icon"
           id='product'
           onClick={() => iconClick('product')}
           src='https://smarttodo.s3.ca-central-1.amazonaws.com/product.png' />
         <img
+          alt="business icon"
           id='business'
           onClick={() => iconClick('business')}
           src="https://smarttodo.s3.ca-central-1.amazonaws.com/coffee-cup.png" />
         <img
+          alt="upcoming icon"
           id='upcoming'
           onClick={() => iconClick('upcoming')}
           style={{ padding: '17%' }} src="https://smarttodo.s3.ca-central-1.amazonaws.com/next.png" />
         <img
+          alt="favorite icon"
           id='favorite'
           onClick={() => iconClick('favorite')}
           style={{ padding: '16%' }} src="https://smarttodo.s3.ca-central-1.amazonaws.com/star.png" />
@@ -262,7 +247,7 @@ export default function Category(props) {
           showItem={showItem} />}
         {group === 'business' && <CardList items={props.list[3]} group={group}
           showItem={showItem} />}
-        {group === 'favorite' && <CardList items={favorites} group={group}
+        {group === 'favorite' && <CardList group={group}
           showItem={showItem} />}
       </div>
       <div className='profile'>
@@ -270,7 +255,9 @@ export default function Category(props) {
           <h1>Profile</h1>
           <i class="fa fa-edit"></i>
         </div>
-        <img src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"></img>
+        <img
+          alt='edit icon'
+          src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg"></img>
         <h1>Mary Luis</h1>
         <div className="details">
           <div className="detail-main">
@@ -304,6 +291,7 @@ export default function Category(props) {
         </div>
         <div className='edit'>
           <img
+            alt='edit icon'
             id='signout'
             src="https://smarttodo.s3.ca-central-1.amazonaws.com/logout.png"
             onClick={logout}></img>

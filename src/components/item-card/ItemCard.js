@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTimesCircle, FaLink, FaHeart, FaStar } from 'react-icons/fa';
+import { FaTimesCircle, FaLink, FaStar } from 'react-icons/fa';
 import './ItemCard.scss';
 import axios from 'axios';
 

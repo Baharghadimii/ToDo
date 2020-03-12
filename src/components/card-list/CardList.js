@@ -12,8 +12,7 @@ export default function CardList(props) {
         setItemList(props.items);
       }
     }
-  });
-  console.log(itemList);
+  }, [props.items]);
   return (
     <div className="card-list">
       {itemList.map((item, index) => {
