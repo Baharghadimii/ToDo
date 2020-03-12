@@ -13,6 +13,7 @@ export default function CardList(props) {
       }
     }
   }, [props.items]);
+  console.log(props.items);
   return (
     <div className="card-list">
       {itemList.map((item, index) => {
