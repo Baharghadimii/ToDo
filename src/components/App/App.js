@@ -54,12 +54,16 @@ function App() {
         }))
       ]).then(all => {
         let temp = state.list;
+        const favorites = [];
         const movies = all[0].data;
         if (movies[0]) {
           movies.forEach((element, index) => {
             movies[index]['longTitle'] = movies[index].title;
             if (element.title.length > 10) {
               movies[index].title = `${movies[index].title.slice(0, 10)}...`;
+            }
+            if (element.favorite) {
+              favorites.push(element);
             }
           })
           temp.push({ category: 'Movies', value: movies });
@@ -70,6 +74,9 @@ function App() {
             books[0]['longTitle'] = books[0].title;
             if (element.title.length > 10) {
               books[index].title = `${books[index].title.slice(0, 10)}...`;
+            }
+            if (element.favorite) {
+              favorites.push(element);
             }
           })
           temp.push({ category: 'Books', value: books });
@@ -82,6 +89,9 @@ function App() {
             if (element.title.length > 10) {
               products[index].title = `${products[index].title.slice(0, 10)}...`;
             }
+            if (element.favorite) {
+              favorites.push(element);
+            }
           })
           temp.push({ category: 'Products', value: products });
         }
@@ -92,9 +102,14 @@ function App() {
             if (element.title.length > 10) {
               restaurants[index].title = `${restaurants[index].title.slice(0, 10)}...`;
             }
+            if (element.favorite) {
+              favorites.push(element);
+            }
           })
           temp.push({ category: 'Restaurants', value: restaurants });
         }
+        temp.push(favorites);
+
         setState({
           ...state,
           list: temp
@@ -102,7 +117,7 @@ function App() {
       })
     }
 
-  }, [state]);
+  }, []);
   return (
     <div className="App">
       {state.home &&

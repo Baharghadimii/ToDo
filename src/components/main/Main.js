@@ -247,7 +247,7 @@ export default function Category(props) {
           showItem={showItem} />}
         {group === 'business' && <CardList items={props.list[3]} group={group}
           showItem={showItem} />}
-        {group === 'favorite' && <CardList group={group}
+        {group === 'favorite' && <CardList items={props.list[4]} group={group}
           showItem={showItem} />}
       </div>
       <div className='profile'>
