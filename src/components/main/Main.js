@@ -15,14 +15,14 @@ export default function Category(props) {
     businesses: 0
   })
   useEffect(() => {
-    setTimeout(() => {
-      setCounts({
-        movies: props.list[0] ? props.list[0].value.length : 0,
-        books: props.list[1] ? props.list[1].value.length : 0,
-        products: props.list[2] ? props.list[2].value.length : 0,
-        businesses: props.list[3] ? props.list[3].value.length : 0,
-      })
-    }, 500);
+    // setTimeout(() => {
+    //   setCounts({
+    //     movies: props.list[0] ? props.list[0].value.length : 0,
+    //     books: props.list[1] ? props.list[1].value.length : 0,
+    //     products: props.list[2] ? props.list[2].value.length : 0,
+    //     businesses: props.list[3] ? props.list[3].value.length : 0,
+    //   })
+    // }, 500);
   });
   const [group, setGroup] = useState('movie');
   const iconClick = (group) => {
