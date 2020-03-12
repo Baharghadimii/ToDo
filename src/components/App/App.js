@@ -118,6 +118,37 @@ function App() {
     }
 
   }, []);
+  const makeFavorite = (item) => {
+    if (item.category === 'movies') {
+      state.list[0].value.forEach((element, index) => {
+        if (item.id === element.id) {
+          state.list[0].value[index].favorite = true;
+
+        }
+      });
+    }
+    if (item.category === 'books') {
+      state.list[1].value.forEach((element, index) => {
+        if (item.id === element.id) {
+          state.list[1].value[index].favorite = true;
+        }
+      });
+    }
+    if (item.category === 'products') {
+      state.list[2].value.forEach((element, index) => {
+        if (item.id === element.id) {
+          state.list[2].value[index].favorite = true;
+        }
+      });
+    }
+    if (item.category === 'businesses') {
+      state.list[3].value.forEach((element, index) => {
+        if (item.id === element.id) {
+          state.list[3].value[index].favorite = true;
+        }
+      });
+    }
+  }
   return (
     <div className="App">
       {state.home &&
@@ -128,7 +159,7 @@ function App() {
       {state.signUp && <Login reset={reset} displayLogin={false} />}
       {state.login && <Login reset={reset} displayLogin={true} />}
       {state.showList && state.list && < Main list={state.list} reset={reset} showItem={showItem} />}
-      {state.showItem && <ItemCard item={state.item} showList={showList} />}
+      {state.showItem && <ItemCard item={state.item} showList={showList} edit={makeFavorite} />}
     </div>
   );
 }

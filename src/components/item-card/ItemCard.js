@@ -4,10 +4,12 @@ import './ItemCard.scss';
 import axios from 'axios';
 
 export default function ItemCard(props) {
+
   const handleFavorite = () => {
     const token = JSON.parse(localStorage.getItem('token'));
     token.favorites.push(props.item);
     localStorage.setItem('token', JSON.stringify(token));
+    props.edit(props.item);
     document.getElementById('star').style.color = '#ff2d56';
     const itemId = props.item.id;
     axios.post(`http://localhost:3001/api/${itemId}/favorite`)
@@ -57,7 +59,7 @@ export default function ItemCard(props) {
 
         <FaLink style={{ float: 'right', marginRight: '2rem' }} size={25} color='#3750b2' onClick={() => window.open(props.item.link)} />
         <FaStar id="star" style={{ float: 'right', marginRight: '1rem', cursor: 'pointer' }} size={25}
-          color={props.item.favorite || (localStorage.getItem('token')) ? '#ff2d56' : '#3750b2'} onClick={handleFavorite} />
+          color={props.item.favorite ? '#ff2d56' : '#3750b2'} onClick={handleFavorite} />
       </div>
     </div>
   )
