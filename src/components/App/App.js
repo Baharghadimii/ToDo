@@ -55,7 +55,7 @@ function App() {
       ]).then(all => {
         let temp = state.list;
         const favorites = [];
-        const movies = all[0].data;
+        const movies = all[0].data || [];
         if (movies[0]) {
           movies.forEach((element, index) => {
             movies[index]['longTitle'] = movies[index].title;
@@ -66,9 +66,9 @@ function App() {
               favorites.push(element);
             }
           })
-          temp.push({ category: 'Movies', value: movies });
         }
-        const books = all[1].data;
+        temp.push({ category: 'Movies', value: movies });
+        const books = all[1].data || [];
         if (all[1].data[0]) {
           books.forEach((element, index) => {
             books[0]['longTitle'] = books[0].title;
@@ -79,10 +79,9 @@ function App() {
               favorites.push(element);
             }
           })
-          temp.push({ category: 'Books', value: books });
         }
-
-        const products = all[2].data;
+        temp.push({ category: 'Books', value: books });
+        const products = all[2].data || [];
         if (all[2].data[0]) {
           products.forEach((element, index) => {
             products[0]['longTitle'] = products[0].title;
@@ -93,9 +92,9 @@ function App() {
               favorites.push(element);
             }
           })
-          temp.push({ category: 'Products', value: products });
         }
-        const restaurants = all[3].data;
+        temp.push({ category: 'Products', value: products });
+        const restaurants = all[3].data || [];
         if (all[3].data[0]) {
           restaurants.forEach((element, index) => {
             restaurants[0]['longTitle'] = restaurants[0].title;
@@ -106,10 +105,9 @@ function App() {
               favorites.push(element);
             }
           })
-          temp.push({ category: 'Restaurants', value: restaurants });
         }
+        temp.push({ category: 'Restaurants', value: restaurants });
         temp.push(favorites);
-
         setState({
           ...state,
           list: temp
