@@ -123,7 +123,11 @@ function App() {
       state.list[0].value.forEach((element, index) => {
         if (item.id === element.id) {
           state.list[0].value[index].favorite = true;
-
+          state.list.forEach((listItem, index) => {
+            if (Array.isArray(listItem)) {
+              state.list[index].push(element);
+            }
+          });
         }
       });
     }
@@ -131,6 +135,11 @@ function App() {
       state.list[1].value.forEach((element, index) => {
         if (item.id === element.id) {
           state.list[1].value[index].favorite = true;
+          state.list.forEach((listItem, index) => {
+            if (Array.isArray(listItem)) {
+              state.list[index].push(element);
+            }
+          });
         }
       });
     }
@@ -138,6 +147,11 @@ function App() {
       state.list[2].value.forEach((element, index) => {
         if (item.id === element.id) {
           state.list[2].value[index].favorite = true;
+          state.list.forEach((listItem, index) => {
+            if (Array.isArray(listItem)) {
+              state.list[index].push(element);
+            }
+          });
         }
       });
     }
@@ -145,9 +159,15 @@ function App() {
       state.list[3].value.forEach((element, index) => {
         if (item.id === element.id) {
           state.list[3].value[index].favorite = true;
+          state.list.forEach((listItem, index) => {
+            if (Array.isArray(listItem)) {
+              state.list[index].push(element);
+            }
+          });
         }
       });
     }
+    console.log(state.list);
   }
   return (
     <div className="App">

@@ -13,7 +13,8 @@ export default function Category(props) {
     books: 0,
     products: 0,
     businesses: 0
-  })
+  });
+  const [favorites, setFavorites] = useState([])
   useEffect(() => {
     // setTimeout(() => {
     //   setCounts({
@@ -23,6 +24,11 @@ export default function Category(props) {
     //     businesses: props.list[3] ? props.list[3].value.length : 0,
     //   })
     // }, 500);
+    props.list.forEach(listItem => {
+      if (Array.isArray(listItem)) {
+        setFavorites(listItem);
+      }
+    });
   });
   const [group, setGroup] = useState('movie');
   const iconClick = (group) => {
@@ -247,7 +253,7 @@ export default function Category(props) {
           showItem={showItem} />}
         {group === 'business' && <CardList items={props.list[3]} group={group}
           showItem={showItem} />}
-        {group === 'favorite' && <CardList items={props.list[4]} group={group}
+        {group === 'favorite' && <CardList items={favorites} group={group}
           showItem={showItem} />}
       </div>
       <div className='profile'>
