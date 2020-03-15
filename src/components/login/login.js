@@ -97,7 +97,12 @@ export default function Login(props) {
           {!state.showLogin && < button className='login-btn' onClick={register}> Sign Up</button>}
           {state.showLogin && < button className='login-btn' onClick={login}> Log In</button>}
         </div>
-        <div className="auth-div"></div>
+        <div className="auth-div">
+          <button id="facebook">
+            <img id="icon-fb" src="https://smarttodo.s3.ca-central-1.amazonaws.com/facebook.png" />
+            Login with Facebook</button>
+          <button id="google"> Login with Google</button>
+        </div>
       </div>
       <img
         alt='background'
