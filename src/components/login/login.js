@@ -101,7 +101,9 @@ export default function Login(props) {
           <button id="facebook">
             <img id="icon-fb" src="https://smarttodo.s3.ca-central-1.amazonaws.com/facebook.png" />
             Login with Facebook</button>
-          <button id="google"> Login with Google</button>
+          <button id="google">
+            <img id="icon-gle" src="https://avatars1.githubusercontent.com/u/7328930?v=4" />
+            Login with Google</button>
         </div>
       </div>
       <img
