@@ -50,52 +50,61 @@ export default function Login(props) {
         data-aos="fade-up"
         data-aos-duration="3000"
         className="card">
-        {!state.showLogin && <div className='label' id=''>
-          <label>Name</label>
-        </div>}
-        {!state.showLogin && <div className='input'>
-          <input
-            value={state.name}
-            onChange={(e) => setState({ ...state, name: e.target.value })}
-            type='text'
-            placeholder="Enter your Name"></input>
-        </div>}
-        {!state.showLogin && <div className='label'>
-          <label >Email</label>
-        </div>}
-        {!state.showLogin && <div className='input'>
-          <input
-            value={state.email}
-            type='email'
-            onChange={(e) => setState({ ...state, email: e.target.value })}
-            placeholder="Enter your email"></input>
-        </div>}
-        {state.showLogin && <div
-          className='label'
-          style={{ marginTop: '10%' }}>
-          <label >Email</label>
-        </div>}
-        {state.showLogin && <div className='input'>
-          <input
-            type='email'
-            placeholder="Enter your email"
-            value={state.email}
-            onChange={e => setState({ ...state, email: e.target.value })}
-          ></input>
-        </div>}
-        <div className='label'>
-          <label>Password</label>
+        <div className="input-div">
+          {!state.showLogin && <div className='label'>
+            <label>Name</label>
+          </div>}
+          {!state.showLogin && <div className='input'>
+            <input
+              value={state.name}
+              onChange={(e) => setState({ ...state, name: e.target.value })}
+              type='text'
+              placeholder="Enter your Name"></input>
+          </div>}
+          {!state.showLogin && <div className='label'>
+            <label >Email</label>
+          </div>}
+          {!state.showLogin && <div className='input'>
+            <input
+              value={state.email}
+              type='email'
+              onChange={(e) => setState({ ...state, email: e.target.value })}
+              placeholder="Enter your email"></input>
+          </div>}
+          {state.showLogin && <div
+            className='label'
+            style={{ marginTop: '10%' }}>
+            <label >Email</label>
+          </div>}
+          {state.showLogin && <div className='input'>
+            <input
+              type='email'
+              placeholder="Enter your email"
+              value={state.email}
+              onChange={e => setState({ ...state, email: e.target.value })}
+            ></input>
+          </div>}
+          <div className='label'>
+            <label>Password</label>
+          </div>
+          <div className='input'>
+            <input
+              value={state.password}
+              onChange={(e) => setState({ ...state, password: e.target.value })}
+              type='password'
+              placeholder="Enter your Password"></input>
+          </div>
+          {!state.showLogin && < button className='login-btn' onClick={register}> Sign Up</button>}
+          {state.showLogin && < button className='login-btn' onClick={login}> Log In</button>}
         </div>
-        <div className='input'>
-          <input
-            value={state.password}
-            onChange={(e) => setState({ ...state, password: e.target.value })}
-            type='password'
-            placeholder="Enter your Password"></input>
+        <div className="auth-div">
+          <button id="facebook">
+            <img id="icon-fb" src="https://smarttodo.s3.ca-central-1.amazonaws.com/facebook.png" />
+            Login with Facebook</button>
+          <button id="google">
+            <img id="icon-gle" src="https://avatars1.githubusercontent.com/u/7328930?v=4" />
+            Login with Google</button>
         </div>
-        {!state.showLogin && < button className='login-btn' onClick={register}> Sign Up</button>}
-        {state.showLogin && < button className='login-btn' onClick={login}> Log In</button>}
-
       </div>
       <img
         alt='background'
