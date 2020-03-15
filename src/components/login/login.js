@@ -50,52 +50,54 @@ export default function Login(props) {
         data-aos="fade-up"
         data-aos-duration="3000"
         className="card">
-        {!state.showLogin && <div className='label' id=''>
-          <label>Name</label>
-        </div>}
-        {!state.showLogin && <div className='input'>
-          <input
-            value={state.name}
-            onChange={(e) => setState({ ...state, name: e.target.value })}
-            type='text'
-            placeholder="Enter your Name"></input>
-        </div>}
-        {!state.showLogin && <div className='label'>
-          <label >Email</label>
-        </div>}
-        {!state.showLogin && <div className='input'>
-          <input
-            value={state.email}
-            type='email'
-            onChange={(e) => setState({ ...state, email: e.target.value })}
-            placeholder="Enter your email"></input>
-        </div>}
-        {state.showLogin && <div
-          className='label'
-          style={{ marginTop: '10%' }}>
-          <label >Email</label>
-        </div>}
-        {state.showLogin && <div className='input'>
-          <input
-            type='email'
-            placeholder="Enter your email"
-            value={state.email}
-            onChange={e => setState({ ...state, email: e.target.value })}
-          ></input>
-        </div>}
-        <div className='label'>
-          <label>Password</label>
+        <div className="input-div">
+          {!state.showLogin && <div className='label'>
+            <label>Name</label>
+          </div>}
+          {!state.showLogin && <div className='input'>
+            <input
+              value={state.name}
+              onChange={(e) => setState({ ...state, name: e.target.value })}
+              type='text'
+              placeholder="Enter your Name"></input>
+          </div>}
+          {!state.showLogin && <div className='label'>
+            <label >Email</label>
+          </div>}
+          {!state.showLogin && <div className='input'>
+            <input
+              value={state.email}
+              type='email'
+              onChange={(e) => setState({ ...state, email: e.target.value })}
+              placeholder="Enter your email"></input>
+          </div>}
+          {state.showLogin && <div
+            className='label'
+            style={{ marginTop: '10%' }}>
+            <label >Email</label>
+          </div>}
+          {state.showLogin && <div className='input'>
+            <input
+              type='email'
+              placeholder="Enter your email"
+              value={state.email}
+              onChange={e => setState({ ...state, email: e.target.value })}
+            ></input>
+          </div>}
+          <div className='label'>
+            <label>Password</label>
+          </div>
+          <div className='input'>
+            <input
+              value={state.password}
+              onChange={(e) => setState({ ...state, password: e.target.value })}
+              type='password'
+              placeholder="Enter your Password"></input>
+          </div>
+          {!state.showLogin && < button className='login-btn' onClick={register}> Sign Up</button>}
+          {state.showLogin && < button className='login-btn' onClick={login}> Log In</button>}
         </div>
-        <div className='input'>
-          <input
-            value={state.password}
-            onChange={(e) => setState({ ...state, password: e.target.value })}
-            type='password'
-            placeholder="Enter your Password"></input>
-        </div>
-        {!state.showLogin && < button className='login-btn' onClick={register}> Sign Up</button>}
-        {state.showLogin && < button className='login-btn' onClick={login}> Log In</button>}
-
+        <div className="auth-div"></div>
       </div>
       <img
         alt='background'
